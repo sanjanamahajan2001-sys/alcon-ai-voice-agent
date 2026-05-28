@@ -1,0 +1,75 @@
+{
+  "session_id": "chat_9fdba4",
+  "flow_id": "post_service_feedback_draft_a49e",
+  "current_node_id": "end",
+  "variables": {
+    "from": " 919881012767",
+    "id": "1",
+    "name": "Sanjana",
+    "phone": "+919881012767",
+    "car_model": "Hyundai Creta",
+    "registration_number": "MH15-AB-1234",
+    "registration_date": "2024-01-01",
+    "last_service_date": "2025-10-15",
+    "service_due_months": 6,
+    "gender": "female",
+    "dnd_status": false,
+    "location": "Mumbai",
+    "insurance_expiry_date": "2026-06-03",
+    "insurance_provider": "HDFC Ergo",
+    "policy_number": "POL-123456",
+    "current_premium": "\u20b912,500",
+    "loyalty_premium": "\u20b911,800",
+    "policy_status": "PENDING",
+    "exists": true,
+    "tier": "premium",
+    "last_svc_formatted": "October 15",
+    "callback_confirmation": "I've scheduled a reminder to call you back at Tuesday, June 09 at 09:00 AM",
+    "concerns": "actually my break pad is still making noise",
+    "satisfaction_check": false,
+    "confirmed_date": "Tuesday, June 09 at 09:00 AM",
+    "advisor_rating": 8,
+    "callback_time": "Tuesday, June 09 at 09:00 AM",
+    "pickup_rating": 10,
+    "cleanliness_rating": 10,
+    "overall_rating": 9
+  },
+  "history": [
+    {
+      "role": "user",
+      "text": "yes speaking"
+    },
+    {
+      "role": "user",
+      "text": "actually my break pad is still making noise"
+    },
+    {
+      "role": "user",
+      "text": "yes"
+    },
+    {
+      "role": "user",
+      "text": "8"
+    },
+    {
+      "role": "user",
+      "text": "service charges are high"
+    },
+    {
+      "role": "user",
+      "text": "10"
+    },
+    {
+      "role": "user",
+      "text": "10"
+    },
+    {
+      "role": "user",
+      "text": "9"
+    },
+    {
+      "role": "user",
+      "text": ""
+    }
+  ]
+}

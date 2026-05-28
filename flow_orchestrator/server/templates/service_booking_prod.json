@@ -1,0 +1,191 @@
+{
+  "flow_id": "service_booking_prod",
+  "name": "Service Booking (Production)",
+  "description": "Enterprise-grade operational workflow with 100% parity to the original backend.",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "startNode",
+      "position": { "x": 400, "y": 0 },
+      "data": { "label": "Start Call" }
+    },
+    {
+      "id": "crm_lookup",
+      "type": "apiNode",
+      "position": { "x": 400, "y": 100 },
+      "data": { "label": "/mock/crm/{{from}}" }
+    },
+    {
+      "id": "intro",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 200 },
+      "data": { "label": "Hello, I'm Supriya from Alcon. Am I speaking with {{name}} {{salutation}}?" }
+    },
+    {
+      "id": "check_id",
+      "type": "conditionNode",
+      "position": { "x": 400, "y": 350 },
+      "data": { "label": "Identity Verification" }
+    },
+    {
+      "id": "handle_wrong",
+      "type": "messageNode",
+      "position": { "x": 700, "y": 350 },
+      "data": { "label": "I'm so sorry! I must have the wrong number. I'll update our records immediately. Have a nice day!" }
+    },
+    {
+      "id": "ask_callback",
+      "type": "messageNode",
+      "position": { "x": 100, "y": 350 },
+      "data": { "label": "No problem {{salutation}}. I completely understand. When would be a more convenient time for me to call you back?" }
+    },
+    {
+      "id": "confirm_callback",
+      "type": "messageNode",
+      "position": { "x": 100, "y": 500 },
+      "data": { "label": "Got it. I've scheduled a reminder to call you back at {{callback_time}}. Have a great day!" }
+    },
+    {
+      "id": "verify_due",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 500 },
+      "data": { "label": "Great! I've verified your record {{salutation}} {{name}}. I see your {{car_model}} was last serviced on {{last_svc_formatted}}, and your next appointment is now due. Would you like to book it today?" }
+    },
+    {
+      "id": "check_booking",
+      "type": "conditionNode",
+      "position": { "x": 400, "y": 650 },
+      "data": { "label": "User says Yes" }
+    },
+    {
+      "id": "ask_date",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 800 },
+      "data": { "label": "Great. What date would you prefer for the service?" }
+    },
+    {
+      "id": "collect_mileage",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 920 },
+      "data": { "label": "Got it. Available on {{confirmed_date}}. What's the current mileage of your car?" }
+    },
+    {
+      "id": "ask_concerns",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 1040 },
+      "data": { "label": "Got it. And are there any specific concerns or issues with the car?" }
+    },
+    {
+      "id": "pick_drop_offer",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 1160 },
+      "data": { "label": "I've noted those points. We offer free Pick and Drop service. Would you like to avail this?" }
+    },
+    {
+      "id": "pick_drop_check",
+      "type": "conditionNode",
+      "position": { "x": 400, "y": 1280 },
+      "data": { "label": "User says Yes" }
+    },
+    {
+      "id": "confirm_valet",
+      "type": "messageNode",
+      "position": { "x": 200, "y": 1420 },
+      "data": { "label": "Wonderful {{salutation}}. Your service is confirmed for {{confirmed_date}}. At Alcon, we provide a 50-point safety check and use only genuine Hyundai parts to ensure your vehicle's peak performance. Your Advisor, Amit Shah, will greet you upon arrival and walk you through the repair order details. A confirmation SMS has been sent to you. Have a great day!" }
+    },
+    {
+      "id": "confirm_self",
+      "type": "messageNode",
+      "position": { "x": 600, "y": 1420 },
+      "data": { "label": "Wonderful {{salutation}}. Your service is confirmed for {{confirmed_date}}. At Alcon, we provide a 50-point safety check and use only genuine Hyundai parts to ensure your vehicle's peak performance. Your Advisor, Amit Shah, will greet you upon arrival and walk you through the repair order details. A confirmation SMS has been sent to you. Have a great day!" }
+    },
+    {
+      "id": "end",
+      "type": "endNode",
+      "position": { "x": 400, "y": 1550 },
+      "data": { "label": "Hangup" }
+    },
+    {
+      "id": "no_booking",
+      "type": "messageNode",
+      "position": { "x": 650, "y": 650 },
+      "data": { "label": "Understood {{salutation}}. {{callback_confirmation}}. Have a great day!" }
+    },
+    {
+      "id": "not_due_message",
+      "type": "messageNode",
+      "position": { "x": 600, "y": 500 },
+      "data": { "label": "I see your {{car_model}} was last serviced recently on {{last_svc_formatted}}. Since your service is only due every {{service_due_months}} months, you are all set for now! Have a wonderful day!" }
+    },
+    {
+      "id": "check_slot_action",
+      "type": "actionNode",
+      "position": { "x": 400, "y": 860 },
+      "data": { "label": "validate_slot_request", "action_type": "validate_slot_request" }
+    },
+    {
+      "id": "suggest_alternate_slots",
+      "type": "messageNode",
+      "position": { "x": 650, "y": 860 },
+      "data": { "label": "I'm sorry, that timing is fully booked. We have Saturday slots available at 10:00 AM and 03:00 PM, or would Friday evening at 05:30 PM work better?" }
+    },
+    {
+      "id": "suggest_period_choices_node",
+      "type": "messageNode",
+      "position": { "x": 150, "y": 860 },
+      "data": { "label": "{{slot_choice_prefix}} On {{requested_day_rel}} we have slots at {{matching_period_slots_text}}. Which one works better for you?" }
+    },
+    {
+      "id": "emergency_breakdown_node",
+      "type": "messageNode",
+      "position": { "x": 900, "y": 860 },
+      "data": { "label": "I understand you have an urgent breakdown. Connecting you immediately to our Roadside Assistance supervisor." }
+    },
+    {
+      "id": "check_counter_proposal",
+      "type": "conditionNode",
+      "position": { "x": 400, "y": 980 },
+      "data": { "label": "Check Counter Proposal" }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "source": "start", "target": "crm_lookup", "animated": true },
+    { "id": "e2", "source": "crm_lookup", "target": "intro", "animated": true },
+    { "id": "e3", "source": "intro", "target": "check_id", "animated": true },
+    { "id": "e4", "source": "check_id", "target": "verify_due", "sourceHandle": "true", "animated": true },
+    { "id": "e4_not_due", "source": "check_id", "target": "not_due_message", "sourceHandle": "not_due", "animated": true },
+    { "id": "e4_not_due_end", "source": "not_due_message", "target": "end", "animated": true },
+    { "id": "e5", "source": "check_id", "target": "handle_wrong", "sourceHandle": "wrong_number", "animated": true },
+    { "id": "e6", "source": "check_id", "target": "ask_callback", "sourceHandle": "busy", "animated": true },
+    { "id": "e7", "source": "ask_callback", "target": "confirm_callback", "animated": true },
+    { "id": "e8", "source": "handle_wrong", "target": "end", "animated": true },
+    { "id": "e9", "source": "confirm_callback", "target": "end", "animated": true },
+    { "id": "e10", "source": "verify_due", "target": "check_booking", "animated": true },
+    { "id": "e11", "source": "check_booking", "target": "ask_date", "sourceHandle": "true", "animated": true },
+    { "id": "e12", "source": "check_booking", "target": "no_booking", "sourceHandle": "false", "animated": true },
+    { "id": "e12_busy", "source": "check_booking", "target": "no_booking", "sourceHandle": "busy", "animated": true },
+    { "id": "e13", "source": "no_booking", "target": "end", "animated": true },
+    { "id": "e14_validate", "source": "ask_date", "target": "check_slot_action", "animated": true },
+    { "id": "e_slot_avail", "source": "check_slot_action", "target": "collect_mileage", "sourceHandle": "available", "animated": true },
+    { "id": "e_slot_unavail", "source": "check_slot_action", "target": "suggest_alternate_slots", "sourceHandle": "unavailable", "animated": true },
+    { "id": "e_slot_period", "source": "check_slot_action", "target": "suggest_period_choices_node", "sourceHandle": "suggest_period_choices", "animated": true },
+    { "id": "e_slot_breakdown", "source": "check_slot_action", "target": "emergency_breakdown_node", "sourceHandle": "breakdown_urgent", "animated": true },
+    { "id": "e_emergency_transfer", "source": "emergency_breakdown_node", "target": "end", "animated": true },
+    { "id": "e_period_user_choice", "source": "suggest_period_choices_node", "target": "check_counter_proposal", "animated": true },
+    { "id": "e_alt_response", "source": "suggest_alternate_slots", "target": "check_counter_proposal", "animated": true },
+    { "id": "e_alt_accepted", "source": "check_counter_proposal", "target": "collect_mileage", "sourceHandle": "accepted", "animated": true },
+    { "id": "e_alt_still_unavail", "source": "check_counter_proposal", "target": "suggest_alternate_slots", "sourceHandle": "still_unavailable", "animated": true },
+    { "id": "e_alt_period_loop", "source": "check_counter_proposal", "target": "suggest_period_choices_node", "sourceHandle": "suggest_period_choices_loop", "animated": true },
+    { "id": "e_alt_family_pause", "source": "check_counter_proposal", "target": "ask_callback", "sourceHandle": "pause_for_family", "animated": true },
+    { "id": "e_alt_pickup_ack", "source": "check_counter_proposal", "target": "suggest_alternate_slots", "sourceHandle": "pickup_acknowledged", "animated": true },
+    { "id": "e_alt_max_rejections", "source": "check_counter_proposal", "target": "no_booking", "sourceHandle": "max_rejections_escalate", "animated": true },
+    { "id": "e15", "source": "collect_mileage", "target": "ask_concerns", "animated": true },
+    { "id": "e16", "source": "ask_concerns", "target": "pick_drop_offer", "animated": true },
+    { "id": "e17", "source": "pick_drop_offer", "target": "pick_drop_check", "animated": true },
+    { "id": "e18", "source": "pick_drop_check", "target": "confirm_valet", "sourceHandle": "true", "animated": true },
+    { "id": "e19", "source": "pick_drop_check", "target": "confirm_self", "sourceHandle": "false", "animated": true },
+    { "id": "e19_busy", "source": "pick_drop_check", "target": "no_booking", "sourceHandle": "busy", "animated": true },
+    { "id": "e20", "source": "confirm_valet", "target": "end", "animated": true },
+    { "id": "e21", "source": "confirm_self", "target": "end", "animated": true }
+  ]
+}

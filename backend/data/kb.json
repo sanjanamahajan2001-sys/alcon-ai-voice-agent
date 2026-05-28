@@ -1,0 +1,102 @@
+{
+    "models": {
+        "creta": {
+            "price": "Starting from ₹11 Lakhs",
+            "mileage": "18 kmpl",
+            "features": "Panoramic Sunroof, Ventilated Seats, Bose Sound System, Level 2 ADAS",
+            "variants": "E, EX, S, S(O), SX, SX Tech, SX(O)",
+            "colors": "Abyss Black, Atlas White, Titan Grey, Ranger Khaki",
+            "offers": "Festive benefit of up to ₹50,000 including an exchange bonus of ₹20,000. Downpayment starts from as low as ₹1.5 Lakhs.",
+            "availability": "The SX and SX(O) variants are available for immediate delivery. Other variants have a 3-week waiting period.",
+            "emi_starts": "₹18,500 per month",
+            "safety": "Level 2 ADAS with 19 features, 6 Airbags standard, and ESC."
+        },
+        "venue": {
+            "price": "Starting from ₹7.94 Lakhs",
+            "mileage": "17.5 kmpl",
+            "features": "Electric Sunroof, Air Purifier, Wireless Charger, 8-inch Touchscreen",
+            "variants": "E, S, S(O), SX, SX(O)",
+            "colors": "Typhoon Silver, Fiery Red, Denim Blue",
+            "offers": "Cash discount of ₹15,000 and corporate benefits up to ₹10,000. Downpayment from ₹1 Lakh.",
+            "availability": "Ready stock available in all colors at our city showroom.",
+            "emi_starts": "₹12,400 per month",
+            "safety": "6 Airbags, ABS with EBD, and ISOFIX."
+        },
+        "verna": {
+            "price": "Starting from ₹11 Lakhs",
+            "mileage": "19 kmpl",
+            "features": "Horizon LED Lamps, Heated Seats, 10.25-inch Screen, 6 Airbags standard",
+            "variants": "EX, S, SX, SX(O)",
+            "colors": "Starry Night, Tellurian Brown, Abyss Black",
+            "offers": "Special exchange bonus of ₹25,000 for this week only. Zero downpayment schemes available.",
+            "availability": "Available for delivery within 7 to 10 days.",
+            "emi_starts": "₹19,200 per month",
+            "safety": "Level 2 ADAS, 6 Airbags standard, and 5-star GNCAP rating."
+        },
+        "tucson": {
+            "price": "Starting from ₹29 Lakhs",
+            "mileage": "15 kmpl",
+            "features": "HTRAC AWD, Level 2 ADAS, Blind View Monitor, 10.25-inch Touchscreen",
+            "variants": "Platinum, Signature",
+            "colors": "Amazon Grey, White Pearl, Starry Night",
+            "offers": "Corporate discount of ₹50,000 and loyalty bonus of ₹30,000. Finance at 7.99%.",
+            "availability": "Premium models available for test drive; 4-week wait for delivery.",
+            "emi_starts": "₹42,000 per month",
+            "safety": "6 Airbags, ADAS, Front and Rear Parking Sensors."
+        },
+        "aura": {
+            "price": "Starting from ₹6.49 Lakhs",
+            "mileage": "20 kmpl",
+            "features": "Wireless Charger, Type-C Ports, 8-inch Screen, Best-in-class boot space",
+            "variants": "E, S, SX, SX(O)",
+            "colors": "Polar White, Titan Grey, Fiery Red",
+            "offers": "Cash discount of ₹20,000 and exchange bonus of ₹10,000. Zero downpayment available.",
+            "availability": "Ready stock available.",
+            "emi_starts": "₹10,500 per month",
+            "safety": "4 Airbags standard, ABS with EBD."
+        },
+        "exter": {
+            "price": "Starting from ₹6.13 Lakhs",
+            "mileage": "19.2 kmpl",
+            "features": "Dashcam with Dual Camera, Electric Sunroof, 6 Airbags standard",
+            "variants": "EX, S, SX, SX(O)",
+            "colors": "Ranger Khaki, Cosmic Blue, Starry Night",
+            "offers": "Introductory festive offers up to ₹15,000.",
+            "availability": "High demand; 2-month waiting period.",
+            "emi_starts": "₹9,800 per month",
+            "safety": "6 Airbags standard, ESC, VSM, and Hill Start Assist."
+        },
+        "grand i10": {
+            "price": "Starting from ₹5.92 Lakhs",
+            "mileage": "20 kmpl",
+            "features": "8-inch Touchscreen, Wireless Charger, Rear AC Vents, Cruise Control",
+            "variants": "Era, Magna, Sportz, Asta",
+            "colors": "Polar White, Typhoon Silver, Titan Grey",
+            "offers": "Festive benefits up to ₹43,000.",
+            "availability": "Ready stock available.",
+            "emi_starts": "₹9,200 per month",
+            "safety": "6 Airbags standard, ABS with EBD, and ESC."
+        },
+        "i20": {
+            "price": "Starting from ₹7.04 Lakhs",
+            "mileage": "18.5 kmpl",
+            "features": "Digital Cluster, Ambient Lighting, Puddle Lamps, Sunroof",
+            "variants": "Era, Magna, Sportz, Asta, Asta(O)",
+            "colors": "Fiery Red, Starry Night, Atlas White",
+            "offers": "Exchange bonus of ₹15,000 and special finance rates.",
+            "availability": "Ready delivery for Sportz and Asta variants.",
+            "emi_starts": "₹11,200 per month",
+            "safety": "6 Airbags, ABS, and Rear Parking Camera."
+        }
+    },
+    "general_faqs": {
+        "emi": "We offer attractive EMI schemes starting as low as ₹8,999. Our current benefits include a special interest rate of 8.25%, zero processing fees for this month, and a 'Buy Now, Pay Later' holiday period of 3 months. I can connect you to our finance expert for a personalized quote.",
+        "exchange": "Yes, we have a best-in-class exchange program. We offer free doorstep evaluation, spot valuation within 30 minutes, and a dedicated exchange bonus of up to ₹30,000 depending on the model you choose.",
+        "test_drive": "I can certainly arrange a doorstep test drive for you. Which model would you like to experience?",
+        "warranty": "Hyundai offers a 3-year unlimited km warranty, extendable up to 7 years.",
+        "location": "Alcon Hyundai is located on the Main Highway, near the city center. We are open from 9 AM to 7 PM.",
+        "offers": "We have exclusive festive benefits up to ₹50,000 including exchange bonuses and corporate discounts. Which model are you interested in?",
+        "availability": "Most variants of the Creta and Venue are available for immediate delivery. Some specific colors might have a 2-week waiting period.",
+        "driver": "Yes, all our drivers, including Rajesh, are fully licensed, police-verified, and highly experienced professionals with clean safety records. You can be fully assured of your car's safety."
+    }
+}

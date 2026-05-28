@@ -1,0 +1,38 @@
+{
+  "session_id": "chat_e19b63",
+  "flow_id": "service_booking_prod_draft_5337",
+  "current_node_id": "end",
+  "variables": {
+    "from": " 919881012768",
+    "id": "6",
+    "name": "Kavita",
+    "phone": "+919881012768",
+    "car_model": "Hyundai Aura",
+    "registration_number": "DL04-CC-1122",
+    "registration_date": "2022-10-05",
+    "last_service_date": "2025-10-05",
+    "service_due_months": 6,
+    "gender": "female",
+    "dnd_status": false,
+    "exists": true,
+    "tier": "generic",
+    "last_svc_formatted": "October 05",
+    "confirmed_date": "Monday, May 11 at 09:00 AM",
+    "callback_time": "Monday, May 11 at 06:00 PM",
+    "callback_confirmation": "I've scheduled a reminder to call you back at Monday, May 11 at 06:00 PM"
+  },
+  "history": [
+    {
+      "role": "user",
+      "text": "busy, call back in the evening"
+    },
+    {
+      "role": "user",
+      "text": "evening"
+    },
+    {
+      "role": "user",
+      "text": ""
+    }
+  ]
+}

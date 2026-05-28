@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alcon AI | Centralized Campaign Orchestrator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #070a13;
+            --card-bg: rgba(30, 41, 59, 0.4);
+            --accent-blue: #38bdf8;
+            --accent-green: #4ade80;
+            --accent-red: #f43f5e;
+            --accent-purple: #c084fc;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --neon-glow: 0 0 20px rgba(56, 189, 248, 0.25);
+            --card-hover-border: rgba(56, 189, 248, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(192, 132, 252, 0.05) 0%, transparent 40%);
+        }
+
+        /* Sidebar Navigation Layout */
+        .sidebar-nav {
+            width: 80px;
+            background: rgba(15, 23, 42, 0.6);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 0;
+            gap: 2rem;
+            z-index: 10;
+            backdrop-filter: blur(20px);
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+        }
+
+        .nav-item {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .nav-item span {
+            font-size: 0.6rem;
+            font-weight: 600;
+            margin-top: 4px;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: all 0.3s;
+            position: absolute;
+            bottom: -18px;
+            white-space: nowrap;
+        }
+
+        .nav-item:hover {
+            color: var(--accent-blue);
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .nav-item:hover span {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-item.active {
+            color: white;
+            background: var(--accent-blue);
+            box-shadow: var(--neon-glow);
+        }
+
+        .nav-item.active span {
+            opacity: 1;
+            color: var(--accent-blue);
+        }
+
+        /* Main Workspace Content */
+        .main-container {
+            margin-left: 80px;
+            flex: 1;
+            padding: 2rem 3rem;
+            max-width: 1600px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-left h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.25rem;
+        }
+
+        .header-left p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Action Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #0284c7 100%);
+            color: white;
+            box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: rgba(244, 63, 94, 0.1);
+            border-color: rgba(244, 63, 94, 0.2);
+            color: var(--accent-red);
+        }
+
+        .btn-danger:hover:not(:disabled) {
+            background: rgba(244, 63, 94, 0.2);
+            border-color: var(--accent-red);
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* 9 Flow Grid Layout */
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .flow-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flow-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .flow-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--card-hover-border);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), var(--neon-glow);
+        }
+
+        .flow-card:hover::before {
+            opacity: 1;
+        }
+
+        .flow-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .flow-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+
+        .flow-card:nth-child(2) .flow-icon { background: rgba(74, 222, 128, 0.1); color: var(--accent-green); border-color: rgba(74, 222, 128, 0.15); }
+        .flow-card:nth-child(3) .flow-icon { background: rgba(192, 132, 252, 0.1); color: var(--accent-purple); border-color: rgba(192, 132, 252, 0.15); }
+        .flow-card:nth-child(4) .flow-icon { background: rgba(244, 63, 94, 0.1); color: var(--accent-red); border-color: rgba(244, 63, 94, 0.15); }
+        .flow-card:nth-child(5) .flow-icon { background: rgba(56, 189, 248, 0.1); color: var(--accent-blue); border-color: rgba(56, 189, 248, 0.15); }
+
+        .eligibility-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .eligibility-badge.active-targets {
+            background: rgba(74, 222, 128, 0.1);
+            border-color: rgba(74, 222, 128, 0.2);
+            color: var(--accent-green);
+        }
+
+        .flow-info h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.4rem;
+        }
+
+        .flow-info p {
+            color: var(--text-secondary);
+            font-size: 0.825rem;
+            line-height: 1.4;
+            height: 48px;
+            overflow: hidden;
+        }
+
+        .flow-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .flow-status-text {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Staged Queue & Live dialogue logs layout */
+        .workspace-split {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 1.5rem;
+            height: 520px;
+        }
+
+        .panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .panel-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .queue-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .queue-item {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .queue-item:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .queue-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .queue-item-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .queue-item-meta {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .queue-status-badge {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-queued { background: rgba(148, 163, 184, 0.1); color: var(--text-secondary); border: 1px solid rgba(148, 163, 184, 0.2); }
+        .status-processing { background: rgba(56, 189, 248, 0.1); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.2); animation: pulseGlow 1.5s infinite; }
+        .status-completed { background: rgba(74, 222, 128, 0.1); color: var(--accent-green); border: 1px solid rgba(74, 222, 128, 0.2); }
+        .status-failed { background: rgba(244, 63, 94, 0.1); color: var(--accent-red); border: 1px solid rgba(244, 63, 94, 0.2); }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; box-shadow: 0 0 5px rgba(56, 189, 248, 0.2); }
+            50% { opacity: 0.8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.5); }
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .progress-bar-bg {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            width: 0%;
+            transition: width 0.5s ease-out;
+        }
+
+        .queue-item-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .retrigger-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 3px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .retrigger-btn:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Terminal Console style */
+        .terminal {
+            flex: 1;
+            background: #04060b;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 1.25rem;
+            overflow-y: auto;
+            color: #4de80;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            border-radius: 0 0 24px 24px;
+        }
+
+        .terminal-log {
+            color: #94a3b8;
+        }
+
+        .terminal-system {
+            color: #38bdf8;
+            font-weight: bold;
+        }
+
+        .terminal-ai {
+            color: #a855f7;
+            font-weight: 500;
+        }
+
+        .terminal-customer {
+            color: #4ade80;
+            font-weight: 500;
+        }
+
+        .terminal-outcome {
+            color: #eab308;
+            font-weight: bold;
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            color: var(--text-secondary);
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Scan Progress Banner */
+        .scan-overlay {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            animation: slideInDown 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideInDown {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Staged targets visual list dropdown styling */
+        .action-btn-mini {
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: var(--accent-blue);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .action-btn-mini:hover:not(:disabled) {
+            background: var(--accent-blue);
+            color: white;
+            box-shadow: var(--neon-glow);
+        }
+
+        .action-btn-mini:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .toggle-targets-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .toggle-targets-btn:hover {
+            color: white;
+        }
+
+        .staged-customers-dropdown {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            display: none;
+            animation: fadeIn 0.3s;
+            width: 100%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .staged-customers-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            max-height: 140px;
+            overflow-y: auto;
+            margin-top: 0.5rem;
+            padding-right: 4px;
+        }
+
+        /* Custom Scrollbar for dropdown */
+        .staged-customers-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        .staged-customers-list::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        .staged-customers-list::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 2px;
+        }
+
+        .target-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            padding: 5px 8px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .target-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .target-car {
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+            margin-left: 6px;
+        }
+
+        .target-status {
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 1px 6px;
+            border-radius: 8px;
+            text-transform: uppercase;
+        }
+
+        .target-status.staged { background: rgba(148, 163, 184, 0.1); color: var(--text-secondary); }
+        .target-status.queued { background: rgba(234, 179, 8, 0.1); color: #eab308; }
+        .target-status.processing { background: rgba(56, 189, 248, 0.1); color: var(--accent-blue); }
+        .target-status.completed { background: rgba(74, 222, 128, 0.1); color: var(--accent-green); }
+        .target-status.failed { background: rgba(244, 63, 94, 0.1); color: var(--accent-red); }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar-nav">
+        <div class="nav-item" id="nav-voice" onclick="location.href='index.html'">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            <span>Voice Agent</span>
+        </div>
+        <div class="nav-item" id="nav-chat" onclick="location.href='index.html?view=chat'">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span>Chat Assistant</span>
+        </div>
+        <div class="nav-item" id="nav-dashboards" onclick="window.open('campaign_dashboard.html', '_blank')">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            <span>AI Dashboards</span>
+        </div>
+        <div class="nav-item active" id="nav-campaigns">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span>Campaign Hub</span>
+        </div>
+        <div class="nav-item" id="nav-flow" onclick="window.open('http://localhost:3000', '_blank')">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <span>Flow Builder</span>
+        </div>
+    </nav>
+
+    <!-- Main Workspace -->
+    <div class="main-container">
+        <header>
+            <div class="header-left">
+                <h1>Central Campaign Hub</h1>
+                <p>Digital DMS Scanning & Flow Execution Engine</p>
+            </div>
+            <div class="header-right">
+                <button id="scan-dms-btn" class="btn btn-secondary" onclick="scanDMS()">
+                    🔍 Run DMS Scan
+                </button>
+                <button id="trigger-all-btn" class="btn btn-primary" onclick="triggerAllCampaigns()" disabled>
+                    ⚡ Trigger Active Campaigns
+                </button>
+                <button id="clear-queue-btn" class="btn btn-danger" onclick="clearQueue()" disabled>
+                    🗑️ Clear Queue
+                </button>
+            </div>
+        </header>
+
+        <!-- Scanning progress block -->
+        <div id="scan-progress-banner" class="scan-overlay" style="display: none;">
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 0.4rem;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600;">
+                    <span>Scanning local DMS database tables...</span>
+                    <span id="scan-percent">0%</span>
+                </div>
+                <div class="progress-bar-bg" style="height: 8px;">
+                    <div id="scan-progress-fill" class="progress-bar-fill" style="width: 0%;"></div>
+                </div>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--accent-green); font-weight: 700; white-space: nowrap;" id="scan-results-text">
+                Syncing status...
+            </div>
+        </div>
+
+        <!-- 9 Flows Grid -->
+        <div class="flow-grid" id="campaign-flow-grid">
+            <!-- 1. Booking Flow -->
+            <div class="flow-card">
+                <div class="flow-header">
+                    <div class="flow-icon">📅</div>
+                    <div class="eligibility-badge" id="badge-booking">0 Staged</div>
+                </div>
+                <div class="flow-info">
+                    <h3>Service Due Reminder</h3>
+                    <p>Customers with service due in the next 2 days. Prompts slot booking via voice template.</p>
+                </div>
+                <div class="flow-footer">
+                    <button class="toggle-targets-btn" id="btn-toggle-booking" onclick="toggleStagedTargets('booking')">👁️ Show Staged</button>
+                    <button class="action-btn-mini" onclick="triggerSingleCampaign('booking')" id="btn-trigger-booking" style="opacity: 0.6;" disabled>Trigger</button>
+                </div>
+                <div class="staged-customers-dropdown" id="dropdown-booking">
+                    <h4 style="font-size: 0.7rem; text-transform: uppercase; color: var(--accent-blue);">Staged Targets:</h4>
+                    <div class="staged-customers-list" id="list-booking">
+                        <!-- Items rendered via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Pickup Coordination -->
+            <div class="flow-card">
+                <div class="flow-header">
+                    <div class="flow-icon">🚚</div>
+                    <div class="eligibility-badge" id="badge-pickup">0 Staged</div>
+                </div>
+                <div class="flow-info">
+                    <h3>Pickup Coordination</h3>
+                    <p>Customers with booked service due for logistics planning. Coordinates driver pickup details.</p>
+                </div>
+                <div class="flow-footer">
+                    <button class="toggle-targets-btn" id="btn-toggle-pickup" onclick="toggleStagedTargets('pd_pickup_coordination')">👁️ Show Staged</button>
+                    <button class="action-btn-mini" onclick="triggerSingleCampaign('pd_pickup_coordination')" id="btn-trigger-pickup" style="opacity: 0.6;" disabled>Trigger</button>
+                </div>
+                <div class="staged-customers-dropdown" id="dropdown-pd_pickup_coordination">
+                    <h4 style="font-size: 0.7rem; text-transform: uppercase; color: var(--accent-blue);">Staged Targets:</h4>
+                    <div class="staged-customers-list" id="list-pd_pickup_coordination">
+                        <!-- Items rendered via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Workshop Update -->
+            <div class="flow-card">
+                <div class="flow-header">
+                    <div class="flow-icon">🔧</div>
+                    <div class="eligibility-badge" id="badge-workshop">0 Staged</div>
+                </div>
+                <div class="flow-info">
+                    <h3>Workshop Update</h3>
+                    <p>Customers with in-progress service jobs. Reviews diagnostics, estimates, and captures consent.</p>
+                </div>
+                <div class="flow-footer">
+                    <button class="toggle-targets-btn" id="btn-toggle-workshop" onclick="toggleStagedTargets('pd_workshop_update')">👁️ Show Staged</button>
+                    <button class="action-btn-mini" onclick="triggerSingleCampaign('pd_workshop_update')" id="btn-trigger-workshop" style="opacity: 0.6;" disabled>Trigger</button>
+                </div>
+                <div class="staged-customers-dropdown" id="dropdown-pd_workshop_update">
+                    <h4 style="font-size: 0.7rem; text-transform: uppercase; color: var(--accent-blue);">Staged Targets:</h4>
+                    <div class="staged-customers-list" id="list-pd_workshop_update">
+                        <!-- Items rendered via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Ready for Delivery -->
+            <div class="flow-card">
+                <div class="flow-header">
+                    <div class="flow-icon">✨</div>
+                    <div class="eligibility-badge" id="badge-ready">0 Staged</div>
+                </div>
+                <div class="flow-info">
+                    <h3>Ready for Delivery</h3>
+                    <p>Customers whose service is completed. Confirms invoice settlement and schedules delivery drops.</p>
+                </div>
+                <div class="flow-footer">
+                    <button class="toggle-targets-btn" id="btn-toggle-ready" onclick="toggleStagedTargets('pd_ready')">👁️ Show Staged</button>
+                    <button class="action-btn-mini" onclick="triggerSingleCampaign('pd_ready')" id="btn-trigger-ready" style="opacity: 0.6;" disabled>Trigger</button>
+                </div>
+                <div class="staged-customers-dropdown" id="dropdown-pd_ready">
+                    <h4 style="font-size: 0.7rem; text-transform: uppercase; color: var(--accent-blue);">Staged Targets:</h4>
+                    <div class="staged-customers-list" id="list-pd_ready">
+                        <!-- Items rendered via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Insurance Renewals -->
+            <div class="flow-card">
+                <div class="flow-header">
+                    <div class="flow-icon">🛡️</div>
+                    <div class="eligibility-badge" id="badge-insurance">0 Staged</div>
+                </div>
+                <div class="flow-info">
+                    <h3>Insurance Renewal</h3>
+                    <p>Staged reminders based on expiry date: T-30, T-15, T-7, T-1, or Expired break-in scenarios.</p>
+                </div>
+                <div class="flow-footer">
+                    <button class="toggle-targets-btn" id="btn-toggle-insurance" onclick="toggleStagedTargets('insurance_start')">👁️ Show Staged</button>
+                    <button class="action-btn-mini" onclick="triggerSingleCampaign('insurance_start')" id="btn-trigger-insurance" style="opacity: 0.6;" disabled>Trigger</button>
+                </div>
+                <div class="staged-customers-dropdown" id="dropdown-insurance_start">
+                    <h4 style="font-size: 0.7rem; text-transform: uppercase; color: var(--accent-blue);">Staged Targets:</h4>
+                    <div class="staged-customers-list" id="list-insurance_start">
+                        <!-- Items rendered via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Post 3rd Day Feedback -->
+            <div class="flow-card">
+                <div class="flow-header">
+                    <div class="flow-icon">💬</div>
+                    <div class="eligibility-badge" id="badge-feedback3">0 Staged</div>
+                </div>
+                <div class="flow-info">
+                    <h3>3rd-Day Feedback</h3>
+                    <p>Post 3rd-day service satisfaction callback. Resolves concerns and updates customer score.</p>
+                </div>
+                <div class="flow-footer">
+                    <button class="toggle-targets-btn" id="btn-toggle-feedback3" onclick="toggleStagedTargets('feedback_3rd_day')">👁️ Show Staged</button>
+                    <button class="action-btn-mini" onclick="triggerSingleCampaign('feedback_3rd_day')" id="btn-trigger-feedback3" style="opacity: 0.6;" disabled>Trigger</button>
+                </div>
+                <div class="staged-customers-dropdown" id="dropdown-feedback_3rd_day">
+                    <h4 style="font-size: 0.7rem; text-transform: uppercase; color: var(--accent-blue);">Staged Targets:</h4>
+                    <div class="staged-customers-list" id="list-feedback_3rd_day">
+                        <!-- Items rendered via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. 15 Day Feedback -->
+            <div class="flow-card">
+                <div class="flow-header">
+                    <div class="flow-icon">🗣️</div>
+                    <div class="eligibility-badge" id="badge-feedback15">0 Staged</div>
+                </div>
+                <div class="flow-info">
+                    <h3>15-Day Service Feedback</h3>
+                    <p>15-day service health callback. Evaluates vehicle performance and driving diagnostics.</p>
+                </div>
+                <div class="flow-footer">
+                    <button class="toggle-targets-btn" id="btn-toggle-feedback15" onclick="toggleStagedTargets('feedback_15day_v2')">👁️ Show Staged</button>
+                    <button class="action-btn-mini" onclick="triggerSingleCampaign('feedback_15day_v2')" id="btn-trigger-feedback15" style="opacity: 0.6;" disabled>Trigger</button>
+                </div>
+                <div class="staged-customers-dropdown" id="dropdown-feedback_15day_v2">
+                    <h4 style="font-size: 0.7rem; text-transform: uppercase; color: var(--accent-blue);">Staged Targets:</h4>
+                    <div class="staged-customers-list" id="list-feedback_15day_v2">
+                        <!-- Items rendered via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. Pre-Sales Campaign -->
+            <div class="flow-card">
+                <div class="flow-header">
+                    <div class="flow-icon">📈</div>
+                    <div class="eligibility-badge" id="badge-presales">0 Staged</div>
+                </div>
+                <div class="flow-info">
+                    <h3>Pre-Sales Upgrade</h3>
+                    <p>Targeted sales pitches: exchange (age &ge; 5y), upgrade (age &ge; 3y), or EMI benefits (&lt; 3y).</p>
+                </div>
+                <div class="flow-footer">
+                    <button class="toggle-targets-btn" id="btn-toggle-presales" onclick="toggleStagedTargets('pre_sales')">👁️ Show Staged</button>
+                    <button class="action-btn-mini" onclick="triggerSingleCampaign('pre_sales')" id="btn-trigger-presales" style="opacity: 0.6;" disabled>Trigger</button>
+                </div>
+                <div class="staged-customers-dropdown" id="dropdown-pre_sales">
+                    <h4 style="font-size: 0.7rem; text-transform: uppercase; color: var(--accent-blue);">Staged Targets:</h4>
+                    <div class="staged-customers-list" id="list-pre_sales">
+                        <!-- Items rendered via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. Inbound Calls -->
+            <div class="flow-card">
+                <div class="flow-header">
+                    <div class="flow-icon">📞</div>
+                    <div class="eligibility-badge" id="badge-inbound">0 Staged</div>
+                </div>
+                <div class="flow-info">
+                    <h3>Inbound Call Queue</h3>
+                    <p>Simulates incoming client calls waiting in queue. Connects dynamically to reception template.</p>
+                </div>
+                <div class="flow-footer">
+                    <button class="toggle-targets-btn" id="btn-toggle-inbound" onclick="toggleStagedTargets('reception')">👁️ Show Staged</button>
+                    <button class="action-btn-mini" onclick="triggerSingleCampaign('reception')" id="btn-trigger-inbound" style="opacity: 0.6;" disabled>Trigger</button>
+                </div>
+                <div class="staged-customers-dropdown" id="dropdown-reception">
+                    <h4 style="font-size: 0.7rem; text-transform: uppercase; color: var(--accent-blue);">Staged Targets:</h4>
+                    <div class="staged-customers-list" id="list-reception">
+                        <!-- Items rendered via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Staged Queue Monitor & Live terminal logs split -->
+        <div class="workspace-split">
+            <!-- Staged Queue Monitor Panel -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>📋 Campaign Queue Monitor</h2>
+                    <span id="queue-count-badge" style="font-size: 0.8rem; background: rgba(56,189,248,0.15); padding: 3px 8px; border-radius: 8px; color: var(--accent-blue); font-weight: 600;">0 Jobs Active</span>
+                </div>
+                <div class="queue-list" id="queue-list-container">
+                    <div class="empty-state">
+                        <div>⏳</div>
+                        <div>Queue is currently empty. Run a DMS Scan and Trigger Campaigns to see active queue items.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Dialogue Terminal Panel -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>📟 Live Dialog Terminal & System Activity</h2>
+                    <button class="retrigger-btn" onclick="clearTerminal()">Reset Terminal</button>
+                </div>
+                <div class="terminal" id="terminal-logs-container">
+                    <div class="terminal-system">[SYSTEM] Platform active. Ready for scanning...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="central_dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+    "Hi, I'm Supriya from Alcon. How can I help? Sales or Service?": {
+        "tag": "greeting_reception",
+        "priority_static": true
+    },
+    "Please wait while I connect you to the Sales team.": {
+        "tag": "transfer_sales",
+        "priority_static": true
+    },
+    "Please wait while I connect you to the Service team.": {
+        "tag": "transfer_service",
+        "priority_static": true
+    },
+    "My apologies, I must have the wrong number. Have a wonderful day!": {
+        "tag": "wrong_number",
+        "priority_static": true
+    },
+    "Understood. Have a great day!": {
+        "tag": "closing_generic",
+        "priority_static": true
+    }
+}

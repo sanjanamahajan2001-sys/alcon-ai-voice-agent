@@ -1,0 +1,296 @@
+{
+  "flow_id": "inbound_receptionist",
+  "version": 6,
+  "status": "draft",
+  "name": "Inbound Receptionist",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "startNode",
+      "data": { "label": "Start" },
+      "position": { "x": 500, "y": 0 }
+    },
+    {
+      "id": "init_context",
+      "type": "contextLogicNode",
+      "data": { "label": "Receptionist Initialization" },
+      "position": { "x": 500, "y": 100 }
+    },
+    {
+      "id": "greeting",
+      "type": "messageNode",
+      "data": {
+        "label": "Welcome to Alcon Hyundai. I am your AI assistant. How can I help you today? Are you looking for a new car enquiry or service assistance?"
+      },
+      "position": { "x": 500, "y": 200 }
+    },
+    {
+      "id": "intent_check",
+      "type": "conditionNode",
+      "data": { "label": "Consent/Identity Check" },
+      "position": { "x": 500, "y": 320 }
+    },
+    {
+      "id": "sales_path",
+      "type": "conditionNode",
+      "data": {
+        "label": "name_known",
+        "condition": "name not in [None, 'Customer', 'Unknown']"
+      },
+      "position": { "x": 200, "y": 450 }
+    },
+    {
+      "id": "ask_name_sales",
+      "type": "messageNode",
+      "data": {
+        "label": "Great! I can certainly help with your new car enquiry. May I know your name please?"
+      },
+      "position": { "x": 50, "y": 550 }
+    },
+    {
+      "id": "capture_name_sales",
+      "type": "conditionNode",
+      "data": { "label": "Consent/Identity Check" },
+      "position": { "x": 50, "y": 670 }
+    },
+    {
+      "id": "ask_model",
+      "type": "messageNode",
+      "data": {
+        "label": "Thank you {{name}}. Which model are you interested in today? I can help with pricing, features, or EMI details."
+      },
+      "position": { "x": 200, "y": 800 }
+    },
+    {
+      "id": "sales_query_loop",
+      "type": "conditionNode",
+      "data": { "label": "Query Intent Check" },
+      "position": { "x": 200, "y": 920 }
+    },
+    {
+      "id": "kb_handler_sales",
+      "type": "knowledgeBaseNode",
+      "data": { "label": "Knowledge Base Handler", "capability": "query" },
+      "position": { "x": 50, "y": 1050 }
+    },
+    {
+      "id": "transfer_sales",
+      "type": "actionNode",
+      "data": { "label": "Transfer to Sales", "action_type": "transfer_sales", "capability": "transfer" },
+      "position": { "x": 350, "y": 1050 }
+    },
+    {
+      "id": "service_path",
+      "type": "conditionNode",
+      "data": {
+        "label": "name_known",
+        "condition": "name not in [None, 'Customer', 'Unknown']"
+      },
+      "position": { "x": 800, "y": 450 }
+    },
+    {
+      "id": "ask_name_service",
+      "type": "messageNode",
+      "data": {
+        "label": "Understood. I can help you with your service booking. May I know your name please?"
+      },
+      "position": { "x": 950, "y": 550 }
+    },
+    {
+      "id": "capture_name_service",
+      "type": "conditionNode",
+      "data": { "label": "Consent/Identity Check" },
+      "position": { "x": 950, "y": 670 }
+    },
+    {
+      "id": "ask_reg_service",
+      "type": "messageNode",
+      "data": {
+        "label": "Thank you {{name}}. To proceed, could you please share your vehicle registration number?"
+      },
+      "position": { "x": 800, "y": 800 }
+    },
+    {
+      "id": "capture_reg_service",
+      "type": "conditionNode",
+      "data": { "label": "Consent/Identity Check" },
+      "position": { "x": 800, "y": 920 }
+    },
+    {
+      "id": "check_service_due",
+      "type": "actionNode",
+      "data": { "label": "Check Service Due", "action_type": "check_service_due" },
+      "position": { "x": 800, "y": 1040 }
+    },
+    {
+      "id": "service_due_path",
+      "type": "conditionNode",
+      "data": { "label": "Is Service Due", "condition": "is_due == True" },
+      "position": { "x": 800, "y": 1160 }
+    },
+    {
+      "id": "verify_due_msg",
+      "type": "messageNode",
+      "data": {
+        "label": "Thank you. I've verified your record. I see your {{car}} was last serviced on {{last_service_date}}, and your next appointment is now due. Would you like to book it today?"
+      },
+      "position": { "x": 700, "y": 1280 }
+    },
+    {
+      "id": "verify_not_due_msg",
+      "type": "messageNode",
+      "data": {
+        "label": "Thank you. I've checked our records and your {{car}} service is not yet due. It is scheduled for {{service_due_date}}. Is there anything else I can help you with today?"
+      },
+      "position": { "x": 950, "y": 1280 }
+    },
+    {
+      "id": "check_booking",
+      "type": "conditionNode",
+      "data": { "label": "User says Yes" },
+      "position": { "x": 700, "y": 1400 }
+    },
+    {
+      "id": "service_query_loop",
+      "type": "conditionNode",
+      "data": { "label": "Query Intent Check" },
+      "position": { "x": 950, "y": 1400 }
+    },
+    {
+      "id": "ask_date",
+      "type": "messageNode",
+      "data": { "label": "Great. What date would you prefer for the service?" },
+      "position": { "x": 550, "y": 1520 }
+    },
+    {
+      "id": "capture_date_service",
+      "type": "conditionNode",
+      "data": { "label": "Consent/Identity Check" },
+      "position": { "x": 550, "y": 1640 }
+    },
+    {
+      "id": "collect_mileage",
+      "type": "messageNode",
+      "data": { "label": "Got it. Available on {{confirmed_date}}. What's the current mileage of your car?" },
+      "position": { "x": 550, "y": 1760 }
+    },
+    {
+      "id": "capture_mileage_service",
+      "type": "conditionNode",
+      "data": { "label": "Consent/Identity Check" },
+      "position": { "x": 550, "y": 1880 }
+    },
+    {
+      "id": "ask_concerns",
+      "type": "messageNode",
+      "data": { "label": "Got it. And are there any specific concerns or issues with the car?" },
+      "position": { "x": 550, "y": 2000 }
+    },
+    {
+      "id": "capture_concerns_service",
+      "type": "conditionNode",
+      "data": { "label": "Consent/Identity Check" },
+      "position": { "x": 550, "y": 2120 }
+    },
+    {
+      "id": "pick_drop_offer",
+      "type": "messageNode",
+      "data": { "label": "I've noted those points. We offer free Pick and Drop service. Would you like to avail this?" },
+      "position": { "x": 550, "y": 2240 }
+    },
+    {
+      "id": "pick_drop_check",
+      "type": "conditionNode",
+      "data": { "label": "User says Yes" },
+      "position": { "x": 550, "y": 2360 }
+    },
+    {
+      "id": "final_booking_sync",
+      "type": "actionNode",
+      "data": { "label": "Confirm Booking", "action_type": "final_booking_sync" },
+      "position": { "x": 550, "y": 2480 }
+    },
+    {
+      "id": "confirm_valet",
+      "type": "messageNode",
+      "data": {
+        "label": "Wonderful {{salutation}}. Your service is confirmed. At Alcon, we provide a 50-point safety check and use only genuine Hyundai parts to ensure your vehicle's peak performance. Your Advisor, Amit Shah, will greet you upon arrival and walk you through the repair order details. You'll receive an SMS shortly. Have a great day!"
+      },
+      "position": { "x": 450, "y": 2600 }
+    },
+    {
+      "id": "confirm_self",
+      "type": "messageNode",
+      "data": {
+        "label": "Wonderful {{salutation}}. Your service is confirmed. At Alcon, we provide a 50-point safety check and use only genuine Hyundai parts. Your Advisor, Amit Shah, will greet you upon arrival. You'll receive an SMS shortly. Have a great day!"
+      },
+      "position": { "x": 650, "y": 2600 }
+    },
+    {
+      "id": "no_booking",
+      "type": "messageNode",
+      "data": { "label": "Understood {{salutation}}. I'll make a note of it. Have a great day!" },
+      "position": { "x": 800, "y": 1520 }
+    },
+    {
+      "id": "kb_handler_service",
+      "type": "knowledgeBaseNode",
+      "data": { "label": "Knowledge Base Handler", "capability": "query" },
+      "position": { "x": 1050, "y": 1520 }
+    },
+    {
+      "id": "end",
+      "type": "endNode",
+      "data": { "label": "Hangup" },
+      "position": { "x": 500, "y": 2800 }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "source": "start", "target": "init_context" },
+    { "id": "e2", "source": "init_context", "target": "greeting" },
+    { "id": "e3", "source": "greeting", "target": "intent_check" },
+    { "id": "e4_sales", "source": "intent_check", "target": "sales_path", "sourceHandle": "true" },
+    { "id": "e4_service", "source": "intent_check", "target": "service_path", "sourceHandle": "false" },
+    { "id": "e5_s_known", "source": "sales_path", "target": "ask_model", "sourceHandle": "true" },
+    { "id": "e5_s_unknown", "source": "sales_path", "target": "ask_name_sales", "sourceHandle": "false" },
+    { "id": "e6_s_cap", "source": "ask_name_sales", "target": "capture_name_sales" },
+    { "id": "e7_s_model", "source": "capture_name_sales", "target": "ask_model", "sourceHandle": "true" },
+    { "id": "e8_s_query", "source": "ask_model", "target": "sales_query_loop" },
+    { "id": "e9_s_kb", "source": "sales_query_loop", "target": "kb_handler_sales", "sourceHandle": "query" },
+    { "id": "e10_s_kb_cont", "source": "kb_handler_sales", "target": "sales_query_loop", "sourceHandle": "answered" },
+    { "id": "e11_s_trans", "source": "sales_query_loop", "target": "transfer_sales", "sourceHandle": "transfer" },
+    { "id": "e11_s_rej", "source": "sales_query_loop", "target": "end", "sourceHandle": "rejection" },
+    { "id": "e11_s_rej_f", "source": "sales_query_loop", "target": "end", "sourceHandle": "false" },
+    { "id": "e12_svc_known", "source": "service_path", "target": "ask_reg_service", "sourceHandle": "true" },
+    { "id": "e12_svc_unknown", "source": "service_path", "target": "ask_name_service", "sourceHandle": "false" },
+    { "id": "e13_svc_name_cap", "source": "ask_name_service", "target": "capture_name_service" },
+    { "id": "e14_svc_reg", "source": "capture_name_service", "target": "ask_reg_service", "sourceHandle": "true" },
+    { "id": "e15_svc_reg_cap", "source": "ask_reg_service", "target": "capture_reg_service" },
+    { "id": "e16_svc_check", "source": "capture_reg_service", "target": "check_service_due", "sourceHandle": "true" },
+    { "id": "e17_svc_due_path", "source": "check_service_due", "target": "service_due_path" },
+    { "id": "e18_svc_is_due", "source": "service_due_path", "target": "verify_due_msg", "sourceHandle": "true" },
+    { "id": "e18_svc_not_due", "source": "service_due_path", "target": "verify_not_due_msg", "sourceHandle": "false" },
+    { "id": "e19_svc_book_check", "source": "verify_due_msg", "target": "check_booking" },
+    { "id": "e20_svc_yes", "source": "check_booking", "target": "ask_date", "sourceHandle": "true" },
+    { "id": "e20_svc_no", "source": "check_booking", "target": "no_booking", "sourceHandle": "false" },
+    { "id": "e21_svc_query_check", "source": "verify_not_due_msg", "target": "service_query_loop" },
+    { "id": "e22_svc_kb", "source": "service_query_loop", "target": "kb_handler_service", "sourceHandle": "query" },
+    { "id": "e23_svc_kb_cont", "source": "kb_handler_service", "target": "service_query_loop", "sourceHandle": "answered" },
+    { "id": "e23_svc_rej", "source": "service_query_loop", "target": "end", "sourceHandle": "rejection" },
+    { "id": "e23_svc_rej_f", "source": "service_query_loop", "target": "end", "sourceHandle": "false" },
+    { "id": "e24_svc_date_cap", "source": "ask_date", "target": "capture_date_service" },
+    { "id": "e25_svc_mile_trigger", "source": "capture_date_service", "target": "collect_mileage", "sourceHandle": "true" },
+    { "id": "e26_svc_mile_cap", "source": "collect_mileage", "target": "capture_mileage_service" },
+    { "id": "e27_svc_conc_trigger", "source": "capture_mileage_service", "target": "ask_concerns", "sourceHandle": "true" },
+    { "id": "e28_svc_conc_cap", "source": "ask_concerns", "target": "capture_concerns_service" },
+    { "id": "e29_svc_pd_trigger", "source": "capture_concerns_service", "target": "pick_drop_offer", "sourceHandle": "true" },
+    { "id": "e30_svc_pd_check", "source": "pick_drop_offer", "target": "pick_drop_check" },
+    { "id": "e31_svc_sync", "source": "pick_drop_check", "target": "final_booking_sync" },
+    { "id": "e32_svc_confirm_v", "source": "final_booking_sync", "target": "confirm_valet", "sourceHandle": "true" },
+    { "id": "e32_svc_confirm_s", "source": "final_booking_sync", "target": "confirm_self", "sourceHandle": "false" },
+    { "id": "e33_final_sales_end", "source": "transfer_sales", "target": "end" },
+    { "id": "e33_final_svc_end_v", "source": "confirm_valet", "target": "end" },
+    { "id": "e33_final_svc_end_s", "source": "confirm_self", "target": "end" },
+    { "id": "e33_final_no_end", "source": "no_booking", "target": "end" }
+  ]
+}

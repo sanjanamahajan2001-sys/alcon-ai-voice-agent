@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alcon Digital - Future of Mobility</title>
+    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="lander-body">
+    <div class="lander-content">
+        <div class="lander-logo"><span class="logo-accent">Alcon</span> Digital</div>
+        <h1 class="lander-title">Discover The Future In Paradise</h1>
+        <p class="lander-desc">
+            The Definitive Gateway to Alcon's Digital Revolution. 
+            Experience our AI-driven service booking, automated support, and seamless dealership interactions.
+        </p>
+        <button class="lander-btn" onclick="toggleChat(true)">Interact with Supriya AI</button>
+    </div>
+
+    <!-- Floating Chat Widget (Plug & Play) -->
+    <div id="chat-widget" class="chat-widget-container">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <div class="chat-avatar">S</div>
+                <div class="chat-title">
+                    <h2>Alcon Assistant</h2>
+                    <p>Powered by Supriya AI</p>
+                </div>
+            </div>
+            <div class="chat-actions">
+                <button class="close-chat" onclick="toggleChat()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="chat-messages" class="chat-messages">
+            <div class="msg msg-ai">
+                <span class="msg-label">Supriya</span>
+                <div class="msg-text">Hello! I'm Supriya, your Alcon Digital Assistant. I'm the same engine that powers our telephony calls. How can I help you today?</div>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <div class="chat-options" id="chat-quick-options">
+                <button class="chip" onclick="sendChatMessage('Book a service')">Book Service</button>
+                <button class="chip" onclick="sendChatMessage('New car enquiry')">Enquiry</button>
+                <button class="chip" onclick="sendChatMessage('Track status')">Track</button>
+            </div>
+            <div class="chat-input-wrapper">
+                <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
+                <button id="chat-send-btn" class="chat-send-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <div id="chat-fab" class="chat-fab" onclick="toggleChat()">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </div>
+
+    <!-- We need a minimal app.js for the lander, or handle missing elements gracefully in existing app.js -->
+    <script src="app.js?v=5"></script>
+    <script>
+        // Override login for the demo lander if needed, or just let it init
+        // For the lander, we don't want the blur effect or login screen
+        document.addEventListener('DOMContentLoaded', () => {
+            if (elements.appContainer) elements.appContainer.classList.remove('blur');
+            const loginOverlay = document.getElementById('login-overlay');
+            if (loginOverlay) loginOverlay.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

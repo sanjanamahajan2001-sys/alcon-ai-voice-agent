@@ -1,0 +1,74 @@
+{
+  "flow_id": "pd_pickup_coordination",
+  "version": 1,
+  "status": "master",
+  "name": "Pickup Coordination",
+  "description": "Coordinate vehicle pickup with the customer.",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "startNode",
+      "data": { "label": "Start" },
+      "position": { "x": 400, "y": 0 }
+    },
+    {
+      "id": "crm_lookup",
+      "type": "apiNode",
+      "data": { "label": "http://mock/crm/{{from}}" },
+      "position": { "x": 400, "y": 100 }
+    },
+    {
+      "id": "greeting",
+      "type": "messageNode",
+      "data": { "label": "Hello {{salutation}} {{name}}, I'm Supriya from Alcon. Calling to confirm your scheduled Pick & Drop for tomorrow. Is this still a good time?" },
+      "position": { "x": 400, "y": 200 }
+    },
+    {
+      "id": "check_id",
+      "type": "conditionNode",
+      "data": { "label": "identity_verified == true" },
+      "position": { "x": 400, "y": 300 }
+    },
+    {
+      "id": "pickup_ask",
+      "type": "messageNode",
+      "data": { "label": "Great. Our driver Rajesh is assigned for the pickup. What time should he arrive at your location?" },
+      "position": { "x": 300, "y": 450 }
+    },
+    {
+      "id": "pickup_confirm",
+      "type": "messageNode",
+      "data": { "label": "Perfect. Rajesh will see you tomorrow at {{pickup_time}}. You'll receive driver contact details via SMS shortly. Thanks!" },
+      "position": { "x": 300, "y": 550 }
+    },
+
+    {
+      "id": "reschedule_msg",
+      "type": "messageNode",
+      "data": { "label": "No problem. I will have our coordinator call you to reschedule the pickup. Have a nice day!" },
+      "position": { "x": 600, "y": 450 }
+    },
+    {
+      "id": "end_success",
+      "type": "endNode",
+      "data": { "label": "End" },
+      "position": { "x": 300, "y": 650 }
+    },
+    {
+      "id": "end_fail",
+      "type": "endNode",
+      "data": { "label": "End" },
+      "position": { "x": 600, "y": 550 }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "source": "start", "target": "crm_lookup" },
+    { "id": "e2", "source": "crm_lookup", "target": "greeting" },
+    { "id": "e3", "source": "greeting", "target": "check_id" },
+    { "id": "e4", "source": "check_id", "target": "pickup_ask", "sourceHandle": "true" },
+    { "id": "e5", "source": "check_id", "target": "reschedule_msg", "sourceHandle": "false" },
+    { "id": "e6", "source": "pickup_ask", "target": "pickup_confirm" },
+    { "id": "e7", "source": "pickup_confirm", "target": "end_success" },
+    { "id": "e8", "source": "reschedule_msg", "target": "end_fail" }
+  ]
+}

@@ -1,0 +1,370 @@
+✅ MetricsCollector: Connected to REDIS (alcon_metrics)
+ALCON VOICE FLOW PARITY & REGRESSION VERIFIER
+---------------------------------------------
+
+==================== SCENARIO: DND FLOW ====================
+✅ Database initialized and schema verified.
+[DB] Updating Lead State for PARITY_TEST_LEGACY_DND_1779083692: {'interest_level': 'COLD', 'reasoning_trace': {'outcome': 'not_interested', 'stage': '1'}}
+[DB] Updated 1 rows in lead_states
+[ORCHESTRATOR] Delegating turn to template: insurance_v2_template
+[AUDIT] Logged transition for PARITY_TEST_TEMPLATE_DND_1779083692: None -> ENTRY
+[AGENT ROUTER] Capability Map: ['start', '/mock/crm/lookup', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'is correct person', 'calculate renewal context', '{{greeting_context}}', 'check for queries', 'query', 'user intent', 'certainly. your current premium was {{current_premium}}, but for this year, we have a special loyalty quote of {{loyalty_premium}}. this includes zero depreciation, engine protection, and roadside assistance. does that sound like a good deal?', 'consent check', "i'll connect you to our insurance desk to find the best possible rate. please stay on the line.", 'transfer to manager', 'transfer', "excellent choice! i'm processing your renewal with {{provider}} at {{loyalty_premium}}. you'll receive the payment link shortly via whatsapp. by the way, did you find this call helpful?", 'feedback capture', 'store success & feedback', 'thank you for your feedback! have a wonderful day.', 'end call', "no problem. i'll schedule a call back for later. by the way, did you find this call helpful today?", 'schedule follow-up', 'callback', "understood sir. i'll update our records to not call you again regarding this. by the way, did you find this call helpful today?", 'add to dnd', "no problem sir. i'll schedule a call back so you have time to think about it. just one last thing, did you find this interaction helpful?", "oh, i see! that's great to hear that your {{car}} is already covered. by the way, did you find this call helpful today?"]
+[DEBUG] Current Node: start | Flow Type: insurance_start
+[RUNTIME] Executing Node: start (startNode)
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: start | Outcome: None
+[DEBUG] Default edge match -> crm_lookup
+[DEBUG] Next Node: crm_lookup | Is Bridge: True
+[DEBUG] Current Node: crm_lookup | Flow Type: insurance_start
+[RUNTIME] Executing Node: crm_lookup (apiNode)
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: crm_lookup | Outcome: None
+[DEBUG] Default edge match -> verify_identity
+[DEBUG] Next Node: verify_identity | Is Bridge: True
+[DEBUG] Current Node: verify_identity | Flow Type: insurance_start
+[RUNTIME] Executing Node: verify_identity (messageNode)
+[RUNTIME] Node Result -> Outcome: None, Text: Hello, I'm Supriya from Alcon., Status: None
+[DEBUG] Searching edges for Node: verify_identity | Outcome: None
+[DEBUG] Default edge match -> check_verification
+[DEBUG] Next Node: check_verification | Is Bridge: False
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_DND_1779083692: {'car': None, 'car_model': 'Hyundai Creta', 'memory': {}, 'last_action': "AI Response: Hello, I'm Supriya from Alcon. Am I speaking with ..."}
+[DB] Updated 1 rows in lead_states
+[ORCHESTRATOR] Delegating turn to template: insurance_v2_template
+[AUDIT] Logged transition for PARITY_TEST_TEMPLATE_DND_1779083692: check_verification -> ENTRY
+[AGENT ROUTER] Capability Map: ['start', '/mock/crm/lookup', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'is correct person', 'calculate renewal context', '{{greeting_context}}', 'check for queries', 'query', 'user intent', 'certainly. your current premium was {{current_premium}}, but for this year, we have a special loyalty quote of {{loyalty_premium}}. this includes zero depreciation, engine protection, and roadside assistance. does that sound like a good deal?', 'consent check', "i'll connect you to our insurance desk to find the best possible rate. please stay on the line.", 'transfer to manager', 'transfer', "excellent choice! i'm processing your renewal with {{provider}} at {{loyalty_premium}}. you'll receive the payment link shortly via whatsapp. by the way, did you find this call helpful?", 'feedback capture', 'store success & feedback', 'thank you for your feedback! have a wonderful day.', 'end call', "no problem. i'll schedule a call back for later. by the way, did you find this call helpful today?", 'schedule follow-up', 'callback', "understood sir. i'll update our records to not call you again regarding this. by the way, did you find this call helpful today?", 'add to dnd', "no problem sir. i'll schedule a call back so you have time to think about it. just one last thing, did you find this interaction helpful?", "oh, i see! that's great to hear that your {{car}} is already covered. by the way, did you find this call helpful today?"]
+[DEBUG] Current Node: check_verification | Flow Type: insurance_start
+[RUNTIME] Executing Node: check_verification (conditionNode)
+[DEBUG] Resolved last_msg: 'no, don't call me, put me on dnd'
+[AI ENGINE] Detected Salutation: Ma'am | Current Readiness: 10
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_DND_1779083692: {'lead_status': 'NOT_INTERESTED', 'disposition': 'DND_REQUESTED'}
+[DB] Updated 1 rows in lead_states
+[RUNTIME] Node Result -> Outcome: wrong_number, Text: None, Status: None
+[DEBUG] Searching edges for Node: check_verification | Outcome: wrong_number
+[DEBUG] Matched edge handle 'wrong_number' -> dnd_handler
+[DEBUG] Next Node: dnd_handler | Is Bridge: True
+[DEBUG] Current Node: dnd_handler | Flow Type: insurance_start
+[RUNTIME] Executing Node: dnd_handler (messageNode)
+[RUNTIME] Node Result -> Outcome: None, Text: Understood Sir. I'll update ou, Status: None
+[DEBUG] Searching edges for Node: dnd_handler | Outcome: None
+[DEBUG] Default edge match -> collect_feedback
+[DEBUG] Next Node: collect_feedback | Is Bridge: False
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_DND_1779083692: {'car': None, 'car_model': 'Hyundai Creta', 'memory': {}, 'last_action': "AI Response: Understood Sir. I'll update our records to not cal..."}
+[DB] Updated 1 rows in lead_states
+[ORCHESTRATOR] Delegating turn to template: insurance_v2_template
+[AUDIT] Logged transition for PARITY_TEST_TEMPLATE_DND_1779083692: collect_feedback -> ENTRY
+[AGENT ROUTER] Capability Map: ['start', '/mock/crm/lookup', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'is correct person', 'calculate renewal context', '{{greeting_context}}', 'check for queries', 'query', 'user intent', 'certainly. your current premium was {{current_premium}}, but for this year, we have a special loyalty quote of {{loyalty_premium}}. this includes zero depreciation, engine protection, and roadside assistance. does that sound like a good deal?', 'consent check', "i'll connect you to our insurance desk to find the best possible rate. please stay on the line.", 'transfer to manager', 'transfer', "excellent choice! i'm processing your renewal with {{provider}} at {{loyalty_premium}}. you'll receive the payment link shortly via whatsapp. by the way, did you find this call helpful?", 'feedback capture', 'store success & feedback', 'thank you for your feedback! have a wonderful day.', 'end call', "no problem. i'll schedule a call back for later. by the way, did you find this call helpful today?", 'schedule follow-up', 'callback', "understood sir. i'll update our records to not call you again regarding this. by the way, did you find this call helpful today?", 'add to dnd', "no problem sir. i'll schedule a call back so you have time to think about it. just one last thing, did you find this interaction helpful?", "oh, i see! that's great to hear that your {{car}} is already covered. by the way, did you find this call helpful today?"]
+[DEBUG] Current Node: collect_feedback | Flow Type: insurance_start
+[RUNTIME] Executing Node: collect_feedback (conditionNode)
+[DEBUG] Resolved last_msg: 'yes, it was fine'
+[AI ENGINE] Detected Salutation: Ma'am | Current Readiness: 0
+[RUNTIME] Node Result -> Outcome: dnd, Text: None, Status: None
+[DEBUG] Searching edges for Node: collect_feedback | Outcome: dnd
+[DEBUG] Matched edge handle 'dnd' -> dnd_action
+[DEBUG] Next Node: dnd_action | Is Bridge: True
+[DEBUG] Current Node: dnd_action | Flow Type: insurance_start
+[RUNTIME] Executing Node: dnd_action (actionNode)
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_DND_1779083692: {'lead_status': 'NOT_INTERESTED', 'lead_score': 0, 'disposition': 'REJECTED', 'last_action': 'Explicit Rejection', 'next_step': 'No Further Action', 'policy_status': 'REJECTED'}
+[DB] Updated 1 rows in lead_states
+[COMPLIANCE] Customer 1 marked as DND permanently.
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: dnd_action | Outcome: None
+[DEBUG] Default edge match -> end
+[DEBUG] Next Node: end | Is Bridge: True
+[DEBUG] Current Node: end | Flow Type: insurance_start
+[RUNTIME] Executing Node: end (endNode)
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: end | Outcome: None
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_DND_1779083692: {'car': None, 'car_model': 'Hyundai Creta', 'memory': {}, 'last_action': 'AI Response'}
+[DB] Updated 1 rows in lead_states
+
+--- Turn 0 ---
+Legacy AI  : Hello, I'm Supriya from Alcon. Am I speaking with Sanjana Ma'am?...
+Template AI: Hello, I'm Supriya from Alcon. Am I speaking with Sanjana Ma'am?....
+  ℹ️ Turn skipped (No active database update in Legacy/Template yet)
+
+--- Turn 1 ---
+Legacy AI  : I understand Ma'am. I've noted your preference and we won't call you further regarding thi...
+Template AI: Understood Sir. I'll update our records to not call you again regarding this. By the way, ...
+  ✅ Core KPI Database Parity Matches Perfectly!
+
+--- Turn 2 ---
+Legacy AI  : Hello Sanjana Ma'am, I'm Supriya from Alcon. I'm calling to remind you that the insurance ...
+Template AI: ...
+  ✅ Core KPI Database Parity Matches Perfectly!
+
+==================== SCENARIO: BUSY FLOW ====================
+[DB] Updating Lead State for PARITY_TEST_LEGACY_BUSY_1779083693: {'interest_level': 'WARM', 'reasoning_trace': {'outcome': 'busy_retry', 'stage': '1'}}
+[DB] Updated 1 rows in lead_states
+[ORCHESTRATOR] Delegating turn to template: insurance_v2_template
+[AUDIT] Logged transition for PARITY_TEST_TEMPLATE_BUSY_1779083693: None -> ENTRY
+[AGENT ROUTER] Capability Map: ['start', '/mock/crm/lookup', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'is correct person', 'calculate renewal context', '{{greeting_context}}', 'check for queries', 'query', 'user intent', 'certainly. your current premium was {{current_premium}}, but for this year, we have a special loyalty quote of {{loyalty_premium}}. this includes zero depreciation, engine protection, and roadside assistance. does that sound like a good deal?', 'consent check', "i'll connect you to our insurance desk to find the best possible rate. please stay on the line.", 'transfer to manager', 'transfer', "excellent choice! i'm processing your renewal with {{provider}} at {{loyalty_premium}}. you'll receive the payment link shortly via whatsapp. by the way, did you find this call helpful?", 'feedback capture', 'store success & feedback', 'thank you for your feedback! have a wonderful day.', 'end call', "no problem. i'll schedule a call back for later. by the way, did you find this call helpful today?", 'schedule follow-up', 'callback', "understood sir. i'll update our records to not call you again regarding this. by the way, did you find this call helpful today?", 'add to dnd', "no problem sir. i'll schedule a call back so you have time to think about it. just one last thing, did you find this interaction helpful?", "oh, i see! that's great to hear that your {{car}} is already covered. by the way, did you find this call helpful today?"]
+[DEBUG] Current Node: start | Flow Type: insurance_start
+[RUNTIME] Executing Node: start (startNode)
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: start | Outcome: None
+[DEBUG] Default edge match -> crm_lookup
+[DEBUG] Next Node: crm_lookup | Is Bridge: True
+[DEBUG] Current Node: crm_lookup | Flow Type: insurance_start
+[RUNTIME] Executing Node: crm_lookup (apiNode)
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: crm_lookup | Outcome: None
+[DEBUG] Default edge match -> verify_identity
+[DEBUG] Next Node: verify_identity | Is Bridge: True
+[DEBUG] Current Node: verify_identity | Flow Type: insurance_start
+[RUNTIME] Executing Node: verify_identity (messageNode)
+[RUNTIME] Node Result -> Outcome: None, Text: Hello, I'm Supriya from Alcon., Status: None
+[DEBUG] Searching edges for Node: verify_identity | Outcome: None
+[DEBUG] Default edge match -> check_verification
+[DEBUG] Next Node: check_verification | Is Bridge: False
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_BUSY_1779083693: {'car': None, 'car_model': 'Hyundai Creta', 'memory': {}, 'last_action': "AI Response: Hello, I'm Supriya from Alcon. Am I speaking with ..."}
+[DB] Updated 1 rows in lead_states
+[ORCHESTRATOR] Delegating turn to template: insurance_v2_template
+[AUDIT] Logged transition for PARITY_TEST_TEMPLATE_BUSY_1779083693: check_verification -> ENTRY
+[AGENT ROUTER] Capability Map: ['start', '/mock/crm/lookup', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'is correct person', 'calculate renewal context', '{{greeting_context}}', 'check for queries', 'query', 'user intent', 'certainly. your current premium was {{current_premium}}, but for this year, we have a special loyalty quote of {{loyalty_premium}}. this includes zero depreciation, engine protection, and roadside assistance. does that sound like a good deal?', 'consent check', "i'll connect you to our insurance desk to find the best possible rate. please stay on the line.", 'transfer to manager', 'transfer', "excellent choice! i'm processing your renewal with {{provider}} at {{loyalty_premium}}. you'll receive the payment link shortly via whatsapp. by the way, did you find this call helpful?", 'feedback capture', 'store success & feedback', 'thank you for your feedback! have a wonderful day.', 'end call', "no problem. i'll schedule a call back for later. by the way, did you find this call helpful today?", 'schedule follow-up', 'callback', "understood sir. i'll update our records to not call you again regarding this. by the way, did you find this call helpful today?", 'add to dnd', "no problem sir. i'll schedule a call back so you have time to think about it. just one last thing, did you find this interaction helpful?", "oh, i see! that's great to hear that your {{car}} is already covered. by the way, did you find this call helpful today?"]
+[AGENT ROUTER] Objection detected. Pivoting to Callback.
+[DEBUG] Current Node: schedule_callback_action | Flow Type: insurance_start
+[RUNTIME] Executing Node: schedule_callback_action (actionNode)
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_BUSY_1779083693: {'lead_status': 'WARM_LEAD', 'lead_score': 55, 'disposition': 'BUSY_RETRY', 'last_action': 'Requested Callback', 'next_step': 'Retry in 4 Hours'}
+[DB] Updated 1 rows in lead_states
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_BUSY_1779083693: {'follow_up_time': '2026-05-18T05:59:53.138269'}
+[DB] Updated 1 rows in lead_states
+DEBUG: Callback recorded for 1 at 2026-05-18T05:59:53.138269
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: schedule_callback_action | Outcome: None
+[DEBUG] Default edge match -> end
+[DEBUG] Next Node: end | Is Bridge: True
+[DEBUG] Current Node: end | Flow Type: insurance_start
+[RUNTIME] Executing Node: end (endNode)
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: end | Outcome: None
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_BUSY_1779083693: {'car': None, 'car_model': 'Hyundai Creta', 'memory': {}, 'last_action': 'AI Response'}
+[DB] Updated 1 rows in lead_states
+[ORCHESTRATOR] Delegating turn to template: insurance_v2_template
+[AUDIT] Logged transition for PARITY_TEST_TEMPLATE_BUSY_1779083693: end -> ENTRY
+[AGENT ROUTER] Capability Map: ['start', '/mock/crm/lookup', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'is correct person', 'calculate renewal context', '{{greeting_context}}', 'check for queries', 'query', 'user intent', 'certainly. your current premium was {{current_premium}}, but for this year, we have a special loyalty quote of {{loyalty_premium}}. this includes zero depreciation, engine protection, and roadside assistance. does that sound like a good deal?', 'consent check', "i'll connect you to our insurance desk to find the best possible rate. please stay on the line.", 'transfer to manager', 'transfer', "excellent choice! i'm processing your renewal with {{provider}} at {{loyalty_premium}}. you'll receive the payment link shortly via whatsapp. by the way, did you find this call helpful?", 'feedback capture', 'store success & feedback', 'thank you for your feedback! have a wonderful day.', 'end call', "no problem. i'll schedule a call back for later. by the way, did you find this call helpful today?", 'schedule follow-up', 'callback', "understood sir. i'll update our records to not call you again regarding this. by the way, did you find this call helpful today?", 'add to dnd', "no problem sir. i'll schedule a call back so you have time to think about it. just one last thing, did you find this interaction helpful?", "oh, i see! that's great to hear that your {{car}} is already covered. by the way, did you find this call helpful today?"]
+[DEBUG] Current Node: end | Flow Type: insurance_start
+[RUNTIME] Executing Node: end (endNode)
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: end | Outcome: None
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_BUSY_1779083693: {'car': None, 'car_model': 'Hyundai Creta', 'memory': {}, 'last_action': 'AI Response'}
+[DB] Updated 1 rows in lead_states
+
+--- Turn 0 ---
+Legacy AI  : Hello, I'm Supriya from Alcon. Am I speaking with Sanjana Ma'am?...
+Template AI: Hello, I'm Supriya from Alcon. Am I speaking with Sanjana Ma'am?....
+  ℹ️ Turn skipped (No active database update in Legacy/Template yet)
+
+--- Turn 1 ---
+Legacy AI  : No problem Ma'am. I completely understand. I'll schedule a call back at a more convenient ...
+Template AI: ...
+  ❌ DB MISMATCH for key 'lead_score': Legacy='0', Template='55'
+
+--- Turn 2 ---
+Legacy AI  : Hello Sanjana Ma'am, I'm Supriya from Alcon. I'm calling to remind you that the insurance ...
+Template AI: ...
+  ❌ DB MISMATCH for key 'lead_score': Legacy='0', Template='55'
+
+==================== SCENARIO: CONVERSION FLOW ====================
+[DB] Updating Lead State for PARITY_TEST_LEGACY_CONVERSION_1779083693: {'lead_status': 'WARM_LEAD', 'lead_score': 60, 'disposition': 'QUERY_INTEREST', 'last_action': 'Inquired about Premium', 'next_step': 'Confirm Interest'}
+[DB] Updated 1 rows in lead_states
+[DB] Updating Lead State for PARITY_TEST_LEGACY_CONVERSION_1779083693: {'lead_status': 'CONVERTED', 'lead_score': 100, 'disposition': 'ANSWERED_INTERESTED', 'last_action': 'Accepted Loyalty Offer', 'next_step': 'Payment Received', 'policy_status': 'PENDING_PAYMENT'}
+[DB] Updated 1 rows in lead_states
+[AUDIT] Call PARITY_TEST_LEGACY_CONVERSION_1779083693 | Stage 1 | Outcome INTERESTED_QUOTE_SHARED | Retry 0
+
+[92m[OUTBOUND HOOK] Triggering insurance_renewal_link for Sanjana (+919881012767)[0m
+[92m[MOCK] Sent WhatsApp with Payment Link[0m
+[92m[MOCK] Sent SMS Backup[0m
+
+[ORCHESTRATOR] Delegating turn to template: insurance_v2_template
+[AUDIT] Logged transition for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: None -> ENTRY
+[AGENT ROUTER] Capability Map: ['start', '/mock/crm/lookup', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'is correct person', 'calculate renewal context', '{{greeting_context}}', 'check for queries', 'query', 'user intent', 'certainly. your current premium was {{current_premium}}, but for this year, we have a special loyalty quote of {{loyalty_premium}}. this includes zero depreciation, engine protection, and roadside assistance. does that sound like a good deal?', 'consent check', "i'll connect you to our insurance desk to find the best possible rate. please stay on the line.", 'transfer to manager', 'transfer', "excellent choice! i'm processing your renewal with {{provider}} at {{loyalty_premium}}. you'll receive the payment link shortly via whatsapp. by the way, did you find this call helpful?", 'feedback capture', 'store success & feedback', 'thank you for your feedback! have a wonderful day.', 'end call', "no problem. i'll schedule a call back for later. by the way, did you find this call helpful today?", 'schedule follow-up', 'callback', "understood sir. i'll update our records to not call you again regarding this. by the way, did you find this call helpful today?", 'add to dnd', "no problem sir. i'll schedule a call back so you have time to think about it. just one last thing, did you find this interaction helpful?", "oh, i see! that's great to hear that your {{car}} is already covered. by the way, did you find this call helpful today?"]
+[DEBUG] Current Node: start | Flow Type: insurance_start
+[RUNTIME] Executing Node: start (startNode)
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: start | Outcome: None
+[DEBUG] Default edge match -> crm_lookup
+[DEBUG] Next Node: crm_lookup | Is Bridge: True
+[DEBUG] Current Node: crm_lookup | Flow Type: insurance_start
+[RUNTIME] Executing Node: crm_lookup (apiNode)
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: crm_lookup | Outcome: None
+[DEBUG] Default edge match -> verify_identity
+[DEBUG] Next Node: verify_identity | Is Bridge: True
+[DEBUG] Current Node: verify_identity | Flow Type: insurance_start
+[RUNTIME] Executing Node: verify_identity (messageNode)
+[RUNTIME] Node Result -> Outcome: None, Text: Hello, I'm Supriya from Alcon., Status: None
+[DEBUG] Searching edges for Node: verify_identity | Outcome: None
+[DEBUG] Default edge match -> check_verification
+[DEBUG] Next Node: check_verification | Is Bridge: False
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: {'car': None, 'car_model': 'Hyundai Creta', 'memory': {}, 'last_action': "AI Response: Hello, I'm Supriya from Alcon. Am I speaking with ..."}
+[DB] Updated 1 rows in lead_states
+[ORCHESTRATOR] Delegating turn to template: insurance_v2_template
+[AUDIT] Logged transition for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: check_verification -> ENTRY
+[AGENT ROUTER] Capability Map: ['start', '/mock/crm/lookup', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'is correct person', 'calculate renewal context', '{{greeting_context}}', 'check for queries', 'query', 'user intent', 'certainly. your current premium was {{current_premium}}, but for this year, we have a special loyalty quote of {{loyalty_premium}}. this includes zero depreciation, engine protection, and roadside assistance. does that sound like a good deal?', 'consent check', "i'll connect you to our insurance desk to find the best possible rate. please stay on the line.", 'transfer to manager', 'transfer', "excellent choice! i'm processing your renewal with {{provider}} at {{loyalty_premium}}. you'll receive the payment link shortly via whatsapp. by the way, did you find this call helpful?", 'feedback capture', 'store success & feedback', 'thank you for your feedback! have a wonderful day.', 'end call', "no problem. i'll schedule a call back for later. by the way, did you find this call helpful today?", 'schedule follow-up', 'callback', "understood sir. i'll update our records to not call you again regarding this. by the way, did you find this call helpful today?", 'add to dnd', "no problem sir. i'll schedule a call back so you have time to think about it. just one last thing, did you find this interaction helpful?", "oh, i see! that's great to hear that your {{car}} is already covered. by the way, did you find this call helpful today?"]
+[DEBUG] Current Node: check_verification | Flow Type: insurance_start
+[RUNTIME] Executing Node: check_verification (conditionNode)
+[DEBUG] Resolved last_msg: 'yes, speaking'
+[AI ENGINE] Detected Salutation: Ma'am | Current Readiness: 10
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: {'lead_status': 'WARM_LEAD', 'lead_score': 70, 'disposition': 'ANSWERED_INTERESTED', 'last_action': 'Requested Callback', 'next_step': 'Wait'}
+[DB] Updated 1 rows in lead_states
+[RUNTIME] Node Result -> Outcome: true, Text: None, Status: None
+[DEBUG] Searching edges for Node: check_verification | Outcome: true
+[DEBUG] Matched edge handle 'true' -> calculate_stage
+[DEBUG] Next Node: calculate_stage | Is Bridge: True
+[DEBUG] Current Node: calculate_stage | Flow Type: insurance_start
+[RUNTIME] Executing Node: calculate_stage (contextLogicNode)
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: calculate_stage | Outcome: None
+[DEBUG] Default edge match -> intro_renewal
+[DEBUG] Next Node: intro_renewal | Is Bridge: True
+[DEBUG] Current Node: intro_renewal | Flow Type: insurance_start
+[RUNTIME] Executing Node: intro_renewal (messageNode)
+[RUNTIME] Node Result -> Outcome: None, Text: Hello Sanjana Ma'am, I'm Supri, Status: None
+[DEBUG] Searching edges for Node: intro_renewal | Outcome: None
+[DEBUG] Default edge match -> query_handler_1
+[DEBUG] Next Node: query_handler_1 | Is Bridge: False
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: {'car': 'Hyundai Creta', 'car_model': 'Hyundai Creta', 'memory': {}, 'last_action': "AI Response: Hello Sanjana Ma'am, I'm Supriya from Alcon. I'm c..."}
+[DB] Updated 1 rows in lead_states
+[ORCHESTRATOR] Delegating turn to template: insurance_v2_template
+[AUDIT] Logged transition for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: query_handler_1 -> ENTRY
+[AGENT ROUTER] Capability Map: ['start', '/mock/crm/lookup', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'is correct person', 'calculate renewal context', '{{greeting_context}}', 'check for queries', 'query', 'user intent', 'certainly. your current premium was {{current_premium}}, but for this year, we have a special loyalty quote of {{loyalty_premium}}. this includes zero depreciation, engine protection, and roadside assistance. does that sound like a good deal?', 'consent check', "i'll connect you to our insurance desk to find the best possible rate. please stay on the line.", 'transfer to manager', 'transfer', "excellent choice! i'm processing your renewal with {{provider}} at {{loyalty_premium}}. you'll receive the payment link shortly via whatsapp. by the way, did you find this call helpful?", 'feedback capture', 'store success & feedback', 'thank you for your feedback! have a wonderful day.', 'end call', "no problem. i'll schedule a call back for later. by the way, did you find this call helpful today?", 'schedule follow-up', 'callback', "understood sir. i'll update our records to not call you again regarding this. by the way, did you find this call helpful today?", 'add to dnd', "no problem sir. i'll schedule a call back so you have time to think about it. just one last thing, did you find this interaction helpful?", "oh, i see! that's great to hear that your {{car}} is already covered. by the way, did you find this call helpful today?"]
+[DEBUG] Current Node: query_handler_1 | Flow Type: insurance_start
+[RUNTIME] Executing Node: query_handler_1 (knowledgeBaseNode)
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: {'lead_status': 'WARM_LEAD', 'lead_score': 60, 'last_action': 'Inquired about details'}
+[DB] Updated 1 rows in lead_states
+[RUNTIME] Node Result -> Outcome: answered, Text: Certainly. Your current premiu, Status: None
+[DEBUG] Searching edges for Node: query_handler_1 | Outcome: answered
+[DEBUG] Matched edge handle 'answered' -> query_handler_1
+[FLOW ERROR] Infinite loop detected at query_handler_1. Breaking.
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: {'car': 'Hyundai Creta', 'car_model': 'Hyundai Creta', 'memory': {}, 'last_action': 'AI Response: Certainly. Your current premium was ₹12,500, but f...'}
+[DB] Updated 1 rows in lead_states
+[ORCHESTRATOR] Delegating turn to template: insurance_v2_template
+[AUDIT] Logged transition for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: query_handler_1 -> ENTRY
+[AGENT ROUTER] Capability Map: ['start', '/mock/crm/lookup', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'is correct person', 'calculate renewal context', '{{greeting_context}}', 'check for queries', 'query', 'user intent', 'certainly. your current premium was {{current_premium}}, but for this year, we have a special loyalty quote of {{loyalty_premium}}. this includes zero depreciation, engine protection, and roadside assistance. does that sound like a good deal?', 'consent check', "i'll connect you to our insurance desk to find the best possible rate. please stay on the line.", 'transfer to manager', 'transfer', "excellent choice! i'm processing your renewal with {{provider}} at {{loyalty_premium}}. you'll receive the payment link shortly via whatsapp. by the way, did you find this call helpful?", 'feedback capture', 'store success & feedback', 'thank you for your feedback! have a wonderful day.', 'end call', "no problem. i'll schedule a call back for later. by the way, did you find this call helpful today?", 'schedule follow-up', 'callback', "understood sir. i'll update our records to not call you again regarding this. by the way, did you find this call helpful today?", 'add to dnd', "no problem sir. i'll schedule a call back so you have time to think about it. just one last thing, did you find this interaction helpful?", "oh, i see! that's great to hear that your {{car}} is already covered. by the way, did you find this call helpful today?"]
+[DEBUG] Current Node: query_handler_1 | Flow Type: insurance_start
+[RUNTIME] Executing Node: query_handler_1 (knowledgeBaseNode)
+[RUNTIME] Node Result -> Outcome: no_match, Text: None, Status: None
+[DEBUG] Searching edges for Node: query_handler_1 | Outcome: no_match
+[DEBUG] Matched edge handle 'no_match' -> check_intent
+[DEBUG] Next Node: check_intent | Is Bridge: True
+[DEBUG] Current Node: check_intent | Flow Type: insurance_start
+[RUNTIME] Executing Node: check_intent (conditionNode)
+[DEBUG] Resolved last_msg: 'sounds good, let's proceed'
+[AI ENGINE] Detected Salutation: Ma'am | Current Readiness: 20
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: {'lead_status': 'WARM_LEAD', 'lead_score': 70, 'disposition': 'ANSWERED_INTERESTED', 'last_action': 'Requested Callback', 'next_step': 'Wait'}
+[DB] Updated 1 rows in lead_states
+[RUNTIME] Node Result -> Outcome: true, Text: None, Status: None
+[DEBUG] Searching edges for Node: check_intent | Outcome: true
+[DEBUG] Matched edge handle 'true' -> offer_details
+[DEBUG] Next Node: offer_details | Is Bridge: True
+[DEBUG] Current Node: offer_details | Flow Type: insurance_start
+[RUNTIME] Executing Node: offer_details (messageNode)
+[DEBUG] Duplicate suppression triggered. Skipping duplicate message node: Certainly. Your current premiu...
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: offer_details | Outcome: None
+[DEBUG] Default edge match -> query_handler_2
+[DEBUG] Next Node: query_handler_2 | Is Bridge: True
+[DEBUG] Current Node: query_handler_2 | Flow Type: insurance_start
+[RUNTIME] Executing Node: query_handler_2 (knowledgeBaseNode)
+[RUNTIME] Node Result -> Outcome: no_match, Text: None, Status: None
+[DEBUG] Searching edges for Node: query_handler_2 | Outcome: no_match
+[DEBUG] Matched edge handle 'no_match' -> check_consent
+[DEBUG] Next Node: check_consent | Is Bridge: True
+[DEBUG] Current Node: check_consent | Flow Type: insurance_start
+[RUNTIME] Executing Node: check_consent (conditionNode)
+[DEBUG] Resolved last_msg: 'sounds good, let's proceed'
+[AI ENGINE] Detected Salutation: Ma'am | Current Readiness: 30
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: {'lead_status': 'WARM_LEAD', 'lead_score': 70, 'disposition': 'ANSWERED_INTERESTED', 'last_action': 'Requested Callback', 'next_step': 'Wait'}
+[DB] Updated 1 rows in lead_states
+[RUNTIME] Node Result -> Outcome: true, Text: None, Status: None
+[DEBUG] Searching edges for Node: check_consent | Outcome: true
+[DEBUG] Matched edge handle 'true' -> final_processing
+[DEBUG] Next Node: final_processing | Is Bridge: True
+[DEBUG] Current Node: final_processing | Flow Type: insurance_start
+[RUNTIME] Executing Node: final_processing (messageNode)
+[RUNTIME] Node Result -> Outcome: None, Text: Excellent choice! I'm processi, Status: None
+[DEBUG] Searching edges for Node: final_processing | Outcome: None
+[DEBUG] Default edge match -> collect_feedback
+[DEBUG] Next Node: collect_feedback | Is Bridge: False
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: {'car': 'Hyundai Creta', 'car_model': 'Hyundai Creta', 'memory': {}, 'last_action': "AI Response: Excellent choice! I'm processing your renewal with..."}
+[DB] Updated 1 rows in lead_states
+[ORCHESTRATOR] Delegating turn to template: insurance_v2_template
+[AUDIT] Logged transition for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: collect_feedback -> ENTRY
+[AGENT ROUTER] Capability Map: ['start', '/mock/crm/lookup', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'is correct person', 'calculate renewal context', '{{greeting_context}}', 'check for queries', 'query', 'user intent', 'certainly. your current premium was {{current_premium}}, but for this year, we have a special loyalty quote of {{loyalty_premium}}. this includes zero depreciation, engine protection, and roadside assistance. does that sound like a good deal?', 'consent check', "i'll connect you to our insurance desk to find the best possible rate. please stay on the line.", 'transfer to manager', 'transfer', "excellent choice! i'm processing your renewal with {{provider}} at {{loyalty_premium}}. you'll receive the payment link shortly via whatsapp. by the way, did you find this call helpful?", 'feedback capture', 'store success & feedback', 'thank you for your feedback! have a wonderful day.', 'end call', "no problem. i'll schedule a call back for later. by the way, did you find this call helpful today?", 'schedule follow-up', 'callback', "understood sir. i'll update our records to not call you again regarding this. by the way, did you find this call helpful today?", 'add to dnd', "no problem sir. i'll schedule a call back so you have time to think about it. just one last thing, did you find this interaction helpful?", "oh, i see! that's great to hear that your {{car}} is already covered. by the way, did you find this call helpful today?"]
+[DEBUG] Current Node: collect_feedback | Flow Type: insurance_start
+[RUNTIME] Executing Node: collect_feedback (conditionNode)
+[DEBUG] Resolved last_msg: 'yes please send the link'
+[AI ENGINE] Detected Salutation: Ma'am | Current Readiness: 40
+[RUNTIME] Node Result -> Outcome: true, Text: None, Status: None
+[DEBUG] Searching edges for Node: collect_feedback | Outcome: true
+[DEBUG] Matched edge handle 'true' -> log_success
+[DEBUG] Next Node: log_success | Is Bridge: True
+[DEBUG] Current Node: log_success | Flow Type: insurance_start
+[RUNTIME] Executing Node: log_success (actionNode)
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: {'lead_status': 'CONVERTED', 'lead_score': 100, 'disposition': 'ANSWERED_INTERESTED', 'last_action': 'Accepted Loyalty Offer', 'next_step': 'Payment Received', 'policy_status': 'PENDING_PAYMENT'}
+[DB] Updated 1 rows in lead_states
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: log_success | Outcome: None
+[DEBUG] Default edge match -> closing
+[DEBUG] Next Node: closing | Is Bridge: True
+[DEBUG] Current Node: closing | Flow Type: insurance_start
+[RUNTIME] Executing Node: closing (messageNode)
+[RUNTIME] Node Result -> Outcome: None, Text: Thank you for your feedback! H, Status: None
+[DEBUG] Searching edges for Node: closing | Outcome: None
+[DEBUG] Default edge match -> end
+[DEBUG] Next Node: end | Is Bridge: True
+[DEBUG] Current Node: end | Flow Type: insurance_start
+[RUNTIME] Executing Node: end (endNode)
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: end | Outcome: None
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: {'car': 'Hyundai Creta', 'car_model': 'Hyundai Creta', 'memory': {}, 'last_action': 'AI Response: Thank you for your feedback! Have a wonderful day....'}
+[DB] Updated 1 rows in lead_states
+[OUTBOUND TRIGGER] Lead converted in template. Triggering communication links...
+
+[92m[OUTBOUND HOOK] Triggering insurance_renewal_link for Sanjana (+919881012767)[0m
+[92m[MOCK] Sent WhatsApp with Payment Link[0m
+[92m[MOCK] Sent SMS Backup[0m
+
+[ORCHESTRATOR] Delegating turn to template: insurance_v2_template
+[AUDIT] Logged transition for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: end -> ENTRY
+[AGENT ROUTER] Capability Map: ['start', '/mock/crm/lookup', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'is correct person', 'calculate renewal context', '{{greeting_context}}', 'check for queries', 'query', 'user intent', 'certainly. your current premium was {{current_premium}}, but for this year, we have a special loyalty quote of {{loyalty_premium}}. this includes zero depreciation, engine protection, and roadside assistance. does that sound like a good deal?', 'consent check', "i'll connect you to our insurance desk to find the best possible rate. please stay on the line.", 'transfer to manager', 'transfer', "excellent choice! i'm processing your renewal with {{provider}} at {{loyalty_premium}}. you'll receive the payment link shortly via whatsapp. by the way, did you find this call helpful?", 'feedback capture', 'store success & feedback', 'thank you for your feedback! have a wonderful day.', 'end call', "no problem. i'll schedule a call back for later. by the way, did you find this call helpful today?", 'schedule follow-up', 'callback', "understood sir. i'll update our records to not call you again regarding this. by the way, did you find this call helpful today?", 'add to dnd', "no problem sir. i'll schedule a call back so you have time to think about it. just one last thing, did you find this interaction helpful?", "oh, i see! that's great to hear that your {{car}} is already covered. by the way, did you find this call helpful today?"]
+[DEBUG] Current Node: end | Flow Type: insurance_start
+[RUNTIME] Executing Node: end (endNode)
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: end | Outcome: None
+[DB] Updating Lead State for PARITY_TEST_TEMPLATE_CONVERSION_1779083693: {'car': 'Hyundai Creta', 'car_model': 'Hyundai Creta', 'memory': {}, 'last_action': 'AI Response'}
+[DB] Updated 1 rows in lead_states
+
+--- Turn 0 ---
+Legacy AI  : Hello, I'm Supriya from Alcon. Am I speaking with Sanjana Ma'am?...
+Template AI: Hello, I'm Supriya from Alcon. Am I speaking with Sanjana Ma'am?....
+  ℹ️ Turn skipped (No active database update in Legacy/Template yet)
+
+--- Turn 1 ---
+Legacy AI  : Hello Sanjana Ma'am, I'm Supriya from Alcon. I'm calling to remind you that the insurance ...
+Template AI: Hello Sanjana Ma'am, I'm Supriya from Alcon. I'm calling to remind you that the insurance ...
+  ℹ️ Turn skipped (No active database update in Legacy/Template yet)
+
+--- Turn 2 ---
+Legacy AI  : Certainly. Your current premium was ₹12,500, but for this year, we have a special loyalty ...
+Template AI: Certainly. Your current premium was ₹12,500, but for this year, we have a special loyalty ...
+  ✅ Core KPI Database Parity Matches Perfectly!
+
+--- Turn 3 ---
+Legacy AI  : Great! Shall I go ahead and share the digital copy of the quotation and the secure payment...
+Template AI: Excellent choice! I'm processing your renewal with HDFC Ergo at ₹11,800. You'll receive th...
+  ✅ Core KPI Database Parity Matches Perfectly!
+
+--- Turn 4 ---
+Legacy AI  : Excellent choice! I'm processing your renewal with HDFC Ergo at ₹11,800. This includes Zer...
+Template AI: Thank you for your feedback! Have a wonderful day....
+  ✅ Core KPI Database Parity Matches Perfectly!
+
+--- Turn 5 ---
+Legacy AI  : Thank you for your feedback! It helps us improve our service. Have a wonderful day....
+Template AI: ...
+  ✅ Core KPI Database Parity Matches Perfectly!
+
+==================================================
+⚠️ PARITY CHECK COMPLETED with 2 database field differences.
+==================================================

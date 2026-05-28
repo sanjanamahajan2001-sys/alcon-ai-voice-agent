@@ -1,0 +1,110 @@
+[
+    {
+        "customer": "Sanjana",
+        "transcript": "I checked our records and your car is performing well! Your next service isn't due yet. We'll call you when it is. Have a great day!\n\nYou: \"I checked our records and your car is performing well. Your next service isn't due yet. We'll call you when it is. Have a great day.\"",
+        "duration": "00:44",
+        "timestamp": "2026-04-17T05:41:01.413089"
+    },
+    {
+        "customer": "Sanjana",
+        "transcript": "Hello, am I speaking with Sanjana?",
+        "duration": "00:20",
+        "timestamp": "2026-04-17T05:41:23.291510"
+    },
+    {
+        "customer": "Sanjana",
+        "transcript": "I checked our records and your car is performing well! Your next service isn't due yet. We'll call you when it is. Have a great day!\n\nYou: \"OK, I checked our records and your car is performing well. Your next service isn't due yet. We'll call you when it is. Have a great day.\"",
+        "duration": "00:42",
+        "timestamp": "2026-04-17T05:42:12.496621"
+    },
+    {
+        "customer": "Aditya",
+        "transcript": "Your last service was about 7 months ago, and your next service is due now. Would you like to book an appointment?\n\nYou: \"Your last service was about seven months ago and your next service is due now. Would you like to book an appointment?\"",
+        "duration": "00:26",
+        "timestamp": "2026-04-17T05:42:39.298126"
+    },
+    {
+        "customer": "Sanjana",
+        "transcript": "My apologies, I must have the wrong number. Have a wonderful day!",
+        "duration": "00:18",
+        "timestamp": "2026-04-17T05:48:34.420662"
+    },
+    {
+        "customer": "Aditya",
+        "transcript": "Understood. Have a great day!",
+        "duration": "00:46",
+        "timestamp": "2026-04-17T05:50:17.936158"
+    },
+    {
+        "customer": "Aditya",
+        "transcript": "SUPRIYA\nHello, am I speaking with Aditya?\nYOU\nConfirmed A driver will pick up the car from your address.",
+        "duration": "00:12",
+        "timestamp": "2026-04-17T06:07:58.108974"
+    },
+    {
+        "customer": "Aditya",
+        "transcript": "SUPRIYA\nHello, am I speaking with Aditya?\nYOU\nNo wrong number.\nSUPRIYA\nMy apologies, I must have the wrong number. Have a wonderful day!",
+        "duration": "00:17",
+        "timestamp": "2026-04-17T06:08:19.721992"
+    },
+    {
+        "customer": "Aditya",
+        "transcript": "SUPRIYA\nHello, am I speaking with Aditya?\nYOU\nYes.\nSUPRIYA\nThis is Supriya from Alcon Hyundai regarding your car, the Hyundai Creta.\nSUPRIYA\nYour last service was about 7 months ago, and your next service is due now. Would you like to book an appointment?",
+        "duration": "00:42",
+        "timestamp": "2026-04-17T06:09:45.683847"
+    },
+    {
+        "customer": "Sanjana",
+        "transcript": "SUPRIYA\nHello, am I speaking with Sanjana?\nYOU\nYes, speaking.\nSUPRIYA\nThis is Supriya from Alcon Hyundai regarding your car, the Hyundai Verna.\nSUPRIYA\nI checked our records and your car is performing well! Your next service isn't due yet. We'll call you when it is. Have a great day!",
+        "duration": "00:27",
+        "timestamp": "2026-04-17T06:17:59.399597"
+    },
+    {
+        "customer": "Aditya",
+        "transcript": "SUPRIYA\nHello, am I speaking with Aditya?\nYOU\nOK. Thank you.\nYOU\nNo wrong number.\nSUPRIYA\nMy apologies, I must have the wrong number. Have a wonderful day!",
+        "duration": "00:14",
+        "timestamp": "2026-04-17T06:18:17.421451"
+    },
+    {
+        "customer": "Aditya",
+        "transcript": "SUPRIYA\nHello, am I speaking with Aditya?",
+        "duration": "00:02",
+        "timestamp": "2026-04-17T06:19:14.162946"
+    },
+    {
+        "customer": "Sanjana",
+        "transcript": "SUPRIYA\nHello, am I speaking with Sanjana?\nYOU\nYes, speaking.\nSUPRIYA\nThis is Supriya from Alcon Hyundai regarding your car, the Hyundai Verna.\nSUPRIYA\nI checked our records and your car is performing well! Your next service isn't due yet. We'll call you when it is. Have a great day!",
+        "duration": "00:26",
+        "timestamp": "2026-04-17T06:20:33.141965"
+    },
+    {
+        "customer": "Aditya",
+        "transcript": "SUPRIYA\nHello, am I speaking with Aditya?\nYOU\nYes.\nSUPRIYA\nThis is Supriya from Alcon Hyundai regarding your car, the Hyundai Creta.\nSUPRIYA\nYour last service was about 7 months ago, and your next service is due now. Would you like to book an appointment?\nYOU\nNo, not right now.\nSUPRIYA\nUnderstood. Have a great day!",
+        "duration": "00:30",
+        "timestamp": "2026-04-17T06:21:10.772377"
+    },
+    {
+        "customer": "Sanjana",
+        "transcript": "SUPRIYA\nHello, am I speaking with Sanjana?\nYOU\nYes, speaking.\nSUPRIYA\nThis is Supriya from Alcon Hyundai regarding your car, the Hyundai Verna.\nSUPRIYA\nI checked our records and your car is performing well! Your next service isn't due yet. We'll call you when it is. Have a great day!",
+        "duration": "00:29",
+        "timestamp": "2026-04-17T06:24:01.750047"
+    },
+    {
+        "customer": "Sanjana",
+        "transcript": "SUPRIYA\nHello, am I speaking with Sanjana?\nYOU\nNo wrong number.\nSUPRIYA\nMy apologies, I must have the wrong number. Have a wonderful day!",
+        "duration": "00:15",
+        "timestamp": "2026-04-17T06:24:19.356111"
+    },
+    {
+        "customer": "Aditya",
+        "transcript": "SUPRIYA\nHello, am I speaking with Aditya?\nYOU\nYes, speaking.\nSUPRIYA\nThis is Supriya from Alcon Hyundai regarding your car, the Hyundai Creta.\nSUPRIYA\nYour last service was about 7 months ago, and your next service is due now. Would you like to book an appointment?\nYOU\nNo, not right now.\nSUPRIYA\nUnderstood. Have a great day!",
+        "duration": "00:35",
+        "timestamp": "2026-04-17T06:24:56.610469"
+    },
+    {
+        "customer": "Sanjana",
+        "transcript": "SUPRIYA\nHello, am I speaking with Sanjana?",
+        "duration": "00:02",
+        "timestamp": "2026-04-17T11:45:35.233993"
+    }
+]

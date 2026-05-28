@@ -1,0 +1,48 @@
+{
+  "session_id": "chat_22c69c",
+  "flow_id": "post_service_feedback_draft_8731",
+  "current_node_id": "end",
+  "variables": {
+    "from": " 919834681919",
+    "id": "2",
+    "name": "Anika",
+    "phone": "+919834681919",
+    "car_model": "Hyundai Verna",
+    "registration_number": "MH14-XY-5678",
+    "registration_date": "2021-05-10",
+    "last_service_date": "2026-02-10",
+    "service_due_months": 12,
+    "gender": "female",
+    "dnd_status": false,
+    "current_emi": "\u20b915,000",
+    "insurance_expiry_date": "2026-05-15",
+    "insurance_provider": "ICICI Lombard",
+    "policy_number": "POL-987654",
+    "current_premium": "\u20b918,200",
+    "loyalty_premium": "\u20b917,100",
+    "policy_status": "RENEWED",
+    "exists": true,
+    "tier": "premium",
+    "last_svc_formatted": "February 10",
+    "callback_confirmation": "I've scheduled a reminder to call you back at Wednesday, May 13 at 09:00 AM",
+    "concerns": "no i face some issues",
+    "satisfaction_check": false,
+    "confirmed_date": "Wednesday, May 13 at 09:00 AM",
+    "pickup_time": "Wednesday, May 13 at 09:00 AM",
+    "callback_time": "Wednesday, May 13 at 09:00 AM"
+  },
+  "history": [
+    {
+      "role": "user",
+      "text": "yes"
+    },
+    {
+      "role": "user",
+      "text": "no i face some issues"
+    },
+    {
+      "role": "user",
+      "text": "later"
+    }
+  ]
+}

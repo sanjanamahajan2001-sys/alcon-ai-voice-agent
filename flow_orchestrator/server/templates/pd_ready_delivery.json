@@ -1,0 +1,169 @@
+{
+  "flow_id": "pd_ready_delivery",
+  "version": 2,
+  "status": "draft",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "startNode",
+      "data": {
+        "label": "Start"
+      },
+      "position": {
+        "x": 400.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "crm_lookup",
+      "type": "apiNode",
+      "data": {
+        "label": "http://mock/crm/{{from}}"
+      },
+      "position": {
+        "x": 400.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "svc_lookup",
+      "type": "apiNode",
+      "data": {
+        "label": "http://mock/service_details/{{id}}"
+      },
+      "position": {
+        "x": 400.0,
+        "y": 200.0
+      }
+    },
+    {
+      "id": "greeting",
+      "type": "messageNode",
+      "data": {
+        "label": "Wonderful news {{salutation}} {{name}}! Your car is ready for delivery. We've completed {{service_summary}}. Would you like us to drop it back to your location, or will you be coming to pick it up?"
+      },
+      "position": {
+        "x": 400.0,
+        "y": 300.0
+      }
+    },
+    {
+      "id": "check_delivery",
+      "type": "conditionNode",
+      "data": {
+        "label": "delivery_option"
+      },
+      "position": {
+        "x": 391.0,
+        "y": 505.0
+      }
+    },
+    {
+      "id": "drop_msg",
+      "type": "messageNode",
+      "data": {
+        "label": "Perfect. I've scheduled the drop-off for you. Our driver will contact you shortly. Thank you!"
+      },
+      "position": {
+        "x": 219.0,
+        "y": 701.0
+      }
+    },
+    {
+      "id": "pickup_msg",
+      "type": "messageNode",
+      "data": {
+        "label": "Got it. Your car is parked at our service entrance. See you soon!"
+      },
+      "position": {
+        "x": 505.0,
+        "y": 723.0
+      }
+    },
+    {
+      "id": "end",
+      "type": "endNode",
+      "data": {
+        "label": "End"
+      },
+      "position": {
+        "x": 411.0,
+        "y": 1028.8000000000002
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "start",
+      "target": "crm_lookup",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e2",
+      "source": "crm_lookup",
+      "target": "svc_lookup",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e3",
+      "source": "svc_lookup",
+      "target": "greeting",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e4",
+      "source": "greeting",
+      "target": "check_delivery",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e5",
+      "source": "check_delivery",
+      "target": "drop_msg",
+      "sourceHandle": "drop",
+      "data": null
+    },
+    {
+      "id": "e6",
+      "source": "check_delivery",
+      "target": "pickup_msg",
+      "sourceHandle": "pickup",
+      "data": null
+    },
+    {
+      "id": "e7",
+      "source": "drop_msg",
+      "target": "end",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e8",
+      "source": "pickup_msg",
+      "target": "end",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "reactflow__edge-check_deliverytrue-drop_msg",
+      "source": "check_delivery",
+      "target": "drop_msg",
+      "sourceHandle": "true",
+      "data": null
+    },
+    {
+      "id": "reactflow__edge-check_deliverybusy-pickup_msg",
+      "source": "check_delivery",
+      "target": "pickup_msg",
+      "sourceHandle": "busy",
+      "data": null
+    }
+  ],
+  "description": "",
+  "name": "Flow pd_ready_delivery"
+}

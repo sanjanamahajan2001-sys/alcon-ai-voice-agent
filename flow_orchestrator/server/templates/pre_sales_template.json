@@ -1,0 +1,428 @@
+{
+  "flow_id": "pre_sales_template",
+  "version": 12,
+  "status": "draft",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "startNode",
+      "data": {
+        "label": "Start"
+      },
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "init_context",
+      "type": "contextLogicNode",
+      "data": {
+        "label": "Pre-Sales Initialization"
+      },
+      "position": {
+        "x": 200.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "greeting",
+      "type": "messageNode",
+      "data": {
+        "label": "{{greeting_context}}"
+      },
+      "position": {
+        "x": 400.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "check_consent",
+      "type": "conditionNode",
+      "data": {
+        "label": "Consent/Identity Check"
+      },
+      "position": {
+        "x": 600.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "intro_options",
+      "type": "messageNode",
+      "data": {
+        "label": "Great! To help you better, I can share the latest price, ongoing offers, or schedule a test drive for the {{car}}. What would you prefer?"
+      },
+      "position": {
+        "x": 800.0,
+        "y": -100.0
+      }
+    },
+    {
+      "id": "query_intent_check",
+      "type": "conditionNode",
+      "data": {
+        "label": "Query Intent Check"
+      },
+      "position": {
+        "x": 800.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "kb_handler",
+      "type": "knowledgeBaseNode",
+      "data": {
+        "label": "Knowledge Base Handler",
+        "capability": "query"
+      },
+      "position": {
+        "x": 1000.0,
+        "y": -100.0
+      }
+    },
+    {
+      "id": "inc_query_count",
+      "type": "actionNode",
+      "data": {
+        "label": "Increment Query Count",
+        "action_type": "inc_query",
+        "capability": "answered"
+      },
+      "position": {
+        "x": 1200.0,
+        "y": -100.0
+      }
+    },
+    {
+      "id": "eval_escalation",
+      "type": "actionNode",
+      "data": {
+        "label": "Evaluate Escalation",
+        "action_type": "eval_escalation"
+      },
+      "position": {
+        "x": 1400.0,
+        "y": -100.0
+      }
+    },
+    {
+      "id": "offer_transfer_msg",
+      "type": "messageNode",
+      "data": {
+        "label": "I have more details on this, or I can connect you to our Sales Manager for a deep dive. What would you prefer?"
+      },
+      "position": {
+        "x": 1600.0,
+        "y": -100.0
+      }
+    },
+    {
+      "id": "check_transfer_consent",
+      "type": "conditionNode",
+      "data": {
+        "label": "Transfer Call (Hot Lead)"
+      },
+      "position": {
+        "x": 1800.0,
+        "y": -100.0
+      }
+    },
+    {
+      "id": "transfer_node",
+      "type": "actionNode",
+      "data": {
+        "label": "Transfer to Manager",
+        "action_type": "transfer_sales",
+        "capability": "transfer"
+      },
+      "position": {
+        "x": 2000.0,
+        "y": -100.0
+      }
+    },
+    {
+      "id": "rejection_pivot",
+      "type": "conditionNode",
+      "data": {
+        "label": "Service Bridge Eligibility"
+      },
+      "position": {
+        "x": 800.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "wrong_data_ack",
+      "type": "messageNode",
+      "data": {
+        "label": "I apologize for the incorrect information. I will update our records immediately. Have a wonderful day {{salutation}}!"
+      },
+      "position": {
+        "x": 1000.0,
+        "y": 300.0
+      }
+    },
+    {
+      "id": "service_bridge",
+      "type": "messageNode",
+      "data": {
+        "label": "I understand {{salutation}}. By the way, I noticed your {{car}} is due for its periodic service. Since we are already speaking, would you like me to book a maintenance appointment for you instead?"
+      },
+      "position": {
+        "x": 1000.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "rejection_end",
+      "type": "messageNode",
+      "data": {
+        "label": "Understood {{salutation}}. Have a wonderful day!",
+        "capability": "callback",
+        "is_bridge": true
+      },
+      "position": {
+        "x": 1000.0,
+        "y": 200.0
+      }
+    },
+    {
+      "id": "goodbye",
+      "type": "messageNode",
+      "data": {
+        "label": "Thank you for your time {{salutation}}. Have a great day ahead!",
+        "is_bridge": true
+      },
+      "position": {
+        "x": 1400.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "end",
+      "type": "endNode",
+      "data": {
+        "label": "End Call"
+      },
+      "position": {
+        "x": 2200.0,
+        "y": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "start",
+      "target": "init_context",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e2",
+      "source": "init_context",
+      "target": "greeting",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e3",
+      "source": "greeting",
+      "target": "check_consent",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e4",
+      "source": "check_consent",
+      "target": "intro_options",
+      "sourceHandle": "true",
+      "data": null
+    },
+    {
+      "id": "e4_direct",
+      "source": "check_consent",
+      "target": "kb_handler",
+      "sourceHandle": "direct_query",
+      "data": null
+    },
+    {
+      "id": "e5",
+      "source": "check_consent",
+      "target": "rejection_pivot",
+      "sourceHandle": "false",
+      "data": null
+    },
+    {
+      "id": "e6",
+      "source": "check_consent",
+      "target": "rejection_pivot",
+      "sourceHandle": "busy",
+      "data": null
+    },
+    {
+      "id": "e7",
+      "source": "check_consent",
+      "target": "rejection_pivot",
+      "sourceHandle": "dnd",
+      "data": null
+    },
+    {
+      "id": "e_wrong",
+      "source": "check_consent",
+      "target": "wrong_data_ack",
+      "sourceHandle": "wrong_number",
+      "data": null
+    },
+    {
+      "id": "e8",
+      "source": "intro_options",
+      "target": "query_intent_check",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e9_query",
+      "source": "query_intent_check",
+      "target": "kb_handler",
+      "sourceHandle": "query",
+      "data": null
+    },
+    {
+      "id": "e9_rejection",
+      "source": "query_intent_check",
+      "target": "rejection_pivot",
+      "sourceHandle": "rejection",
+      "data": null
+    },
+    {
+      "id": "e9_transfer",
+      "source": "query_intent_check",
+      "target": "offer_transfer_msg",
+      "sourceHandle": "transfer",
+      "data": null
+    },
+    {
+      "id": "e9_wrong",
+      "source": "query_intent_check",
+      "target": "wrong_data_ack",
+      "sourceHandle": "wrong_number",
+      "data": null
+    },
+    {
+      "id": "e9_busy",
+      "source": "query_intent_check",
+      "target": "rejection_pivot",
+      "sourceHandle": "busy",
+      "data": null
+    },
+    {
+      "id": "e10_kb",
+      "source": "kb_handler",
+      "target": "inc_query_count",
+      "sourceHandle": "answered",
+      "data": null
+    },
+    {
+      "id": "e10_kb_fallback",
+      "source": "kb_handler",
+      "target": "eval_escalation",
+      "sourceHandle": "fallback",
+      "data": null
+    },
+    {
+      "id": "e11_esc",
+      "source": "inc_query_count",
+      "target": "eval_escalation",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e12_esc_offer",
+      "source": "eval_escalation",
+      "target": "offer_transfer_msg",
+      "sourceHandle": "offer_transfer",
+      "data": null
+    },
+    {
+      "id": "e12_esc_cont",
+      "source": "eval_escalation",
+      "target": "query_intent_check",
+      "sourceHandle": "continue",
+      "data": null
+    },
+    {
+      "id": "e13_transfer_ask",
+      "source": "offer_transfer_msg",
+      "target": "check_transfer_consent",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e14_transfer_yes",
+      "source": "check_transfer_consent",
+      "target": "transfer_node",
+      "sourceHandle": "true",
+      "data": null
+    },
+    {
+      "id": "e14_transfer_no",
+      "source": "check_transfer_consent",
+      "target": "query_intent_check",
+      "sourceHandle": "false",
+      "data": null
+    },
+    {
+      "id": "e_transfer_exec",
+      "source": "transfer_node",
+      "target": "end",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e14_pivot_due",
+      "source": "rejection_pivot",
+      "target": "service_bridge",
+      "sourceHandle": "is_due",
+      "data": null
+    },
+    {
+      "id": "e14_pivot_not_due",
+      "source": "rejection_pivot",
+      "target": "rejection_end",
+      "sourceHandle": "not_due",
+      "data": null
+    },
+    {
+      "id": "e_wrong_end",
+      "source": "wrong_data_ack",
+      "target": "end",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e15_svc_end",
+      "source": "service_bridge",
+      "target": "goodbye",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e16_rej_end",
+      "source": "rejection_end",
+      "target": "goodbye",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e17_bye_end",
+      "source": "goodbye",
+      "target": "end",
+      "sourceHandle": null,
+      "data": null
+    }
+  ],
+  "description": "",
+  "name": "Flow pre_sales_template"
+}

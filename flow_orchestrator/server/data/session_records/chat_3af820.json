@@ -1,0 +1,61 @@
+{
+  "session_id": "chat_3af820",
+  "flow_id": "service_booking_prod_draft_4e5b",
+  "current_node_id": "end",
+  "variables": {
+    "from": " 919999999999",
+    "id": "7",
+    "name": "Arjun",
+    "phone": "+919999999999",
+    "car_model": "Mercedes S-Class",
+    "registration_number": "MH01-MS-0001",
+    "registration_date": "2023-11-01",
+    "last_service_date": "2026-04-01",
+    "service_due_months": 6,
+    "gender": "male",
+    "dnd_status": false,
+    "location": "Mumbai",
+    "insurance_expiry_date": "2026-11-01",
+    "insurance_provider": "Tata AIG",
+    "policy_number": "POL-MERC-777",
+    "current_premium": "\u20b985,000",
+    "loyalty_premium": "\u20b980,000",
+    "policy_status": "PENDING",
+    "exists": true,
+    "tier": "premium",
+    "last_svc_formatted": "April 01",
+    "callback_confirmation": "I'll check back later",
+    "confirmed_date": "Saturday, May 23 at 09:00 AM",
+    "mileage": "789"
+  },
+  "history": [
+    {
+      "role": "user",
+      "text": "yes"
+    },
+    {
+      "role": "user",
+      "text": "yes"
+    },
+    {
+      "role": "user",
+      "text": "23rd may"
+    },
+    {
+      "role": "user",
+      "text": "789"
+    },
+    {
+      "role": "user",
+      "text": "no"
+    },
+    {
+      "role": "user",
+      "text": "yes"
+    },
+    {
+      "role": "user",
+      "text": ""
+    }
+  ]
+}

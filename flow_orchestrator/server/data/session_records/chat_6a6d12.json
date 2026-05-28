@@ -1,0 +1,44 @@
+{
+  "session_id": "chat_6a6d12",
+  "flow_id": "pd_ready_delivery_draft_350b",
+  "current_node_id": "end",
+  "variables": {
+    "from": " 919834681919",
+    "id": "2",
+    "name": "Anika",
+    "phone": "+919834681919",
+    "car_model": "Hyundai Verna",
+    "registration_number": "MH14-XY-5678",
+    "registration_date": "2021-05-10",
+    "last_service_date": "2026-02-10",
+    "service_due_months": 12,
+    "gender": "female",
+    "dnd_status": false,
+    "current_emi": "\u20b915,000",
+    "insurance_expiry_date": "2026-05-15",
+    "insurance_provider": "ICICI Lombard",
+    "policy_number": "POL-987654",
+    "current_premium": "\u20b918,200",
+    "loyalty_premium": "\u20b917,100",
+    "policy_status": "RENEWED",
+    "exists": true,
+    "tier": "premium",
+    "last_svc_formatted": "February 10",
+    "reported_concerns": "Engine oil change and tire rotation",
+    "service_summary": "Full synthetic oil change, oil filter replaced, and tires rotated/balanced.",
+    "estimated_cost": "\u20b93,200",
+    "estimated_time": "3:30 PM tomorrow",
+    "concerns": "i'll come to pick up as i have to some checks",
+    "callback_confirmation": "I'll check back later"
+  },
+  "history": [
+    {
+      "role": "user",
+      "text": "i'll come to pick up as i have to some checks"
+    },
+    {
+      "role": "user",
+      "text": "thank you"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "session_id": "chat_318f1c",
+  "flow_id": "service_booking_prod_draft_3bd3",
+  "current_node_id": "check_id",
+  "variables": {
+    "from": " 910000000000",
+    "name": "Valued Customer",
+    "tier": "generic",
+    "exists": false
+  },
+  "history": []
+}

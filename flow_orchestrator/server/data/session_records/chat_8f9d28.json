@@ -1,0 +1,41 @@
+{
+  "session_id": "chat_8f9d28",
+  "flow_id": "pd_pickup_coordination_draft_8c4e",
+  "current_node_id": "end_success",
+  "variables": {
+    "from": " 919881012767",
+    "id": "1",
+    "name": "Sanjana",
+    "phone": "+919881012767",
+    "car_model": "Hyundai Creta",
+    "registration_number": "MH15-AB-1234",
+    "registration_date": "2024-01-01",
+    "last_service_date": "2025-10-15",
+    "service_due_months": 6,
+    "gender": "female",
+    "dnd_status": false,
+    "location": "Mumbai",
+    "insurance_expiry_date": "2026-06-03",
+    "insurance_provider": "HDFC Ergo",
+    "policy_number": "POL-123456",
+    "current_premium": "\u20b912,500",
+    "loyalty_premium": "\u20b911,800",
+    "policy_status": "PENDING",
+    "exists": true,
+    "tier": "premium",
+    "last_svc_formatted": "October 15",
+    "callback_confirmation": "I'll check back later",
+    "confirmed_date": "Tuesday, May 12 at 10:00 AM",
+    "pickup_time": "Tuesday, May 12 at 10:00 AM"
+  },
+  "history": [
+    {
+      "role": "user",
+      "text": "yes speaking"
+    },
+    {
+      "role": "user",
+      "text": "tomorrow morning"
+    }
+  ]
+}

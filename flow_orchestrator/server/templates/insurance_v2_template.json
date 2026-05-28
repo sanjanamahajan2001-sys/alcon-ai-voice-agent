@@ -1,0 +1,230 @@
+{
+  "flow_id": "insurance_v2_template",
+  "name": "Insurance Renewal (Parity v2)",
+  "description": "Full parity with legacy insurance flow including deterministic query handling and transfer logic.",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "startNode",
+      "position": { "x": 400, "y": 0 },
+      "data": { "label": "Start" }
+    },
+    {
+      "id": "crm_lookup",
+      "type": "apiNode",
+      "position": { "x": 400, "y": 80 },
+      "data": { "label": "/mock/crm/lookup" }
+    },
+    {
+      "id": "verify_identity",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 160 },
+      "data": { "label": "Hello, I'm Supriya from Alcon. Am I speaking with {{name}} {{salutation}}?" }
+    },
+    {
+      "id": "check_verification",
+      "type": "conditionNode",
+      "position": { "x": 400, "y": 240 },
+      "data": { "label": "Is Correct Person" }
+    },
+    {
+      "id": "calculate_stage",
+      "type": "contextLogicNode",
+      "position": { "x": 400, "y": 320 },
+      "data": { "label": "Calculate Renewal Context" }
+    },
+    {
+      "id": "intro_renewal",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 400 },
+      "data": { "label": "{{greeting_context}}" }
+    },
+    {
+      "id": "query_handler_1",
+      "type": "knowledgeBaseNode",
+      "position": { "x": 400, "y": 500 },
+      "data": { "label": "Check for Queries" }
+    },
+    {
+      "id": "check_intent",
+      "type": "conditionNode",
+      "position": { "x": 650, "y": 500 },
+      "data": { "label": "User Intent" }
+    },
+    {
+      "id": "offer_details",
+      "type": "messageNode",
+      "position": { "x": 650, "y": 650 },
+      "data": { "label": "Certainly. Your current premium was {{current_premium}}, but for this year, we have a special loyalty quote of {{loyalty_premium}}. This includes Zero Depreciation, Engine Protection, and Roadside Assistance. Does that sound like a good deal?" }
+    },
+    {
+      "id": "query_handler_2",
+      "type": "knowledgeBaseNode",
+      "position": { "x": 400, "y": 650 },
+      "data": { "label": "Check for Queries" }
+    },
+    {
+      "id": "check_consent",
+      "type": "conditionNode",
+      "position": { "x": 400, "y": 800 },
+      "data": { "label": "Consent Check" }
+    },
+    {
+      "id": "share_link_consent",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 920 },
+      "data": { "label": "Great! Shall I go ahead and share the digital copy of the quotation and the secure payment link on your registered mobile number now?" }
+    },
+    {
+      "id": "check_share_consent",
+      "type": "conditionNode",
+      "position": { "x": 400, "y": 1020 },
+      "data": { "label": "Consent Check" }
+    },
+    {
+      "id": "check_transfer_consent",
+      "type": "conditionNode",
+      "position": { "x": 150, "y": 650 },
+      "data": { "label": "Transfer Consent Check" }
+    },
+    {
+      "id": "handle_transfer",
+      "type": "messageNode",
+      "position": { "x": 150, "y": 800 },
+      "data": { "label": "I'll connect you to our insurance desk to find the best possible rate. Please stay on the line." }
+    },
+    {
+      "id": "trigger_transfer",
+      "type": "actionNode",
+      "position": { "x": 150, "y": 900 },
+      "data": { "action_type": "transfer", "department": "Insurance Desk", "label": "Transfer to Manager" }
+    },
+    {
+      "id": "final_processing",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 1120 },
+      "data": { "label": "Excellent choice! I'm processing your renewal with {{provider}} at {{loyalty_premium}}. This includes Zero-Depreciation and 24/7 Roadside Assistance. Your renewal is now in progress. You'll receive the payment link shortly. By the way, did you find this call helpful today?" }
+    },
+    {
+      "id": "collect_feedback",
+      "type": "conditionNode",
+      "position": { "x": 400, "y": 1250 },
+      "data": { "label": "Feedback Capture" }
+    },
+    {
+      "id": "log_success",
+      "type": "actionNode",
+      "position": { "x": 400, "y": 1380 },
+      "data": { "action_type": "log_consent", "label": "Store Success & Feedback" }
+    },
+    {
+      "id": "closing",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 1500 },
+      "data": { "label": "Thank you for your feedback! Have a wonderful day." }
+    },
+    {
+      "id": "end",
+      "type": "endNode",
+      "position": { "x": 400, "y": 1620 },
+      "data": { "label": "End Call" }
+    },
+    {
+      "id": "busy_callback",
+      "type": "messageNode",
+      "position": { "x": 100, "y": 320 },
+      "data": { "label": "No problem. I'll schedule a call back for later. By the way, did you find this call helpful today?" }
+    },
+    {
+      "id": "schedule_callback_action",
+      "type": "actionNode",
+      "position": { "x": 100, "y": 420 },
+      "data": { "action_type": "schedule_callback", "label": "Schedule Follow-up" }
+    },
+    {
+      "id": "dnd_handler",
+      "type": "messageNode",
+      "position": { "x": 900, "y": 500 },
+      "data": { "label": "Understood {{salutation}}. I'll update our records to not call you again regarding this. Have a wonderful day!" }
+    },
+    {
+      "id": "dnd_action",
+      "type": "actionNode",
+      "position": { "x": 900, "y": 600 },
+      "data": { "action_type": "mark_dnd", "label": "Add to DND" }
+    },
+    {
+      "id": "thinking_callback",
+      "type": "messageNode",
+      "position": { "x": 650, "y": 1380 },
+      "data": { "label": "No problem {{salutation}}. I'll schedule a call back so you have time to think about it. Just one last thing, did you find this interaction helpful?" }
+    },
+    {
+      "id": "renewed_elsewhere",
+      "type": "messageNode",
+      "position": { "x": 900, "y": 800 },
+      "data": { "label": "Oh, I see! That's great to hear that your {{car}} is already covered. By the way, did you find this call helpful today?" }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "source": "start", "target": "crm_lookup" },
+    { "id": "e2", "source": "crm_lookup", "target": "verify_identity" },
+    { "id": "e3", "source": "verify_identity", "target": "check_verification" },
+    { "id": "e4", "source": "check_verification", "target": "calculate_stage", "sourceHandle": "true" },
+    { "id": "e4_busy", "source": "check_verification", "target": "busy_callback", "sourceHandle": "busy" },
+    { "id": "e4_wrong", "source": "check_verification", "target": "dnd_action", "sourceHandle": "wrong_number" },
+    { "id": "e4_callback_end", "source": "busy_callback", "target": "collect_feedback" },
+    { "id": "e_thinking_feedback", "source": "thinking_callback", "target": "collect_feedback" },
+    
+    { "id": "e5", "source": "calculate_stage", "target": "intro_renewal" },
+    { "id": "e6", "source": "intro_renewal", "target": "query_handler_1" },
+    { "id": "e7", "source": "query_handler_1", "target": "query_handler_1", "sourceHandle": "answered" },
+    { "id": "e8", "source": "query_handler_1", "target": "check_intent", "sourceHandle": "no_match" },
+    { "id": "e_q1_to_transfer_confirm", "source": "query_handler_1", "target": "check_transfer_consent", "sourceHandle": "manager_transfer" },
+    
+    { "id": "e9", "source": "check_intent", "target": "offer_details", "sourceHandle": "true" },
+    { "id": "e10", "source": "check_intent", "target": "handle_transfer", "sourceHandle": "comparison" },
+    { "id": "e11", "source": "check_intent", "target": "handle_transfer", "sourceHandle": "transfer" },
+    { "id": "e11_thinking", "source": "check_intent", "target": "thinking_callback", "sourceHandle": "thinking" },
+    { "id": "e11_busy", "source": "check_intent", "target": "busy_callback", "sourceHandle": "busy" },
+    { "id": "e11_false", "source": "check_intent", "target": "dnd_handler", "sourceHandle": "false" },
+    { "id": "e11_dnd", "source": "check_intent", "target": "dnd_handler", "sourceHandle": "dnd" },
+    { "id": "e11_renewed", "source": "check_intent", "target": "renewed_elsewhere", "sourceHandle": "already_renewed" },
+    
+    { "id": "e12", "source": "offer_details", "target": "query_handler_2" },
+    { "id": "e13", "source": "query_handler_2", "target": "query_handler_2", "sourceHandle": "answered" },
+    { "id": "e14", "source": "query_handler_2", "target": "check_consent", "sourceHandle": "no_match" },
+    { "id": "e_q2_to_transfer_confirm", "source": "query_handler_2", "target": "check_transfer_consent", "sourceHandle": "manager_transfer" },
+    
+    { "id": "e_tr_consent_true", "source": "check_transfer_consent", "target": "handle_transfer", "sourceHandle": "true" },
+    { "id": "e_tr_consent_false", "source": "check_transfer_consent", "target": "offer_details", "sourceHandle": "false" },
+    
+    { "id": "e15", "source": "check_consent", "target": "share_link_consent", "sourceHandle": "true" },
+    { "id": "e16", "source": "check_consent", "target": "handle_transfer", "sourceHandle": "comparison" },
+    { "id": "e16_thinking", "source": "check_consent", "target": "thinking_callback", "sourceHandle": "thinking" },
+    { "id": "e16_busy", "source": "check_consent", "target": "busy_callback", "sourceHandle": "busy" },
+    { "id": "e16_false", "source": "check_consent", "target": "dnd_handler", "sourceHandle": "false" },
+    { "id": "e16_dnd", "source": "check_consent", "target": "dnd_handler", "sourceHandle": "dnd" },
+
+    { "id": "e_share_to_check", "source": "share_link_consent", "target": "check_share_consent" },
+    { "id": "e_share_check_true", "source": "check_share_consent", "target": "final_processing", "sourceHandle": "true" },
+    { "id": "e_share_check_false", "source": "check_share_consent", "target": "dnd_handler", "sourceHandle": "false" },
+    { "id": "e_share_check_dnd", "source": "check_share_consent", "target": "dnd_handler", "sourceHandle": "dnd" },
+    { "id": "e_share_check_busy", "source": "check_share_consent", "target": "busy_callback", "sourceHandle": "busy" },
+    
+    { "id": "e17", "source": "handle_transfer", "target": "trigger_transfer" },
+    { "id": "e18", "source": "final_processing", "target": "collect_feedback" },
+    { "id": "e18_thinking_fb", "source": "thinking_callback", "target": "collect_feedback" },
+    
+    { "id": "e19", "source": "collect_feedback", "target": "log_success", "sourceHandle": "true" },
+    { "id": "e19_dnd", "source": "collect_feedback", "target": "dnd_action", "sourceHandle": "dnd" },
+    { "id": "e19_busy", "source": "collect_feedback", "target": "schedule_callback_action", "sourceHandle": "busy" },
+    { "id": "e20", "source": "log_success", "target": "closing" },
+    { "id": "e21", "source": "closing", "target": "end" },
+    { "id": "e_dnd_end", "source": "dnd_action", "target": "end" },
+    { "id": "e_busy_end", "source": "schedule_callback_action", "target": "end" },
+    
+    { "id": "e_dnd_action", "source": "dnd_handler", "target": "dnd_action" },
+    { "id": "e_renewed_feedback", "source": "renewed_elsewhere", "target": "collect_feedback" }
+  ]
+}

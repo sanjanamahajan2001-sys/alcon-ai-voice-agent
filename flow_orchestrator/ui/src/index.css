@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --bg-color: #020617;
+  --sidebar-bg: #0f172a;
+  --accent-color: #0ea5e9;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border-color: #1e293b;
+  --node-bg: #1e293b;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* React Flow Customizations */
+.react-flow {
+  background-color: var(--bg-color);
+}
+
+.react-flow__node {
+  border-radius: 12px;
+  padding: 0;
+  border: 1px solid #334155;
+  background: #1e293b;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.react-flow__node:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
+}
+
+.react-flow__node.selected {
+  border-color: var(--accent-color);
+  border-width: 2px;
+}
+
+/* Edge styling */
+.react-flow__edge-path {
+  stroke: #475569;
+  stroke-width: 2;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: var(--accent-color);
+}
+
+/* Controls */
+.react-flow__controls {
+  background: var(--sidebar-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+}
+
+.react-flow__controls-button {
+  background: transparent;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.react-flow__controls-button:hover {
+  background: #334155;
+}
+
+.react-flow__handle {
+  width: 8px;
+  height: 8px;
+  background: #64748b;
+  border: 2px solid var(--node-bg);
+}
+
+.react-flow__handle:hover {
+  background: var(--accent-color);
+}
+
+/* Custom Node Header */
+.node-header {
+  padding: 8px 12px;
+  border-bottom: 1px solid #334155;
+  background: rgba(15, 23, 42, 0.5);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

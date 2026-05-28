@@ -1,0 +1,204 @@
+
+==================== post_service_feedback_15day.json ====================
+[startNode] Start
+[contextLogicNode] Feedback Initialization
+[messageNode] Good morning {{salutation}}. I’m calling from the Alcon Hyundai Customer Relations Department. My name is Supriya. Your Hyundai {{car}}, {{reg}} was serviced at our workshop on {{last_service_date}}. This is our 15-day post-service feedback call. May I take a few minutes?
+[conditionNode] Consent/Identity Check
+[messageNode] Thank you {{salutation}}. I just wanted to check, is your car performing well after the service?
+[conditionNode] Consent/Identity Check
+[actionNode] Record Positive Feedback
+[messageNode] That’s great to hear. Thank you for your valuable feedback. We appreciate your trust in Alcon Hyundai. Have a wonderful day!
+[actionNode] Record Negative Feedback
+[messageNode] I’m really sorry to hear that. Thank you for informing us. I will escalate this to our senior service team, and they will contact you shortly. For immediate support, you may also reach us on {{customer_care_number}}. Thank you for your time.
+[messageNode] I understand {{salutation}}. Could you please let me know a suitable date or time when I should call you back for this feedback?
+[actionNode] Schedule Callback
+[messageNode] Got it. I've scheduled a callback for {{callback_time}}. Thank you for your time, and have a nice day!
+[endNode] End Call
+
+==================== pd_workshop_update.json ====================
+[startNode] Start
+[apiNode] http://mock/crm/{{from}}
+[apiNode] http://mock/service_details/{{id}}
+[messageNode] Hello {{salutation}}, I'm Supriya from Alcon. Am I speaking with {{name}}?
+[conditionNode] identity_verified == true
+[messageNode] Great. I'm calling from the workshop to confirm the reported issues for your {{car_model}}. We have noted: {{reported_concerns}}. Do you have any additional concerns we should address?
+[conditionNode] concerns
+[messageNode] {{additional_concerns_ack}}Based on our inspection, the estimated cost is approximately {{estimated_cost}}, and we expect to have it ready {{estimated_time}}. Should we proceed?
+[conditionNode] proceed == true
+[messageNode] I understand. The estimate includes authorized parts for your {{car_model}}, professional labor, and a service warranty. Would you like to proceed, or should I have the Service Advisor call you?
+[messageNode] Excellent! We are proceeding with the service now. You'll get a detailed breakdown via SMS. Thank you!
+[messageNode] Understood. I will have your Service Advisor call you immediately to discuss the details. Thank you!
+[endNode] End
+
+==================== mercedes_premium_service.json ====================
+[startNode] Start Call
+[apiNode] /mock/crm/{{from}}
+[messageNode] Good day, I'm Supriya from the Alcon Mercedes-Benz Concierge. Am I speaking with {{name}} {{salutation}}?
+[conditionNode] Identity Verification
+[messageNode] My apologies. I'll update our records immediately. Have a pleasant day!
+[messageNode] Of course {{salutation}}. I understand you are busy. When would be a convenient time for our concierge to call you back?
+[messageNode] Perfect. I've scheduled your callback for {{callback_time}}. Have a wonderful day!
+[messageNode] Thank you for confirming {{salutation}}. I see your {{car_model}} is due for its periodic maintenance. Would you like to schedule your premium service today?
+[conditionNode] User says Yes
+[messageNode] Excellent. Which date works best for your schedule?
+[messageNode] Noted for {{confirmed_date}}. Could you please share the current mileage on your instrument cluster?
+[messageNode] Thank you. For our Mercedes clients, we provide a complimentary Chauffeur-driven Pick and Drop. Would you like to avail this premium service?
+[conditionNode] User says Yes
+[messageNode] Wonderful {{salutation}}. Your service is confirmed. We will use only genuine Mercedes-Benz parts and synthetic oil. Our Service Manager, Amit Shah, will personally oversee your vehicle. Have a great day!
+[endNode] Hangup
+[messageNode] Understood {{salutation}}. {{callback_confirmation}}. Have a great day!
+
+==================== pd_pickup_coordination.json ====================
+[startNode] Start
+[apiNode] http://mock/crm/{{from}}
+[messageNode] Hello {{salutation}} {{name}}, I'm Supriya from Alcon. Calling to confirm your scheduled Pick & Drop for tomorrow. Is this still a good time?
+[conditionNode] identity_verified == true
+[messageNode] Great. Our driver Rajesh is assigned for the pickup. What time should he arrive at your location?
+[messageNode] Perfect. Rajesh will see you tomorrow at {{pickup_time}}. You'll receive driver contact details via SMS shortly. Thanks!
+[messageNode] No problem. I will have our coordinator call you to reschedule the pickup. Have a nice day!
+[endNode] End
+[endNode] End
+
+==================== post_service_feedback.json ====================
+[startNode] Start
+[apiNode] http://mock/crm/{{from}}
+[messageNode] Hello {{salutation}}, I'm Supriya from Alcon. Am I speaking with {{name}}?
+[conditionNode] identity_verified == true
+[messageNode] Thank you {{salutation}}. Were all requested jobs done to your complete satisfaction?
+[conditionNode] satisfaction_check == true
+[messageNode] I'm sorry to hear that {{salutation}}. I am escalating this to our senior service team immediately. They will contact you to resolve this. May I still ask for your ratings for other areas?
+[conditionNode] continue == true
+[messageNode] That's great to hear. Now, on a scale of one to ten, how would you rate the service advisor’s explanation of work and charges?
+[conditionNode] advisor_rating >= 9
+[messageNode] I've noted the rating of {{advisor_rating}}. May I know the reason for this rating, so we can improve our service?
+[messageNode] Thank you for sharing that. Next, how would you rate the pickup process after servicing?
+[messageNode] Thank you. Next, how would you rate the pickup process after servicing?
+[conditionNode] pickup_rating >= 9
+[messageNode] Understood. Could you share the reason for the {{pickup_rating}} rating for the pickup process?
+[messageNode] Noted. And how would you rate the cleanliness and condition of the car?
+[messageNode] Got it. And how would you rate the cleanliness and condition of the car?
+[conditionNode] cleanliness_rating >= 9
+[messageNode] Thank you. Could you please tell me why you gave a {{cleanliness_rating}} for cleanliness?
+[messageNode] Finally, how would you rate your overall workshop experience?
+[conditionNode] overall_rating >= 9
+[messageNode] I've noted your rating of {{overall_rating}}. Any suggestions on how we can make your overall experience better?
+[messageNode] Thank you for your valuable feedback! We've noted your suggestions and will work on them. Have a great day!
+[endNode] End
+
+==================== insurance_v2_template.json ====================
+[startNode] Start
+[apiNode] /mock/crm/lookup
+[messageNode] Hello, I'm Supriya from Alcon. Am I speaking with {{name}} {{salutation}}?
+[conditionNode] Is Correct Person
+[contextLogicNode] Calculate Renewal Context
+[messageNode] {{greeting_context}}
+[knowledgeBaseNode] Check for Queries
+[conditionNode] User Intent
+[messageNode] Certainly. Your current premium was {{current_premium}}, but for this year, we have a special loyalty quote of {{loyalty_premium}}. This includes Zero Depreciation, Engine Protection, and Roadside Assistance. Does that sound like a good deal?
+[knowledgeBaseNode] Check for Queries
+[conditionNode] Consent Check
+[messageNode] Great! Shall I go ahead and share the digital copy of the quotation and the secure payment link on your registered mobile number now?
+[conditionNode] Consent Check
+[conditionNode] Transfer Consent Check
+[messageNode] I'll connect you to our insurance desk to find the best possible rate. Please stay on the line.
+[actionNode] Transfer to Manager
+[messageNode] Excellent choice! I'm processing your renewal with {{provider}} at {{loyalty_premium}}. This includes Zero-Depreciation and 24/7 Roadside Assistance. Your renewal is now in progress. You'll receive the payment link shortly. By the way, did you find this call helpful today?
+[conditionNode] Feedback Capture
+[actionNode] Store Success & Feedback
+[messageNode] Thank you for your feedback! Have a wonderful day.
+[endNode] End Call
+[messageNode] No problem. I'll schedule a call back for later. By the way, did you find this call helpful today?
+[actionNode] Schedule Follow-up
+[messageNode] Understood {{salutation}}. I'll update our records to not call you again regarding this. By the way, did you find this call helpful today?
+[actionNode] Add to DND
+[messageNode] No problem {{salutation}}. I'll schedule a call back so you have time to think about it. Just one last thing, did you find this interaction helpful?
+[messageNode] Oh, I see! That's great to hear that your {{car}} is already covered. By the way, did you find this call helpful today?
+
+==================== inbound_receptionist.json ====================
+[startNode] Start
+[contextLogicNode] Receptionist Initialization
+[messageNode] Welcome to Alcon Hyundai. I am your AI assistant. How can I help you today? Are you looking for a new car enquiry or service assistance?
+[conditionNode] Consent/Identity Check
+[conditionNode] name_known
+[messageNode] Great! I can certainly help with your new car enquiry. May I know your name please?
+[conditionNode] Consent/Identity Check
+[messageNode] Thank you {{name}}. Which model are you interested in today? I can help with pricing, features, or EMI details.
+[conditionNode] Query Intent Check
+[knowledgeBaseNode] Knowledge Base Handler
+[actionNode] Transfer to Sales
+[conditionNode] name_known
+[messageNode] Understood. I can help you with your service booking. May I know your name please?
+[conditionNode] Consent/Identity Check
+[messageNode] Thank you {{name}}. To proceed, could you please share your vehicle registration number?
+[conditionNode] Consent/Identity Check
+[actionNode] Check Service Due
+[conditionNode] Is Service Due
+[messageNode] Thank you. I've verified your record. I see your {{car}} was last serviced on {{last_service_date}}, and your next appointment is now due. Would you like to book it today?
+[messageNode] Thank you. I've checked our records and your {{car}} service is not yet due. It is scheduled for {{service_due_date}}. Is there anything else I can help you with today?
+[conditionNode] User says Yes
+[conditionNode] Query Intent Check
+[messageNode] Great. What date would you prefer for the service?
+[conditionNode] Consent/Identity Check
+[messageNode] Got it. Available on {{confirmed_date}}. What's the current mileage of your car?
+[conditionNode] Consent/Identity Check
+[messageNode] Got it. And are there any specific concerns or issues with the car?
+[conditionNode] Consent/Identity Check
+[messageNode] I've noted those points. We offer free Pick and Drop service. Would you like to avail this?
+[conditionNode] User says Yes
+[actionNode] Confirm Booking
+[messageNode] Wonderful {{salutation}}. Your service is confirmed. At Alcon, we provide a 50-point safety check and use only genuine Hyundai parts to ensure your vehicle's peak performance. Your Advisor, Amit Shah, will greet you upon arrival and walk you through the repair order details. You'll receive an SMS shortly. Have a great day!
+[messageNode] Wonderful {{salutation}}. Your service is confirmed. At Alcon, we provide a 50-point safety check and use only genuine Hyundai parts. Your Advisor, Amit Shah, will greet you upon arrival. You'll receive an SMS shortly. Have a great day!
+[messageNode] Understood {{salutation}}. I'll make a note of it. Have a great day!
+[knowledgeBaseNode] Knowledge Base Handler
+[endNode] Hangup
+
+==================== pd_ready_delivery.json ====================
+[startNode] Start
+[apiNode] http://mock/crm/{{from}}
+[apiNode] http://mock/service_details/{{id}}
+[messageNode] Wonderful news {{salutation}} {{name}}! Your car is ready for delivery. We've completed {{service_summary}}. Would you like us to drop it back to your location, or will you be coming to pick it up?
+[conditionNode] delivery_option
+[messageNode] Perfect. I've scheduled the drop-off for you. Our driver will contact you shortly. Thank you!
+[messageNode] Got it. Your car is parked at our service entrance. See you soon!
+[endNode] End
+
+==================== pre_sales_template.json ====================
+[startNode] Start
+[contextLogicNode] Pre-Sales Initialization
+[messageNode] {{greeting_context}}
+[conditionNode] Consent/Identity Check
+[messageNode] Great! To help you better, I can share the latest price, ongoing offers, or schedule a test drive for the {{car}}. What would you prefer?
+[conditionNode] Query Intent Check
+[knowledgeBaseNode] Knowledge Base Handler
+[actionNode] Increment Query Count
+[actionNode] Evaluate Escalation
+[messageNode] I have more details on this, or I can connect you to our Sales Manager for a deep dive. What would you prefer?
+[conditionNode] Transfer Call (Hot Lead)
+[actionNode] Transfer to Manager
+[conditionNode] Service Bridge Eligibility
+[messageNode] I apologize for the incorrect information. I will update our records immediately. Have a wonderful day {{salutation}}!
+[messageNode] I understand {{salutation}}. By the way, I noticed your {{car}} is due for its periodic service. Since we are already speaking, would you like me to book a maintenance appointment for you instead?
+[messageNode] Understood {{salutation}}. Have a wonderful day!
+[messageNode] Thank you for your time {{salutation}}. Have a great day ahead!
+[endNode] End Call
+
+==================== service_booking_prod.json ====================
+[startNode] Start Call
+[apiNode] /mock/crm/{{from}}
+[messageNode] Hello, I'm Supriya from Alcon. Am I speaking with {{name}} {{salutation}}?
+[conditionNode] Identity Verification
+[messageNode] I'm so sorry! I must have the wrong number. I'll update our records immediately. Have a nice day!
+[messageNode] No problem {{salutation}}. I completely understand. When would be a more convenient time for me to call you back?
+[messageNode] Got it. I've scheduled a reminder to call you back at {{callback_time}}. Have a great day!
+[messageNode] Great! I've verified your record {{salutation}} {{name}}. I see your {{car_model}} was last serviced on {{last_svc_formatted}}, and your next appointment is now due. Would you like to book it today?
+[conditionNode] User says Yes
+[messageNode] Great. What date would you prefer for the service?
+[messageNode] Got it. Available on {{confirmed_date}}. What's the current mileage of your car?
+[messageNode] Got it. And are there any specific concerns or issues with the car?
+[messageNode] I've noted those points. We offer free Pick and Drop service. Would you like to avail this?
+[conditionNode] User says Yes
+[messageNode] Wonderful {{salutation}}. Your service is confirmed. At Alcon, we provide a 50-point safety check and use only genuine Hyundai parts to ensure your vehicle's peak performance. Your Advisor, Amit Shah, will greet you upon arrival and walk you through the repair order details. You'll receive an SMS shortly. Have a great day!
+[messageNode] Wonderful {{salutation}}. Your service is confirmed. At Alcon, we provide a 50-point safety check and use only genuine Hyundai parts to ensure your vehicle's peak performance. Your Advisor, Amit Shah, will greet you upon arrival and walk you through the repair order details. You'll receive an SMS shortly. Have a great day!
+[endNode] Hangup
+[messageNode] Understood {{salutation}}. {{callback_confirmation}}. Have a great day!
+[messageNode] I see your {{car_model}} was last serviced recently on {{last_svc_formatted}}. Since your service is only due every {{service_due_months}} months, you are all set for now! Have a wonderful day!

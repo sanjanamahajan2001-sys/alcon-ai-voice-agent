@@ -1,0 +1,1665 @@
+﻿Alcon AI Voice Service Bot
+Strategic Research & Implementation Plan (Agentic AI System)
+________________
+
+
+1. Executive Summary
+Alcon aims to build a fully owned, multilingual AI-powered voice service agent capable of handling customer interactions related to vehicle servicing, appointment booking, and service reminders.
+This initiative transitions Alcon from:
+* Reactive call center operations → Proactive AI-driven engagement
+* Manual scheduling → Automated, real-time orchestration
+* Vendor dependency → Owned, scalable AI infrastructure
+________________
+
+
+2. Problem Framing (Data-Driven View)
+2.1 Current Industry Baseline (Dealership Ops)
+
+
+Metric
+	Typical Value
+	Missed service reminders
+	35–50%
+	Call center cost per call
+	₹12–₹35
+	Conversion rate (manual calls)
+	18–30%
+	Avg call handling time
+	3–6 min
+	
+
+
+
+________________
+
+
+2.2 Opportunity with AI Voice Agent
+
+
+Metric
+	Expected Improvement
+	Call automation
+	70–90%
+	Cost per call
+	↓ 60–80%
+	Conversion rate
+	↑ 21–40%
+	Response time
+	Instant
+	
+
+
+
+________________
+
+
+3. Use Case Decomposition
+Core Use Case: Service Reminder + Booking
+Functional Layers
+1. Identity Resolution
+   * Name confirmation
+   * Phone → CRM lookup
+2. Context Retrieval
+   * Vehicle data
+   * Service history
+   * Service due logic
+3. Conversational Decisioning
+   * Intent detection
+   * Slot negotiation
+   * Add-on services (pickup/drop)
+4. Transaction Execution
+   * Slot booking
+   * Confirmation 
+________________
+
+
+3.1 Post-Service Feedback (Immediate / Day 0)
+* Objective: Capture "fresh" sentiment and identify immediate quality issues before they escalate.
+* Key Logic:
+   * Intent Detection: "Are you facing any issue with the car after the service?"
+   * Conditional Branching:
+      * If YES → Trigger Escalation Protocol (Senior Service Team notification).
+      * If NO → Proceed to CSAT/NPS rating (Scale of 1-10).
+   * Engagement Strategy: Offer to "Reconsider" feedback if ratings are 8-9, emphasizing Alcon’s commitment to a "Perfect 10" experience.
+
+
+________________
+
+
+3.2 Post-Service Feedback (15th Day Monitoring)
+* Objective: Long-term performance monitoring to ensure car reliability and brand trust.
+* Key Logic:
+   * Validation: Check if car is performing well after two weeks of usage.
+   * Availability Handling: If the customer is busy, the agent must offer a specific callback window or a WhatsApp link for text-based status updates.
+   * API Trigger: Sync results back to the CRM to close the service ticket with "Verified" status.
+________________
+
+
+4. System Architecture (Layered View)
+4.1 Logical Architecture
+Customer Call
+   ↓
+Telephony Layer
+   ↓
+Streaming Layer
+   ↓
+Speech Intelligence (STT + TTS)
+   ↓
+Agent Brain (LLM + Workflow Engine)
+   ↓
+Business APIs
+   ↓
+CRM / Scheduling Systems
+
+________________
+4.2 Intelligence Separation (CRITICAL DESIGN PRINCIPLE)
+Layer
+	Responsibility
+	LLM
+	Reasoning, conversation
+	Agent Framework
+	Workflow control
+	APIs
+	Truth source (no hallucination)
+	This avoids LLM hallucination risk in enterprise workflows
+________________
+
+
+5. Agentic Workflow Design
+To meet the requirement for a customizable platform, we propose a Node-Based Workflow Builder. This allows Alcon to visualize and modify conversation paths dynamically.
+5.1 Proposed Immediate Feedback Flow
+________________
+
+
+5.2 Example Flow Mapping
+Step
+	Type
+	Owner
+	Greeting
+	Scripted
+	System
+	Identity check
+	Rule-based
+	API
+	Service due check
+	API
+	Backend
+	Booking intent
+	AI
+	LLM
+	Slot validation
+	Rule-based
+	API
+	Confirmation
+	Hybrid
+	LLM + API
+	________________
+
+
+5.3 Why This Matters
+* Ensures predictability
+* Maintains compliance
+* Reduces AI errors in transactions
+________________
+
+
+6. Multilingual Intelligence Strategy
+Challenge:
+India-specific multilingual voice complexity
+Strategy:
+Layer
+	Approach
+	Input
+	Language detection (auto)
+	Processing
+	Unified English reasoning
+	Output
+	Native language generation
+	Example:
+User speaks Marathi →
+Convert → English → Process → Respond in Marathi
+________________
+
+
+Risk:
+* Marathi STT accuracy ~For Marathi interactions, the system utilizes a 'High-Confidence Confirmation' step to ensure 100% booking accuracy even in varying dialects.
+* Hindi ~90–95%
+* English ~95%+
+Mitigation:
+* Context correction using LLM
+* Confirmation prompts
+________________
+
+
+7. Infrastructure Strategy (Ownership Model)
+7.1 Deployment Philosophy
+Phase-wise ownership transition
+________________
+
+
+Phase 1: Accelerated Launch (Hybrid SaaS)
+* External STT/TTS/LLM
+* Focus: speed
+________________
+
+
+Phase 2: Cost Optimization
+* Self-host STT + LLM
+* Partial GPU infra
+________________
+
+
+Phase 3: Full Ownership
+* Complete AI stack in-house
+* Telephony + AI unified
+________________
+
+
+7.2 Infra Topology
+Kubernetes Cluster
+ ├── Telephony Gateway
+ ├── AI Processing Layer
+ ├── Agent Engine
+ ├── API Layer
+ ├── Data Layer
+
+________________
+7.3 Scaling Model
+Component
+	Scaling Logic
+	Calls
+	Linear scaling
+	STT/LLM
+	GPU-bound
+	APIs
+	Horizontal
+	________________
+
+
+8. Cost Engineering Strategy
+8.1 Estimate Per Call Cost Breakdown (SaaS-Based Setup)
+Component
+	Cost (₹ per call)
+	Notes
+	STT
+	₹1.5 – ₹3
+	Based on streaming usage
+	LLM
+	₹2 – ₹5
+	Depends on tokens & conversation length
+	TTS
+	₹1 – ₹3
+	Voice quality & duration dependent
+	Telephony
+	₹0.5 – ₹1
+	SIP / provider charges
+	________________
+
+
+Total Cost per Call(Estimate):
+₹5 – ₹12 per call
+________________
+
+
+8.2 Cost Breakdown by Percentage
+Component
+	% Contribution
+	STT
+	30–40%
+	LLM
+	25–35%
+	TTS
+	15–25%
+	Telephony
+	5–10%
+	________________
+
+
+8.3 Optimized Cost (Owned Infrastructure)
+After moving to self-hosted stack:
+Component
+	Optimized Cost
+	STT (Whisper)
+	₹0.5 – ₹1
+	LLM (Llama)
+	₹0.5 – ₹2
+	TTS (Coqui)
+	₹0.5 – ₹1
+	Telephony
+	₹0.5 – ₹1
+	________________
+
+
+Total Optimized Cost:
+₹2 – ₹5 per call
+________________
+
+
+8.4 Monthly Cost Projection
+Call Volume
+	SaaS Cost (Variable)
+	Optimized Cost (Effective)*
+	1,000 calls
+	₹5K – ₹12K
+	₹40K (Base Infra Cost)
+	10,000 calls
+	₹50K – ₹1.2L
+	₹45K (Infra + Scaling)
+	100,000 calls
+	₹5L – ₹12L
+	₹1.5L – ₹2.5L
+	
+
+Note: Owned cost includes fixed GPU infrastructure. The "per-call" efficiency is realized at scale (10k+ calls), where the cost per call drops significantly compared to SaaS.
+________________
+
+
+8.5 Cost Optimization Drivers
+* Controlled workflows → reduce conversation duration
+* Token optimization → reduce LLM cost
+* Self-hosted models → eliminate per-call API charges
+* Prompt Caching responses → reduce repeated computation
+________________
+
+
+8.6 Key Insight
+The system is designed to ensure that cost scales linearly with usage initially, but transitions to a controlled and optimized cost model as ownership increases.
+________________
+8.7 Cost Impact of Feedback Workflows
+Post-service feedback and follow-up calls are designed as short-duration structured interactions, typically lasting 1.5–2.5 minutes, resulting in:
+* Lower LLM token consumption
+* Reduced TTS usage
+* Minimal API calls
+Estimated cost per feedback call:
+₹3 – ₹7 per call (SaaS)
+₹1.5 – ₹3 per call (Optimized)
+
+
+________________
+
+
+9. Data & Intelligence Layer
+9.1 Required Data Sources
+* CRM (customer)
+* Vehicle database
+* Service history
+* Slot availability
+________________
+
+
+9.2 Derived Intelligence
+* Service prediction
+* Customer segmentation
+* Upsell triggers
+________________
+
+
+9.3 Feedback Loop
+Call Logs → Analytics → Model Improvement
+
+________________
+10. KPIs & Success Metrics
+Operational Metrics
+* Call completion rate
+* Avg latency
+* Error rate
+Business Metrics
+* Booking conversion %
+* Cost per booking
+* Customer satisfaction (CSAT)
+________________
+
+
+11. Governance & Risk Control
+Risks
+Risk
+	Impact
+	Mitigation
+	Hallucination
+	High
+	API-first design
+	Wrong booking
+	High
+	Confirmation step
+	Language errors
+	Medium
+	Redundant validation
+	Latency
+	High
+	Edge optimization
+	________________
+
+
+12. Implementation Roadmap
+Phase 1 (0–4 weeks)
+* MVP voice bot
+* English + Hindi
+* Basic booking
+________________
+
+
+Phase 2 (1–3 months)
+* Marathi support
+* Agent workflows
+* Cost optimization
+________________
+
+
+Phase 3 (3–6 months)
+* Full ownership infra
+* Advanced analytics
+* Personalization
+Note: The transition to Owned Infrastructure becomes financially superior once volume exceeds 25,000 calls per month, where fixed GPU rental costs become lower than variable SaaS API fees.
+________________
+
+
+13. Strategic Differentiator (WHY OWN THIS)
+Compared to vendors like Gnani:
+Factor
+	Vendor
+	Owned System
+	Cost
+	High recurring
+	Reduced long-term
+	Customization
+	Limited
+	Full control
+	Data ownership
+	External
+	Internal
+	Intelligence evolution
+	Vendor dependent
+	Self-driven
+	________________
+
+
+14. Future Expansion Possibilities
+* WhatsApp + Voice unified agent
+* Predictive service reminders
+* AI-driven upselling
+* Dealer-wide analytics platform
+________________
+
+
+15. Architecture Diagrams
+15.1 End-to-End Voice AI Flow  
+________________
+
+
+15.2 Agentic Decision Flow (Internal Brain)
+  
+
+________________
+
+
+15.3 Latency-Critical Pipeline
+  
+
+________________
+
+
+16. Kubernetes Deployment Blueprint
+16.1 Namespace Design
+namespaces:
+- voice-bot-core
+- voice-bot-ai
+- voice-bot-data
+- observability
+
+________________
+16.2 Pod-Level Architecture
+voice-bot-core:
+  - freeswitch-gateway
+  - media-stream-service
+
+
+voice-bot-ai:
+  - stt-service
+  - llm-agent-service
+  - tts-service
+
+
+voice-bot-data:
+  - redis (session memory)
+  - postgres (booking data)
+
+
+observability:
+  - prometheus
+  - grafana
+  - loki
+
+________________
+16.3 Deployment Blueprint
+  
+
+________________
+
+
+16.4 Autoscaling Strategy (HPA + GPU Scaling)
+Service
+	Scaling Strategy
+	FreeSWITCH
+	Vertical + node scaling
+	STT
+	GPU HPA (based on stream count)
+	LLM
+	GPU autoscale (token load)
+	APIs
+	CPU HPA
+	TTS
+	Horizontal
+	________________
+
+
+16.5 Resource Planning (Per 100 Concurrent Calls)
+Component
+	CPU
+	GPU
+	RAM
+	STT
+	Low
+	1 GPU
+	Medium
+	LLM
+	Medium
+	1–2 GPU
+	High
+	TTS
+	Medium
+	Optional GPU
+	Medium
+	APIs
+	Medium
+	None
+	Medium
+	________________
+
+
+17. Tooling Options & Recommendations (Client Decision Layer)
+17.1 Telephony Layer
+Options:
+* Twilio
+* Exotel
+* Asterisk
+* FreeSWITCH
+Recommendation:
+FreeSWITCH + SIP Provider
+* Full ownership
+* Lower long-term cost
+* Better RTP handling for real-time AI
+________________
+
+
+17.2 Speech-to-Text (STT)
+Options:
+* Google Cloud Speech-to-Text
+* Deepgram
+* Whisper
+Recommendation:
+* Phase 1: Deepgram (low latency)
+* Phase 2+: Whisper (self-host GPU)
+________________
+
+
+17.3 LLM Layer
+Options:
+* OpenAI
+* Anthropic
+* Llama 3
+Recommendation:
+* Phase 1: OpenAI (fast deployment)
+* Phase 2+: Llama 3 via vLLM (cost control)
+________________
+
+
+17.4 Agent Framework
+Options:
+* LangGraph
+* LangChain
+Recommendation:
+LangGraph
+* Deterministic workflows
+* Better for production-grade agents
+________________
+
+
+17.5 Text-to-Speech (TTS)
+Options:
+* ElevenLabs
+* Google Cloud Text-to-Speech
+* Coqui TTS
+Recommendation:
+* Phase 1: ElevenLabs (best UX)
+* Phase 2+: Coqui (self-host)
+________________
+
+
+17.6 Streaming Layer
+Options:
+* WebRTC (recommended)
+* RTP direct handling
+Recommendation:
+WebRTC bridge over FreeSWITCH
+* Lower latency
+* Better browser + AI compatibility
+________________
+
+
+17.7 Data Layer
+Stack:
+* Redis → session memory
+* PostgreSQL → bookings
+* Kafka (optional) → event streaming
+Event-Driven Architecture:
+An event streaming system (e.g., Kafka) is used to decouple real-time call events, enabling scalable handling of:
+
+- Outbound call scheduling
+- Feedback ingestion
+- Analytics pipelines
+- Retry and orchestration workflows
+
+
+This ensures high scalability, fault tolerance, and asynchronous processing.
+________________
+
+
+18. Final Integrated Stack (Client Recommendation)
+Telephony: FreeSWITCH
+Streaming: WebRTC
+STT: Whisper (GPU)
+LLM: Llama 3 (vLLM)
+Agent: LangGraph
+TTS: Coqui
+Infra: Kubernetes
+Cache: Redis
+DB: PostgreSQL
+
+________________
+
+
+19. Operational Readiness & Reliability Strategy
+19.1 SLA & Availability Targets
+Metric
+	Target
+	System uptime
+	99.9%
+	Call success rate
+	> 95%
+	Latency (end-to-end)
+	< 1.5 sec
+	Booking accuracy
+	> 98%
+	
+
+Cold Start Optimization:
+Initial greeting responses are pre-generated and cached to eliminate first-response latency and ensure immediate engagement (<300ms).
+
+
+________________
+
+
+19.2 High Availability Design
+  
+
+Key Strategies:
+* Multi-zone deployment (avoid single point failure)
+* Stateless services (horizontal scaling)
+* Persistent storage for booking data (PostgreSQL HA)
+________________
+
+
+19.3 Failover Strategy
+Failure Type
+	Action
+	STT failure
+	Retry → fallback STT
+	LLM timeout
+	Retry with smaller model
+	API failure
+	Retry with circuit breaker
+	Full system failure
+	Transfer to human agent
+	________________
+20. Structured Survey Handling Capability
+20.1 Requirement
+The system must support deterministic survey execution to ensure:
+* Accurate rating capture
+* No skipped questions
+* Consistent experience
+________________
+
+
+20.2 Implementation Approach
+Predefined Workflow Graph (LangGraph)
+   ↓
+Fixed Question Sequence
+   ↓
+Input Validation (numeric)
+   ↓
+Store response → Move to next step
+
+________________
+20.3 Validation Rules
+Input Type
+	Validation
+	Rating
+	Must be integer (1–10)
+	Empty response
+	Retry prompt
+	Invalid input
+	Re-ask question
+	
+
+________________
+
+
+
+
+21. Fallback & Human Handover Strategy (Critical)
+21.1 AI Confidence-Based Routing
+IF:
+- STT confidence < threshold
+- LLM uncertainty detected
+- Repeated user confusion
+- API failure
+
+
+THEN:
+→ Route call to human agent
+
+
+Additional Handling:
+If no user response is detected within 5–7 seconds:
+→ Re-prompt user
+→ After 2 retries, gracefully terminate or route to fallback handling
+
+________________
+
+
+21.2 Hybrid Call Flow
+AI Agent Handles → Majority Calls
+         |
+         +-- Complex case → Human Agent
+         |
+         +-- Failure case → Immediate transfer
+
+________________
+21.3 Business Impact
+* Prevents customer frustration
+* Ensures service continuity
+* Maintains brand trust
+________________
+
+
+22. POC vs Production Strategy
+________________
+
+
+22.1 Phase-Based Execution
+Stage
+	Objective
+	Approach
+	POC
+	Validate flow
+	SaaS-assisted
+	Pilot
+	Limited rollout
+	Hybrid infra
+	Production
+	Scale system
+	Fully owned
+	________________
+
+
+22.2 POC Scope
+* English + Hindi only
+* Limited call volume
+* Basic booking flow
+________________
+
+
+22.3 Production Evolution
+* Marathi support
+* Full automation
+* GPU-based AI stack
+________________
+
+
+23. Observability & Monitoring Strategy
+23.1 Monitoring Stack
+* Metrics → Prometheus
+* Visualization → Grafana
+* Logs → Loki / ELK
+* Tracing → OpenTelemetry
+________________
+
+
+23.2 Key Metrics to Track
+System Metrics
+* Call latency per stage
+* STT accuracy rate
+* LLM response time
+Business Metrics
+* Booking conversion rate
+* Drop-off rate
+* Call success %
+________________
+
+
+23.3 Alerting Strategy
+IF latency > threshold
+OR call failure rate increases
+→ Trigger alert (Slack / PagerDuty)
+
+________________
+24. Security & Compliance Strategy
+24.1 Data Protection
+* Encrypt call recordings (at rest + in transit)
+* Mask PII (phone, address)
+* Tokenized customer identifiers
+________________
+
+
+24.2 Access Control
+* RBAC for internal systems
+* API authentication (JWT / OAuth)
+________________
+
+
+24.3 Audit & Compliance
+* Call logs retained securely
+* Booking changes tracked
+* Access logs maintained
+
+
+________________
+
+
+23.4 Data Retention Policy
+
+
+* Call recordings and transcripts are retained for a configurable duration (e.g., 30–90 days)
+* Archived securely for analytics and audit purposes
+* Automatic deletion policies applied post retention period
+* Fully compliant with data protection and privacy regulations
+________________
+
+
+25. Capacity Planning & Load Strategy
+25.1 Call Volume Assumptions
+Scenario
+	Concurrent Calls
+	Small dealership
+	10–21
+	Mid scale
+	50–100
+	Enterprise
+	500+
+	________________
+
+
+25.2 Scaling Model
+Incoming Calls ↑
+   ↓
+Auto-scale STT + LLM pods
+   ↓
+Maintain latency SLA
+
+________________
+25.3 Load Handling Strategy
+* Queue management for spikes
+* Prioritize active conversations
+* Graceful degradation (reduce AI complexity under load)
+________________
+
+
+26. Model Optimization Strategy
+26.1 Intelligent Model Usage
+Task
+	Model Type
+	Greeting
+	Rule-based
+	FAQ
+	Small LLM
+	Booking
+	Full LLM
+	________________
+
+
+26.2 Token Optimization
+* Reduce prompt size
+* Cache repeated responses
+* Use structured prompts
+________________
+
+
+26.3 Cost Impact
+Reduces LLM cost by 30–50%
+________________
+
+
+27. Continuous Learning & Feedback Loop
+27.1 Feedback Pipeline
+Call Logs
+   ↓
+Transcription Analysis
+   ↓
+Error Detection
+   ↓
+Prompt / Model Improvement
+
+________________
+27.2 Improvement Areas
+* Accent handling
+* Language switching
+* Intent detection accuracy
+________________
+
+
+28. Risk Assessment (Expanded)
+
+
+Risk
+	Probability
+	Impact
+	Mitigation
+	High latency
+	Medium
+	High
+	GPU scaling
+	Wrong booking
+	Low
+	High
+	Confirmation step
+	Language errors
+	Medium
+	Medium
+	Multi-step validation
+	API downtime
+	Medium
+	High
+	Retry + fallback
+	Cost overrun
+	Medium
+	High
+	Phase optimization
+	
+
+________________
+
+
+29. Extended Use Case Coverage: Feedback & Follow-Up Workflows
+29.1 Post-Service Feedback (Immediate Call)
+Workflow Type
+Structured conversational survey with multi-step rating capture and contextual validation.
+________________
+
+
+Objective
+* Capture customer satisfaction post servicing
+* Identify issues early
+* Improve service quality metrics
+________________
+
+
+Detailed Workflow Execution
+Call Initiation
+   ↓
+Customer Identity Confirmation
+   ↓
+Service Reference Context (Car + Date)
+   ↓
+Check for Issues Post Service
+   ↓
+IF No Issues:
+   → Proceed with rating survey
+ELSE:
+   → Trigger escalation flow
+
+________________
+Survey Flow Structure
+Step
+	Question Type
+	Input Format
+	Advisor explanation rating
+	Scale
+	1–10
+	Pickup process rating
+	Scale
+	1–10
+	Cleanliness rating
+	Scale
+	1–10
+	Overall experience
+	Scale
+	1–10
+	Additional feedback
+	Open text
+	Optional
+	________________
+
+
+AI Behavior Design
+* Enforce strict sequential questioning
+* Capture numeric responses accurately
+* Apply light persuasion logic:
+   * Example: “Would you like to reconsider and give a full ten?”
+________________
+
+
+Data Handling
+* Each response stored via API:
+POST /feedback
+{
+  customer_id,
+  service_id,
+  ratings: {...},
+  comments
+}
+
+________________
+29.2 Conditional Escalation Flow (Critical Business Logic)
+Trigger Conditions
+* Customer reports issue post-service
+* Negative sentiment detected
+* Rating below threshold (e.g., < 7)
+________________
+
+
+Execution Flow
+Issue Detected
+   ↓
+AI Apology Response
+   ↓
+Trigger Escalation API
+   ↓
+Notify Service Team
+   ↓
+Create Ticket in CRM
+   ↓
+Optional: Transfer to Human Agent
+
+________________
+API Example
+POST /escalation
+{
+  customer_id,
+  issue_type,
+  priority,
+  service_id
+}
+
+________________
+Business Impact
+* Reduces customer churn
+* Enables proactive issue resolution
+* Improves CSAT scores
+________________
+
+
+29.3 15-Day Follow-Up Workflow
+Workflow Type
+Event-driven outbound call triggered via CRM.
+________________
+
+
+Trigger Mechanism
+Service Completed
+   ↓
+CRM Event Scheduled (Day +15)
+   ↓
+Auto-trigger AI outbound call
+
+________________
+Conversation Flow
+Greeting + Service Reference
+   ↓
+Check Vehicle Performance
+   ↓
+IF Issue:
+   → Escalation flow
+ELSE:
+   → Positive closure
+
+________________
+System Requirements
+Capability
+	Requirement
+	Scheduling
+	CRM integration
+	Outbound calling
+	Telephony API
+	State tracking
+	Service lifecycle tracking
+	________________
+
+
+29.4 Integration with Existing Architecture
+These workflows are handled using existing system components:
+* Agent Workflow Engine (LangGraph)
+* CRM Integration Layer
+* API Layer
+* Telephony System
+No additional infrastructure required
+________________
+
+
+30. Deployment Strategy (DevOps Lifecycle)
+30.1 CI/CD Pipeline
+Code Commit
+   ↓
+Build (Docker)
+   ↓
+Test (Unit + Integration)
+   ↓
+Deploy (Kubernetes)
+   ↓
+Monitor
+
+________________
+30.2 Release Strategy
+* Canary deployment
+* Blue-green deployment
+* Rollback support
+________________
+
+
+30.3 Environment Strategy
+Env
+	Purpose
+	Dev
+	Feature testing
+	Staging
+	Pre-production
+	Prod
+	Live system
+	
+
+
+
+________________
+
+
+30.4 Testing Strategy
+
+
+* -Synthetic Call Testing: Simulated conversations to validate flow logic and response accuracy
+* Load Testing: Validate system performance under concurrent call scenarios (e.g., 100–500 parallel calls)
+*  Voice Quality Testing: Ensure clarity, latency, and multilingual accuracy of STT/TTS systems
+* Failure Scenario Testing: Validate fallback, retry, and escalation mechanisms under failure conditions
+
+
+________________
+
+
+31. Final Strategic Strengthening
+Why This Design is Enterprise-Grade
+* Hybrid AI + deterministic workflows
+* Fully scalable Kubernetes architecture
+* Phase-wise cost optimization
+* Multi-language adaptability
+* Real-time processing (<1.5 sec latency)
+* Built-in reliability and fallback
+________________
+
+
+32. AI Route Control & Cost-Aware Workflow Design (Critical Requirement Alignment)
+32.1 Problem Statement
+AI-driven systems inherently explore multiple conversational paths, which can lead to:
+* Increased token usage (higher LLM cost)
+* Longer call durations (telephony cost)
+* Unnecessary API calls
+* Inconsistent user experience
+________________
+
+
+32.2 Strategic Approach: Controlled Agentic Workflow
+Instead of allowing free-form AI behavior, the system enforces:
+AI (LLM) → Intent Detection ONLY  
+Workflow Engine → Controls execution path  
+APIs → Execute deterministic actions  
+
+________________
+32.3 Cost-Controlled Decision Routing
+User Input
+   ↓
+Intent Classification (LLM - minimal tokens)
+   ↓
+Predefined Workflow Path
+   ↓
+Conditional API Calls (only when required)
+   ↓
+Short Response Generation
+
+________________
+33.4 Workflow Constraints (Cost Guards)
+Control Mechanism
+	Purpose
+	Max conversation turns
+	Prevent long calls
+	Token limit per response
+	Control LLM cost
+	API call gating
+	Avoid unnecessary backend hits
+	Predefined flows
+	Reduce AI randomness
+	________________
+
+
+32.5 Example: Controlled vs Uncontrolled AI
+Uncontrolled AI
+* Asks multiple unnecessary questions
+* Repeats confirmations
+* Generates long responses
+Cost ↑, latency ↑
+________________
+
+
+Controlled Workflow (Recommended)
+* Direct intent detection
+* Minimal questions
+* Single API call per step
+* Short responses
+Cost ↓, speed ↑
+________________
+
+
+32.6 Cost Impact of Workflow Control
+Factor
+	Without Control
+	With Control
+	Avg call duration
+	4–6 min
+	2–3 min
+	LLM token usage
+	High
+	Reduced (~40%)
+	API calls
+	Unbounded
+	Controlled
+	Cost per call
+	High
+	Optimized
+	________________
+
+
+33. Ownership-Driven Architecture Strategy (Aligned with Requirement)
+33.1 Why Vendors (e.g., Gnani) Fall Short
+* Limited workflow control
+* Black-box AI decisions
+* Fixed pricing (no optimization leverage)
+* Restricted customization
+________________
+
+
+33.2 Owned System Advantage
+Custom Workflow Engine
+        +
+Self-hosted Models
+        +
+Controlled API Layer
+        =
+Full Cost & Behavior Control
+
+________________
+33.3 Key Ownership Benefits
+Capability
+	Impact
+	Workflow control
+	Predictable behavior
+	Model selection
+	Cost optimization
+	Infra control
+	Scale efficiently
+	Data ownership
+	Long-term intelligence
+	________________
+
+
+33.4 Strategic Outcome
+Instead of paying per interaction to a vendor, Alcon builds a cost-optimized AI asset that improves over time.
+________________
+
+
+34. Cost Governance Framework (Advanced Layer)
+34.1 Cost Control Layers
+User Interaction
+   ↓
+Conversation Control (limit turns)
+   ↓
+Model Selection (small vs large)
+   ↓
+API Execution Control
+   ↓
+Infra Optimization (GPU usage)
+
+________________
+34.2 Dynamic Cost Optimization
+Scenario
+	Strategy
+	Simple query
+	Small model
+	Booking flow
+	Full LLM
+	Repeated query
+	Cached response
+	________________
+
+
+34.3 Real-Time Cost Monitoring
+* Cost per call tracking
+* Token usage monitoring
+* API usage tracking
+
+
+________________
+
+
+35. Configurable Flow Builder Architecture (Platform Approach)
+34.1 Problem Statement
+Current approach defines fixed workflows for each use case.
+However, real-world requirements evolve:
+* New call flows (sales, complaints, reminders)
+* Changes in business logic
+* Region-specific variations
+Hardcoding flows leads to:
+* High development effort
+* Slow iteration
+* Increased operational cost
+________________
+
+
+35.2 Proposed Solution: Flow Builder System
+Design the system as a modular, configurable workflow platform where:
+Reusable Building Blocks + Flow Configuration = Dynamic AI Workflows
+
+________________
+35.3 Core Concept: Building Blocks
+Each interaction is composed of atomic reusable components:
+Block Type
+	Description
+	Input Block
+	Capture user input (voice/text)
+	Prompt Block
+	Ask predefined question
+	Decision Block
+	Conditional branching (if/else)
+	API Block
+	Call backend services
+	Response Block
+	Generate AI response
+	Escalation Block
+	Route to human agent
+	End Block
+	Terminate flow
+	________________
+
+
+35.4 Example: Service Booking Flow (Using Blocks)
+  
+
+________________
+
+
+35.5 Example: Feedback Flow
+Start
+ → Service Context Block
+ → Issue Check Block
+     → IF Issue → Escalation Block
+     → ELSE → Rating Blocks (1–10 sequence)
+ → Feedback Capture
+ → End
+
+________________
+35.6 Flow Definition (Config-Driven)
+Flows are stored as JSON/YAML configurations:
+{
+  "flow_name": "post_service_feedback",
+  "steps": [
+    {"type": "prompt", "message": "Are you facing any issue?"},
+    {"type": "decision", "condition": "issue == yes", "next": "escalation"},
+    {"type": "rating", "question": "Rate advisor (1-10)"},
+    {"type": "api_call", "endpoint": "/feedback"},
+    {"type": "end"}
+  ]
+}
+
+________________
+35.7 Flow Engine (Execution Layer)
+User Input
+   ↓
+Flow Engine (LangGraph / Custom Engine)
+   ↓
+Execute Step-by-Step Blocks
+   ↓
+Call APIs / Generate Responses
+Flow execution is handled by a centralized Flow Engine service deployed within Kubernetes, responsible for interpreting flow definitions and orchestrating real-time interactions across STT, LLM, and API layers.
+________________
+
+
+35.8 Edge Case Handling Framework
+The system must handle real-world edge cases:
+1. User Interruptions
+* User speaks mid-response
+→ Stop TTS → process input
+________________
+
+
+2. Invalid Inputs
+   * Non-numeric rating
+→ Re-prompt with validation
+________________
+
+
+3. Silence / No Response
+      * Timeout handling
+→ Retry → fallback
+________________
+
+
+4. Language Switching
+         * User switches Hindi → Marathi
+→ Dynamic language adaptation
+________________
+
+
+5. API Failures
+            * Retry logic + fallback messaging
+________________
+
+
+6. Ambiguous Intent
+            * Clarification prompt
+________________
+
+
+35.9 Flow Mapping to Data Layer
+Each flow is linked to:
+Flow
+	Data Source
+	Booking
+	CRM + slot API
+	Feedback
+	Feedback DB
+	Escalation
+	Ticketing system
+	________________
+
+
+35.10 Benefits of Flow Builder Approach
+Capability
+	Impact
+	Reusability
+	Faster development
+	Config-driven
+	No code changes
+	Scalability
+	Add new flows easily
+	Cost control
+	Optimized execution paths
+	Customization
+	Per dealership/region
+	________________
+
+
+35.11 Strategic Positioning
+The system evolves from a voice bot into a configurable conversational platform, enabling Alcon to rapidly design, deploy, and optimize multiple customer interaction workflows without engineering dependency.
+
+
+________________
+
+
+36. Conversation State & Session Management
+36.1 Problem Statement
+Voice interactions are inherently multi-turn and stateful, requiring the system to:
+            * Track conversation progress
+            * Maintain context across steps
+            * Resume flows reliably
+________________
+
+
+36.2 Session Management Design
+Call Start
+   ↓
+Generate Session ID
+   ↓
+Store Context (Redis)
+   ↓
+Update State Per Interaction
+   ↓
+End / Persist Final State
+
+________________
+36.3 Stored Context Example
+{
+  "session_id": "abc123",
+  "customer_id": "C001",
+  "current_step": "rating_2",
+  "language": "Hindi",
+  "previous_responses": {
+    "advisor_rating": 8
+  }
+}
+
+________________
+36.4 Benefits
+            * Enables multi-step workflows
+            * Supports interruption handling
+            * Allows flow resumption
+________________
+
+
+37. Idempotency & Retry Handling
+37.1 Problem
+Network/API failures can lead to:
+            * Duplicate bookings
+            * Multiple escalations
+________________
+
+
+37.2 Solution
+Every critical API call includes:
+- request_id
+- session_id
+
+________________
+37.3 Example
+POST /book-service
+{
+  "request_id": "req_123",
+  "customer_id": "C001"
+}
+
+________________
+37.4 Outcome
+            * Safe retries
+            * No duplicate transactions
+________________
+
+
+38. Outbound Call Orchestration Engine
+38.1 Requirements
+            * Scheduled calls (Day 15 feedback)
+            * Retry logic
+            * Priority handling
+________________
+
+
+38.2 Flow
+Event Trigger (CRM)
+   ↓
+Queue Job (Kafka/Queue)
+   ↓
+Dialer Service
+   ↓
+Call Execution
+   ↓
+Retry if failed
+
+________________
+38.3 Retry Strategy
+Condition
+	Action
+	No answer
+	Retry after X hrs
+	Busy
+	Reschedule
+	Failed
+	Max 3 retries
+	________________
+
+
+39. Rate Limiting & Abuse Protection
+39.1 Risks
+            * API abuse
+            * Spam calls
+            * System overload
+________________
+
+
+39.2 Controls
+Mechanism
+	Purpose
+	Rate limiting
+	Prevent overload
+	Call throttling
+	Manage spikes
+	IP filtering
+	Block abuse
+	________________
+
+
+40. API Contract & Data Governance
+40.1 Standardization
+            * REST/JSON APIs
+            * Versioned endpoints
+________________
+
+
+40.2 Contract Example
+POST /check-slot
+{
+  "customer_id": "string",
+  "preferred_time": "datetime"
+}
+
+________________
+40.3 Governance
+            * Schema validation
+            * Backward compatibility
+            * Version control
+________________
+
+
+41. Flow Versioning & Release Management
+41.1 Problem
+Flow updates may:
+            * Break active sessions
+            * Cause inconsistency
+________________
+
+
+41.2 Solution
+Each flow has:
+- version_id
+- active_flag
+
+________________
+41.3 Example
+Flow
+	Version
+	booking_flow
+	v1.0
+	booking_flow
+	v1.1
+	________________
+
+
+41.4 Benefit
+            * Safe updates
+            * Controlled rollout
+________________
+
+
+42. Human Agent Integration Layer
+42.1 Handover Flow
+AI detects failure
+   ↓
+Transfer request
+   ↓
+Send context to agent
+   ↓
+Live call transfer
+
+________________
+42.2 Data Shared
+            * Customer details
+            * Conversation history
+            * Detected issue
+________________
+
+
+42.3 Benefits
+            * Seamless transition
+            * No repetition for user

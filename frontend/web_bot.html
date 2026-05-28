@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alcon Assistant | Web Bot</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="web-bot-page">
+    <div class="bot-header">
+        <div class="logo">
+            <span class="brand">ALCON</span>
+            <span class="guide">Assistant</span>
+        </div>
+        <div class="status">
+            <span class="pulse"></span>
+            <span id="current-ui-state">Online</span>
+        </div>
+    </div>
+
+    <div class="chat-container" id="chat-container">
+        <!-- Messages will appear here -->
+        <div class="message bot-message">
+            Hi! I'm Supriya, your Alcon Digital Assistant. How can I help you today?
+            <div class="options-container">
+                <button class="option-btn" onclick="sendQuickMessage('I want to book a service')">Book a Service</button>
+                <button class="option-btn" onclick="sendQuickMessage('Check service status')">Check Status</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-area">
+        <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off">
+        <button id="send-btn">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+                <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div class="flow-explainer" id="flow-explainer">
+        <h4>Agent State</h4>
+        <div class="state-label" id="state-label">Waiting for input</div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+    </div>
+
+    <script src="web_bot.js"></script>
+</body>
+</html>

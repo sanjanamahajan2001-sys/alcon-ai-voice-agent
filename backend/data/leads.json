@@ -1,0 +1,650 @@
+[
+    {
+        "timestamp": "2026-04-24T04:36:41.595578",
+        "phone": "Unknown",
+        "name": "Shreya",
+        "intent": "sales",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-24T09:01:32.168890",
+        "phone": "Unknown",
+        "name": "I Am Maahi",
+        "intent": "sales",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-24T09:01:47.940849",
+        "phone": "Unknown",
+        "name": "Maahi",
+        "intent": "sales",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-28T04:49:33.882080",
+        "phone": "Unknown",
+        "name": "Maahi",
+        "intent": "sales",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:22:03.996222",
+        "phone": "+910000000000",
+        "name": "maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:22:13.525870",
+        "phone": "+910000000000",
+        "name": "maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:22:20.924632",
+        "phone": "+910000000000",
+        "name": "maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "verna",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:22:30.182205",
+        "phone": "+910000000000",
+        "name": "maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:22:37.900860",
+        "phone": "+910000000000",
+        "name": "maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:22:46.228154",
+        "phone": "+910000000000",
+        "name": "maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:22:54.373729",
+        "phone": "+910000000000",
+        "name": "maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:39:04.298839",
+        "phone": "+910000000000",
+        "name": "i am maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:39:18.039525",
+        "phone": "+910000000000",
+        "name": "i am maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:39:33.307882",
+        "phone": "+910000000000",
+        "name": "i am maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "venue",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:39:53.674465",
+        "phone": "+910000000000",
+        "name": "i am maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:40:03.007039",
+        "phone": "+910000000000",
+        "name": "i am maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:40:07.424722",
+        "phone": "+910000000000",
+        "name": "i am maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:41:46.640901",
+        "phone": "Unknown",
+        "name": "Lead",
+        "intent": "Follow-up Call",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:42:03.910991",
+        "phone": "Unknown",
+        "name": "Lead",
+        "intent": "Follow-up Call",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:42:35.561742",
+        "phone": "Unknown",
+        "name": "Lead",
+        "intent": "Follow-up Call",
+        "model_of_interest": "venue",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:46:46.582311",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "verna",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:46:57.778641",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:47:11.039041",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:49:41.887398",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:50:00.543065",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:50:36.893294",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:50:42.608912",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:51:25.260064",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:51:35.373236",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:51:46.533238",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "venue",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:51:53.068335",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:52:06.447793",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:52:12.195770",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:52:17.123572",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "venue",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:52:22.936797",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:52:25.408031",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "venue",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T06:55:05.911896",
+        "phone": "Unknown",
+        "name": "Lead",
+        "intent": "Follow-up Call",
+        "model_of_interest": "verna",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:00:29.184816",
+        "phone": "Unknown",
+        "name": "Lead",
+        "intent": "Follow-up Call",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:28:59.365027",
+        "phone": "+919881012767",
+        "name": "Valued Customer",
+        "intent": "Follow-up Call",
+        "model_of_interest": "verna",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:29:23.485425",
+        "phone": "+919881012767",
+        "name": "Valued Customer",
+        "intent": "Follow-up Call",
+        "model_of_interest": "verna",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:29:41.153879",
+        "phone": "+919881012767",
+        "name": "Valued Customer",
+        "intent": "Follow-up Call",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:30:03.934186",
+        "phone": "+919881012767",
+        "name": "Valued Customer",
+        "intent": "Follow-up Call",
+        "model_of_interest": "venue",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:34:47.038574",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "verna",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:35:13.955164",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "verna",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:35:25.845013",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:35:40.109278",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "verna",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:35:55.464159",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:36:05.334129",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:36:21.934179",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:38:55.719278",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:39:06.249623",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:39:21.860513",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "verna",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:41:12.041778",
+        "phone": "+919881012767",
+        "name": "Sanjana",
+        "intent": "Follow-up Call",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:41:26.964895",
+        "phone": "+919881012767",
+        "name": "Sanjana",
+        "intent": "Follow-up Call",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:41:45.926962",
+        "phone": "+919881012767",
+        "name": "Sanjana",
+        "intent": "Follow-up Call",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:42:05.052743",
+        "phone": "+919881012767",
+        "name": "Sanjana",
+        "intent": "Follow-up Call",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:45:45.346738",
+        "phone": "+910000000000",
+        "name": "Santosh",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:46:14.573950",
+        "phone": "+910000000000",
+        "name": "Santosh",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:46:28.960580",
+        "phone": "+910000000000",
+        "name": "Santosh",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:49:06.208214",
+        "phone": "+910000000000",
+        "name": "Santosh",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:49:23.646114",
+        "phone": "+910000000000",
+        "name": "Santosh",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:49:40.848662",
+        "phone": "+910000000000",
+        "name": "Santosh",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:49:54.287813",
+        "phone": "+910000000000",
+        "name": "Santosh",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T07:50:00.983120",
+        "phone": "+910000000000",
+        "name": "Santosh",
+        "intent": "Sales Enquiry",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T08:11:12.701618",
+        "phone": "Unknown",
+        "name": "Lead",
+        "intent": "Follow-up Call",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T08:11:21.821586",
+        "phone": "Unknown",
+        "name": "Lead",
+        "intent": "Follow-up Call",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T08:11:46.408217",
+        "phone": "Unknown",
+        "name": "Lead",
+        "intent": "Follow-up Call",
+        "model_of_interest": "verna",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T08:11:56.737953",
+        "phone": "Unknown",
+        "name": "Lead",
+        "intent": "Follow-up Call",
+        "model_of_interest": "verna",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T08:20:59.319232",
+        "phone": "Unknown",
+        "name": "Lead",
+        "intent": "Follow-up Call",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T08:21:38.906347",
+        "phone": "Unknown",
+        "name": "Lead",
+        "intent": "Follow-up Call",
+        "model_of_interest": "verna",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T08:21:47.322822",
+        "phone": "Unknown",
+        "name": "Lead",
+        "intent": "Follow-up Call",
+        "model_of_interest": "verna",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T08:22:10.076671",
+        "phone": "Unknown",
+        "name": "Lead",
+        "intent": "Follow-up Call",
+        "model_of_interest": null,
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T08:22:30.310863",
+        "phone": "Unknown",
+        "name": "Lead",
+        "intent": "Follow-up Call",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T08:22:40.784118",
+        "phone": "Unknown",
+        "name": "Lead",
+        "intent": "Follow-up Call",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-04-29T08:22:52.646807",
+        "phone": "Unknown",
+        "name": "Lead",
+        "intent": "Follow-up Call",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-05-04T06:43:45.087864",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-05-04T06:43:50.611859",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-05-04T06:44:27.383738",
+        "phone": "+919881012767",
+        "name": "Sanjana",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-05-04T06:44:30.950820",
+        "phone": "+919881012767",
+        "name": "Sanjana",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-05-04T07:24:12.290761",
+        "phone": "+919881012767",
+        "name": "Sanjana",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    },
+    {
+        "timestamp": "2026-05-04T10:46:05.504577",
+        "phone": "+910000000000",
+        "name": "Maahi",
+        "intent": "Sales Enquiry",
+        "model_of_interest": "creta",
+        "status": "Captured"
+    }
+]

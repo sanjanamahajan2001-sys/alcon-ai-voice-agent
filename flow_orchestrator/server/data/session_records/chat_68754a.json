@@ -1,0 +1,15 @@
+{
+  "session_id": "chat_68754a",
+  "flow_id": "pre_sales_template_draft_fb46",
+  "current_node_id": "query_intent_check",
+  "variables": {
+    "from": " 919881012767",
+    "callback_confirmation": "I'll check back later"
+  },
+  "history": [
+    {
+      "role": "user",
+      "text": "yes"
+    }
+  ]
+}

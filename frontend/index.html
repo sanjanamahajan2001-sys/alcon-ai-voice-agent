@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alcon Hyundai | Voice AI POC</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="glass-container">
+        <header>
+            <div class="logo">ALCON HYUNDAI</div>
+            <div class="status-pill" id="status-pill">Ready</div>
+        </header>
+
+        <main id="app-content">
+            <!-- Initial State -->
+            <div id="setup-view" class="view">
+                <h1>Service Reminder Bot</h1>
+                <p>Select a customer to simulate an outbound call.</p>
+                <div class="customer-list" id="customer-list">
+                    <!-- Customers will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Call State -->
+            <div id="call-view" class="view hidden">
+                <div class="call-card">
+                    <div class="caller-id">
+                        <div class="avatar pulsing">SH</div>
+                        <h2>Supriya</h2>
+                        <span class="designation">Alcon Virtual Assistant</span>
+                    </div>
+                    
+                    <div class="call-timer" id="call-timer">00:00</div>
+
+                    <div class="transcript" id="transcript">
+                        <p class="bot-text">Connecting...</p>
+                    </div>
+
+                    <div id="waveform" class="waveform hidden">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+
+                    <div class="actions" id="user-actions">
+                        <!-- Interaction buttons will appear here -->
+                    </div>
+
+                    <div class="call-controls">
+                        <button id="end-call" class="btn-danger">End Call</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success State -->
+            <div id="success-view" class="view hidden">
+                <div class="success-card">
+                    <div class="check-icon">✓</div>
+                    <h2>Appointment Booked!</h2>
+                    <p id="success-msg"></p>
+                    <button id="restart" class="btn-primary">Back to Home</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2026 Alcon Hyundai AI Systems</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

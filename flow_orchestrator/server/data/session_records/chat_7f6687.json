@@ -1,0 +1,33 @@
+{
+  "session_id": "chat_7f6687",
+  "flow_id": "pd_workshop_update_draft_e262",
+  "current_node_id": "check_concerns",
+  "variables": {
+    "from": " 919881012768",
+    "id": "6",
+    "name": "Kavita",
+    "phone": "+919881012768",
+    "car_model": "Hyundai Aura",
+    "registration_number": "DL04-CC-1122",
+    "registration_date": "2022-10-05",
+    "last_service_date": "2025-10-05",
+    "service_due_months": 6,
+    "gender": "female",
+    "dnd_status": false,
+    "exists": true,
+    "tier": "generic",
+    "last_svc_formatted": "October 05",
+    "callback_confirmation": "I'll check back later",
+    "additional_concerns_ack": ""
+  },
+  "history": [
+    {
+      "role": "user",
+      "text": "yes"
+    },
+    {
+      "role": "user",
+      "text": "no thats all"
+    }
+  ]
+}

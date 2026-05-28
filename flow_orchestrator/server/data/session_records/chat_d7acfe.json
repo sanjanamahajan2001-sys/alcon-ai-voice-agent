@@ -1,0 +1,14 @@
+{
+  "session_id": "chat_d7acfe",
+  "flow_id": "service_booking_prod_draft_2611",
+  "current_node_id": "check_id",
+  "variables": {
+    "from": " 919881012767"
+  },
+  "history": [
+    {
+      "role": "user",
+      "text": ""
+    }
+  ]
+}

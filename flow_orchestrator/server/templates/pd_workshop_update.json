@@ -1,0 +1,112 @@
+{
+  "flow_id": "pd_workshop_update",
+  "version": 2,
+  "status": "master",
+  "name": "Workshop Update",
+  "description": "Update customer on workshop progress and confirm estimates.",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "startNode",
+      "data": { "label": "Start" },
+      "position": { "x": 400, "y": 0 }
+    },
+    {
+      "id": "crm_lookup",
+      "type": "apiNode",
+      "data": { "label": "http://mock/crm/{{from}}" },
+      "position": { "x": 400, "y": 100 }
+    },
+    {
+      "id": "svc_lookup",
+      "type": "apiNode",
+      "data": { "label": "http://mock/service_details/{{id}}" },
+      "position": { "x": 400, "y": 200 }
+    },
+    {
+      "id": "greeting",
+      "type": "messageNode",
+      "data": { "label": "Hello {{salutation}}, I'm Supriya from Alcon. Am I speaking with {{name}}?" },
+      "position": { "x": 400, "y": 300 }
+    },
+    {
+      "id": "check_id",
+      "type": "conditionNode",
+      "data": { "label": "identity_verified == true" },
+      "position": { "x": 400, "y": 400 }
+    },
+    {
+      "id": "concerns_confirm",
+      "type": "messageNode",
+      "data": { "label": "Great. I'm calling from the workshop to confirm the reported issues for your {{car_model}}. We have noted: {{reported_concerns}}. Do you have any additional concerns we should address?" },
+      "position": { "x": 300, "y": 550 }
+    },
+    {
+      "id": "check_concerns",
+      "type": "conditionNode",
+      "data": { "label": "concerns" },
+      "position": { "x": 300, "y": 650 }
+    },
+    {
+      "id": "concerns_ack",
+      "type": "messageNode",
+      "data": { "label": "{{additional_concerns_ack}}Based on our inspection, the estimated cost is approximately {{estimated_cost}}, and we expect to have it ready {{estimated_time}}. Should we proceed?" },
+      "position": { "x": 300, "y": 750 }
+    },
+    {
+      "id": "check_proceed",
+      "type": "conditionNode",
+      "data": { "label": "proceed == true" },
+      "position": { "x": 300, "y": 850 }
+    },
+    {
+      "id": "price_explain",
+      "type": "messageNode",
+      "data": { "label": "I understand. The estimate includes authorized parts for your {{car_model}}, professional labor, and a service warranty. Would you like to proceed, or should I have the Service Advisor call you?" },
+      "position": { "x": 100, "y": 950 }
+    },
+    {
+      "id": "transfer_advisor",
+      "type": "transfernode",
+      "data": { "agent_name": "Service Advisor", "reason": "Detailed Cost Discussion" },
+      "position": { "x": 300, "y": 1050 }
+    },
+    {
+      "id": "success_msg",
+      "type": "messageNode",
+      "data": { "label": "Excellent! We are proceeding with the service now. You'll get a detailed breakdown via SMS. Thank you!" },
+      "position": { "x": 500, "y": 950 }
+    },
+    {
+      "id": "callback_msg",
+      "type": "messageNode",
+      "data": { "label": "Understood. I will have your Service Advisor call you immediately to discuss the details. Thank you!" },
+      "position": { "x": 600, "y": 550 }
+    },
+    {
+      "id": "end",
+      "type": "endNode",
+      "data": { "label": "End" },
+      "position": { "x": 400, "y": 1200 }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "source": "start", "target": "crm_lookup" },
+    { "id": "e2", "source": "crm_lookup", "target": "svc_lookup" },
+    { "id": "e3", "source": "svc_lookup", "target": "greeting" },
+    { "id": "e4", "source": "greeting", "target": "check_id" },
+    { "id": "e5", "source": "check_id", "target": "concerns_confirm", "sourceHandle": "true" },
+    { "id": "e6", "source": "check_id", "target": "callback_msg", "sourceHandle": "false" },
+    { "id": "e7", "source": "concerns_confirm", "target": "check_concerns" },
+    { "id": "e8", "source": "check_concerns", "target": "concerns_ack", "sourceHandle": "true" },
+    { "id": "e_false", "source": "check_concerns", "target": "concerns_ack", "sourceHandle": "false" },
+    { "id": "e9", "source": "concerns_ack", "target": "check_proceed" },
+
+    { "id": "e10", "source": "check_proceed", "target": "success_msg", "sourceHandle": "true" },
+    { "id": "e11", "source": "check_proceed", "target": "price_explain", "sourceHandle": "false" },
+    { "id": "e12", "source": "check_proceed", "target": "transfer_advisor", "sourceHandle": "transfer" },
+    { "id": "e13", "source": "price_explain", "target": "check_proceed" },
+    { "id": "e14", "source": "success_msg", "target": "end" },
+    { "id": "e15", "source": "callback_msg", "target": "end" }
+  ]
+}

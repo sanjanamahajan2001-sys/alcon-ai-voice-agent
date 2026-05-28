@@ -1,0 +1,180 @@
+✅ MetricsCollector: Connected to REDIS (alcon_metrics)
+✅ Database initialized and schema verified.
+--- TURN 1 ---
+[AUDIT] Logged transition for DEBUG_TEST_CALL_12345: None -> ENTRY
+[AGENT ROUTER] Capability Map: ['start call', '/mock/crm/{{from}}', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'identity verification', "i'm so sorry! i must have the wrong number. i'll update our records immediately. have a nice day!", 'no problem {{salutation}}. i completely understand. when would be a more convenient time for me to call you back?', "got it. i've scheduled a reminder to call you back at {{callback_time}}. have a great day!", "great! i've verified your record {{salutation}} {{name}}. i see your {{car_model}} was last serviced on {{last_svc_formatted}}, and your next appointment is now due. would you like to book it today?", 'user says yes', 'great. what date would you prefer for the service?', "got it. available on {{confirmed_date}}. what's the current mileage of your car?", 'got it. and are there any specific concerns or issues with the car?', "i've noted those points. we offer free pick and drop service. would you like to avail this?", "wonderful {{salutation}}. your service is confirmed. at alcon, we provide a 50-point safety check and use only genuine hyundai parts to ensure your vehicle's peak performance. your advisor, amit shah, will greet you upon arrival and walk you through the repair order details. you'll receive an sms shortly. have a great day!", 'hangup', 'understood {{salutation}}. {{callback_confirmation}}. have a great day!', 'i see your {{car_model}} was last serviced recently on {{last_svc_formatted}}. since your service is only due every {{service_due_months}} months, you are all set for now! have a wonderful day!', 'validate_slot_request', "i'm sorry, that timing is fully booked. we have saturday slots available at 10:00 am and 03:00 pm, or would friday evening at 05:30 pm work better?", 'sure. on {{requested_day_rel}} we have slots at {{matching_period_slots_text}}. which one works better for you?', 'i understand you have an urgent breakdown. connecting you immediately to our roadside assistance supervisor.', 'check counter proposal']
+[DEBUG] Current Node: start | Flow Type: booking
+[RUNTIME] Executing Node: start (startNode)
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: start | Outcome: None
+[DEBUG] Default edge match -> crm_lookup
+[DEBUG] Next Node: crm_lookup | Is Bridge: True
+[DEBUG] Current Node: crm_lookup | Flow Type: booking
+[RUNTIME] Executing Node: crm_lookup (apiNode)
+[RUNTIME] Node Result -> Outcome: None, Text: None, Status: None
+[DEBUG] Searching edges for Node: crm_lookup | Outcome: None
+[DEBUG] Default edge match -> intro
+[DEBUG] Next Node: intro | Is Bridge: True
+[DEBUG] Current Node: intro | Flow Type: booking
+[RUNTIME] Executing Node: intro (messageNode)
+[DEBUG MESSAGE EXECUTOR] node_id: intro | flow_type: booking | user_input: 
+[RUNTIME] Node Result -> Outcome: None, Text: Hello, I'm Supriya from Alcon., Status: None
+[DEBUG] Searching edges for Node: intro | Outcome: None
+[DEBUG] Default edge match -> check_id
+[DEBUG] Next Node: check_id | Is Bridge: False
+[DB] Updating Lead State for DEBUG_TEST_CALL_12345: {'car': 'Hyundai Venue', 'car_model': 'Hyundai Venue', 'memory': {}, 'feedback_score': None, 'feedback_text': 'Advisor: None, Pickup: None, Cleanliness: None', 'last_action': 'Discussing Details'}
+[DB] Updated 1 rows in lead_states
+TwiML 1:
+ <?xml version="1.0" encoding="UTF-8"?><Response><Say>Hello, I'm Supriya from Alcon. Am I speaking with Aarav Mehta Sir?.</Say><Gather action="/process?step=continue&amp;customer_id=10&amp;flow_type=booking" input="speech" language="en-IN" method="POST" speechTimeout="1.0" timeout="5" /><Redirect>/process?step=continue&amp;customer_id=10&amp;flow_type=booking&amp;retry=true</Redirect></Response>
+
+--- TURN 2 (Select English) ---
+[AUDIT] Logged transition for DEBUG_TEST_CALL_12345: check_id -> ENTRY
+[AGENT ROUTER] Capability Map: ['start call', '/mock/crm/{{from}}', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'identity verification', "i'm so sorry! i must have the wrong number. i'll update our records immediately. have a nice day!", 'no problem {{salutation}}. i completely understand. when would be a more convenient time for me to call you back?', "got it. i've scheduled a reminder to call you back at {{callback_time}}. have a great day!", "great! i've verified your record {{salutation}} {{name}}. i see your {{car_model}} was last serviced on {{last_svc_formatted}}, and your next appointment is now due. would you like to book it today?", 'user says yes', 'great. what date would you prefer for the service?', "got it. available on {{confirmed_date}}. what's the current mileage of your car?", 'got it. and are there any specific concerns or issues with the car?', "i've noted those points. we offer free pick and drop service. would you like to avail this?", "wonderful {{salutation}}. your service is confirmed. at alcon, we provide a 50-point safety check and use only genuine hyundai parts to ensure your vehicle's peak performance. your advisor, amit shah, will greet you upon arrival and walk you through the repair order details. you'll receive an sms shortly. have a great day!", 'hangup', 'understood {{salutation}}. {{callback_confirmation}}. have a great day!', 'i see your {{car_model}} was last serviced recently on {{last_svc_formatted}}. since your service is only due every {{service_due_months}} months, you are all set for now! have a wonderful day!', 'validate_slot_request', "i'm sorry, that timing is fully booked. we have saturday slots available at 10:00 am and 03:00 pm, or would friday evening at 05:30 pm work better?", 'sure. on {{requested_day_rel}} we have slots at {{matching_period_slots_text}}. which one works better for you?', 'i understand you have an urgent breakdown. connecting you immediately to our roadside assistance supervisor.', 'check counter proposal']
+[DEBUG] Current Node: check_id | Flow Type: booking
+[RUNTIME] Executing Node: check_id (conditionNode)
+[DEBUG] Resolved last_msg: '1'
+[DEBUG] Service Booking Condition Check: 'Identity Verification'. Input: '1'
+[RUNTIME] Node Result -> Outcome: true, Text: None, Status: None
+[DEBUG] Searching edges for Node: check_id | Outcome: true
+[DEBUG] Matched edge handle 'true' -> verify_due
+[DEBUG] Next Node: verify_due | Is Bridge: True
+[DEBUG] Current Node: verify_due | Flow Type: booking
+[RUNTIME] Executing Node: verify_due (messageNode)
+[DEBUG MESSAGE EXECUTOR] node_id: verify_due | flow_type: booking | user_input: 1
+[RUNTIME] Node Result -> Outcome: None, Text: Great! I've verified your reco, Status: None
+[DEBUG] Searching edges for Node: verify_due | Outcome: None
+[DEBUG] Default edge match -> check_booking
+[DEBUG] Next Node: check_booking | Is Bridge: False
+[DB] Updating Lead State for DEBUG_TEST_CALL_12345: {'car': 'Hyundai Venue', 'car_model': 'Hyundai Venue', 'memory': {}, 'feedback_score': None, 'feedback_text': 'Advisor: None, Pickup: None, Cleanliness: None', 'last_action': 'Discussing Details'}
+[DB] Updated 1 rows in lead_states
+[ORCHESTRATION SERVICE] Status: ACTIVE | Next Step: continue
+TwiML 2:
+ <?xml version="1.0" encoding="UTF-8"?><Response><Say>Great! I've verified your record Sir Aarav Mehta. I see your Hyundai Venue was last serviced on 2025-11-20, and your next appointment is now due. Would you like to book it today?.</Say><Gather action="/process?step=continue&amp;customer_id=10&amp;flow_type=booking" input="speech" language="en-IN" method="POST" speechTimeout="1.0" timeout="5" /><Redirect>/process?step=continue&amp;customer_id=10&amp;flow_type=booking&amp;retry=true</Redirect></Response>
+
+--- TURN 3 (Speak 'yes') ---
+[AUDIT] Logged transition for DEBUG_TEST_CALL_12345: check_booking -> ENTRY
+[AGENT ROUTER] Capability Map: ['start call', '/mock/crm/{{from}}', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'identity verification', "i'm so sorry! i must have the wrong number. i'll update our records immediately. have a nice day!", 'no problem {{salutation}}. i completely understand. when would be a more convenient time for me to call you back?', "got it. i've scheduled a reminder to call you back at {{callback_time}}. have a great day!", "great! i've verified your record {{salutation}} {{name}}. i see your {{car_model}} was last serviced on {{last_svc_formatted}}, and your next appointment is now due. would you like to book it today?", 'user says yes', 'great. what date would you prefer for the service?', "got it. available on {{confirmed_date}}. what's the current mileage of your car?", 'got it. and are there any specific concerns or issues with the car?', "i've noted those points. we offer free pick and drop service. would you like to avail this?", "wonderful {{salutation}}. your service is confirmed. at alcon, we provide a 50-point safety check and use only genuine hyundai parts to ensure your vehicle's peak performance. your advisor, amit shah, will greet you upon arrival and walk you through the repair order details. you'll receive an sms shortly. have a great day!", 'hangup', 'understood {{salutation}}. {{callback_confirmation}}. have a great day!', 'i see your {{car_model}} was last serviced recently on {{last_svc_formatted}}. since your service is only due every {{service_due_months}} months, you are all set for now! have a wonderful day!', 'validate_slot_request', "i'm sorry, that timing is fully booked. we have saturday slots available at 10:00 am and 03:00 pm, or would friday evening at 05:30 pm work better?", 'sure. on {{requested_day_rel}} we have slots at {{matching_period_slots_text}}. which one works better for you?', 'i understand you have an urgent breakdown. connecting you immediately to our roadside assistance supervisor.', 'check counter proposal']
+[DEBUG] Current Node: check_booking | Flow Type: booking
+[RUNTIME] Executing Node: check_booking (conditionNode)
+[DEBUG] Resolved last_msg: 'yes'
+[DEBUG] Service Booking Condition Check: 'User says Yes'. Input: 'yes'
+[RUNTIME] Node Result -> Outcome: true, Text: None, Status: None
+[DEBUG] Searching edges for Node: check_booking | Outcome: true
+[DEBUG] Matched edge handle 'true' -> ask_date
+[DEBUG] Next Node: ask_date | Is Bridge: True
+[DEBUG] Current Node: ask_date | Flow Type: booking
+[RUNTIME] Executing Node: ask_date (messageNode)
+[DEBUG MESSAGE EXECUTOR] node_id: ask_date | flow_type: booking | user_input: yes
+[RUNTIME] Node Result -> Outcome: None, Text: Great. What date would you pre, Status: None
+[DEBUG] Searching edges for Node: ask_date | Outcome: None
+[DEBUG] Default edge match -> check_slot_action
+[DEBUG] Next Node: check_slot_action | Is Bridge: False
+[DB] Updating Lead State for DEBUG_TEST_CALL_12345: {'car': 'Hyundai Venue', 'car_model': 'Hyundai Venue', 'memory': {}, 'feedback_score': None, 'feedback_text': 'Advisor: None, Pickup: None, Cleanliness: None', 'last_action': 'Discussing Details'}
+[DB] Updated 1 rows in lead_states
+[ORCHESTRATION SERVICE] Status: ACTIVE | Next Step: continue
+TwiML 3:
+ <?xml version="1.0" encoding="UTF-8"?><Response><Say>Great. What date would you prefer for the service?.</Say><Gather action="/process?step=continue&amp;customer_id=10&amp;flow_type=booking" input="speech" language="en-IN" method="POST" speechTimeout="1.0" timeout="5" /><Redirect>/process?step=continue&amp;customer_id=10&amp;flow_type=booking&amp;retry=true</Redirect></Response>
+
+--- TURN 4 (Speak 'yes' for booking) ---
+[AUDIT] Logged transition for DEBUG_TEST_CALL_12345: check_slot_action -> ENTRY
+[AGENT ROUTER] Capability Map: ['start call', '/mock/crm/{{from}}', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'identity verification', "i'm so sorry! i must have the wrong number. i'll update our records immediately. have a nice day!", 'no problem {{salutation}}. i completely understand. when would be a more convenient time for me to call you back?', "got it. i've scheduled a reminder to call you back at {{callback_time}}. have a great day!", "great! i've verified your record {{salutation}} {{name}}. i see your {{car_model}} was last serviced on {{last_svc_formatted}}, and your next appointment is now due. would you like to book it today?", 'user says yes', 'great. what date would you prefer for the service?', "got it. available on {{confirmed_date}}. what's the current mileage of your car?", 'got it. and are there any specific concerns or issues with the car?', "i've noted those points. we offer free pick and drop service. would you like to avail this?", "wonderful {{salutation}}. your service is confirmed. at alcon, we provide a 50-point safety check and use only genuine hyundai parts to ensure your vehicle's peak performance. your advisor, amit shah, will greet you upon arrival and walk you through the repair order details. you'll receive an sms shortly. have a great day!", 'hangup', 'understood {{salutation}}. {{callback_confirmation}}. have a great day!', 'i see your {{car_model}} was last serviced recently on {{last_svc_formatted}}. since your service is only due every {{service_due_months}} months, you are all set for now! have a wonderful day!', 'validate_slot_request', "i'm sorry, that timing is fully booked. we have saturday slots available at 10:00 am and 03:00 pm, or would friday evening at 05:30 pm work better?", 'sure. on {{requested_day_rel}} we have slots at {{matching_period_slots_text}}. which one works better for you?', 'i understand you have an urgent breakdown. connecting you immediately to our roadside assistance supervisor.', 'check counter proposal']
+[DEBUG] Current Node: check_slot_action | Flow Type: booking
+[RUNTIME] Executing Node: check_slot_action (actionNode)
+[RUNTIME] Node Result -> Outcome: suggest_period_choices, Text: None, Status: None
+[DEBUG] Searching edges for Node: check_slot_action | Outcome: suggest_period_choices
+[DEBUG] Matched edge handle 'suggest_period_choices' -> suggest_period_choices_node
+[DEBUG] Next Node: suggest_period_choices_node | Is Bridge: True
+[DEBUG] Current Node: suggest_period_choices_node | Flow Type: booking
+[RUNTIME] Executing Node: suggest_period_choices_node (messageNode)
+[DEBUG MESSAGE EXECUTOR] node_id: suggest_period_choices_node | flow_type: booking | user_input: yes
+[RUNTIME] Node Result -> Outcome: None, Text: Sure. On tomorrow we have slot, Status: None
+[DEBUG] Searching edges for Node: suggest_period_choices_node | Outcome: None
+[DEBUG] Default edge match -> check_counter_proposal
+[DEBUG] Next Node: check_counter_proposal | Is Bridge: False
+[DB] Updating Lead State for DEBUG_TEST_CALL_12345: {'car': 'Hyundai Venue', 'car_model': 'Hyundai Venue', 'memory': {}, 'feedback_score': None, 'feedback_text': 'Advisor: None, Pickup: None, Cleanliness: None', 'last_action': 'Discussing Details'}
+[DB] Updated 1 rows in lead_states
+[ORCHESTRATION SERVICE] Status: ACTIVE | Next Step: continue
+TwiML 4:
+ <?xml version="1.0" encoding="UTF-8"?><Response><Say>Sure. On tomorrow we have slots at 09:00 AM and 11:00 AM. Which one works better for you?.</Say><Gather action="/process?step=continue&amp;customer_id=10&amp;flow_type=booking" input="speech" language="en-IN" method="POST" speechTimeout="1.0" timeout="5" /><Redirect>/process?step=continue&amp;customer_id=10&amp;flow_type=booking&amp;retry=true</Redirect></Response>
+
+--- TURN 5 (Speak '28th may') ---
+Session params before Turn 5: {'phone': '+919881012761', 'language': 'en-IN', 'id': '10', 'name': 'Aarav Mehta', 'car_model': 'Hyundai Venue', 'car': 'Hyundai Venue', 'last_service_date': '2025-11-20', 'last_svc_formatted': '2025-11-20', 'reg': 'MH12-AM-1010', 'salutation': 'Sir', 'registration_number': 'MH12-AM-1010', 'registration_date': '2022-04-12', 'service_due_date': '2026-05-23', 'service_due_months': 6, 'gender': 'male', 'dnd_status': False, 'service_status': 'idle', 'campaign_triggered_at': '2026-05-21T07:23:07.274008', 'campaign_last_outcome': 'SERVICE_REDIRECTED', 'campaign_status': 'synced', 'flow_type': 'booking', 'slot_negotiation_depth': 0, 'callback_confirmation': 'I will have our Service Desk call you back to coordinate a suitable time', 'target_date_raw': '2026-05-27', 'target_period': None, 'requested_day_rel': 'tomorrow', 'matching_period_slots_text': '09:00 AM and 11:00 AM', 'last_action': 'Discussing Details'}
+[AUDIT] Logged transition for DEBUG_TEST_CALL_12345: check_counter_proposal -> ENTRY
+[AGENT ROUTER] Capability Map: ['start call', '/mock/crm/{{from}}', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'identity verification', "i'm so sorry! i must have the wrong number. i'll update our records immediately. have a nice day!", 'no problem {{salutation}}. i completely understand. when would be a more convenient time for me to call you back?', "got it. i've scheduled a reminder to call you back at {{callback_time}}. have a great day!", "great! i've verified your record {{salutation}} {{name}}. i see your {{car_model}} was last serviced on {{last_svc_formatted}}, and your next appointment is now due. would you like to book it today?", 'user says yes', 'great. what date would you prefer for the service?', "got it. available on {{confirmed_date}}. what's the current mileage of your car?", 'got it. and are there any specific concerns or issues with the car?', "i've noted those points. we offer free pick and drop service. would you like to avail this?", "wonderful {{salutation}}. your service is confirmed. at alcon, we provide a 50-point safety check and use only genuine hyundai parts to ensure your vehicle's peak performance. your advisor, amit shah, will greet you upon arrival and walk you through the repair order details. you'll receive an sms shortly. have a great day!", 'hangup', 'understood {{salutation}}. {{callback_confirmation}}. have a great day!', 'i see your {{car_model}} was last serviced recently on {{last_svc_formatted}}. since your service is only due every {{service_due_months}} months, you are all set for now! have a wonderful day!', 'validate_slot_request', "i'm sorry, that timing is fully booked. we have saturday slots available at 10:00 am and 03:00 pm, or would friday evening at 05:30 pm work better?", 'sure. on {{requested_day_rel}} we have slots at {{matching_period_slots_text}}. which one works better for you?', 'i understand you have an urgent breakdown. connecting you immediately to our roadside assistance supervisor.', 'check counter proposal']
+[DEBUG] Current Node: check_counter_proposal | Flow Type: booking
+[RUNTIME] Executing Node: check_counter_proposal (conditionNode)
+[DEBUG] Resolved last_msg: '28th may'
+[DEBUG] Service Booking Condition Check: 'Check Counter Proposal'. Input: '28th may'
+[RUNTIME] Node Result -> Outcome: suggest_period_choices_loop, Text: None, Status: None
+[DEBUG] Searching edges for Node: check_counter_proposal | Outcome: suggest_period_choices_loop
+[DEBUG] Matched edge handle 'suggest_period_choices_loop' -> suggest_period_choices_node
+[DEBUG] Next Node: suggest_period_choices_node | Is Bridge: True
+[DEBUG] Current Node: suggest_period_choices_node | Flow Type: booking
+[RUNTIME] Executing Node: suggest_period_choices_node (messageNode)
+[DEBUG MESSAGE EXECUTOR] node_id: suggest_period_choices_node | flow_type: booking | user_input: 28th may
+[RUNTIME] Node Result -> Outcome: None, Text: Sure. On Thursday, May 28 we h, Status: None
+[DEBUG] Searching edges for Node: suggest_period_choices_node | Outcome: None
+[DEBUG] Default edge match -> check_counter_proposal
+[DEBUG] Next Node: check_counter_proposal | Is Bridge: False
+[DB] Updating Lead State for DEBUG_TEST_CALL_12345: {'car': 'Hyundai Venue', 'car_model': 'Hyundai Venue', 'memory': {}, 'feedback_score': None, 'feedback_text': 'Advisor: None, Pickup: None, Cleanliness: None', 'last_action': 'Discussing Details'}
+[DB] Updated 1 rows in lead_states
+[ORCHESTRATION SERVICE] Status: ACTIVE | Next Step: continue
+TwiML 5:
+ <?xml version="1.0" encoding="UTF-8"?><Response><Say>Sure. On Thursday, May 28 we have slots at 09:00 AM and 11:00 AM. Which one works better for you?.</Say><Gather action="/process?step=continue&amp;customer_id=10&amp;flow_type=booking" input="speech" language="en-IN" method="POST" speechTimeout="1.0" timeout="5" /><Redirect>/process?step=continue&amp;customer_id=10&amp;flow_type=booking&amp;retry=true</Redirect></Response>
+Session params after Turn 5: {'phone': '+919881012761', 'language': 'en-IN', 'id': '10', 'name': 'Aarav Mehta', 'car_model': 'Hyundai Venue', 'car': 'Hyundai Venue', 'last_service_date': '2025-11-20', 'last_svc_formatted': '2025-11-20', 'reg': 'MH12-AM-1010', 'salutation': 'Sir', 'registration_number': 'MH12-AM-1010', 'registration_date': '2022-04-12', 'service_due_date': '2026-05-23', 'service_due_months': 6, 'gender': 'male', 'dnd_status': False, 'service_status': 'idle', 'campaign_triggered_at': '2026-05-21T07:23:07.274008', 'campaign_last_outcome': 'SERVICE_REDIRECTED', 'campaign_status': 'synced', 'flow_type': 'booking', 'slot_negotiation_depth': 1, 'callback_confirmation': 'I will have our Service Desk call you back to coordinate a suitable time', 'target_date_raw': '2026-05-28', 'target_period': None, 'requested_day_rel': 'Thursday, May 28', 'matching_period_slots_text': '09:00 AM and 11:00 AM', 'last_action': 'Discussing Details'}
+
+--- TURN 6 (Speak 'No, I’ll be busy in the morning.') ---
+[AUDIT] Logged transition for DEBUG_TEST_CALL_12345: check_counter_proposal -> ENTRY
+[AGENT ROUTER] Capability Map: ['start call', '/mock/crm/{{from}}', "hello, i'm supriya from alcon. am i speaking with {{name}} {{salutation}}?", 'identity verification', "i'm so sorry! i must have the wrong number. i'll update our records immediately. have a nice day!", 'no problem {{salutation}}. i completely understand. when would be a more convenient time for me to call you back?', "got it. i've scheduled a reminder to call you back at {{callback_time}}. have a great day!", "great! i've verified your record {{salutation}} {{name}}. i see your {{car_model}} was last serviced on {{last_svc_formatted}}, and your next appointment is now due. would you like to book it today?", 'user says yes', 'great. what date would you prefer for the service?', "got it. available on {{confirmed_date}}. what's the current mileage of your car?", 'got it. and are there any specific concerns or issues with the car?', "i've noted those points. we offer free pick and drop service. would you like to avail this?", "wonderful {{salutation}}. your service is confirmed. at alcon, we provide a 50-point safety check and use only genuine hyundai parts to ensure your vehicle's peak performance. your advisor, amit shah, will greet you upon arrival and walk you through the repair order details. you'll receive an sms shortly. have a great day!", 'hangup', 'understood {{salutation}}. {{callback_confirmation}}. have a great day!', 'i see your {{car_model}} was last serviced recently on {{last_svc_formatted}}. since your service is only due every {{service_due_months}} months, you are all set for now! have a wonderful day!', 'validate_slot_request', "i'm sorry, that timing is fully booked. we have saturday slots available at 10:00 am and 03:00 pm, or would friday evening at 05:30 pm work better?", 'sure. on {{requested_day_rel}} we have slots at {{matching_period_slots_text}}. which one works better for you?', 'i understand you have an urgent breakdown. connecting you immediately to our roadside assistance supervisor.', 'check counter proposal']
+[DEBUG] Current Node: check_counter_proposal | Flow Type: booking
+[RUNTIME] Executing Node: check_counter_proposal (conditionNode)
+[DEBUG] Resolved last_msg: 'no, i’ll be busy in the morning.'
+[DEBUG] Service Booking Condition Check: 'Check Counter Proposal'. Input: 'no, i’ll be busy in the morning.'
+[RUNTIME] Node Result -> Outcome: suggest_period_choices_loop, Text: None, Status: None
+[DEBUG] Searching edges for Node: check_counter_proposal | Outcome: suggest_period_choices_loop
+[DEBUG] Matched edge handle 'suggest_period_choices_loop' -> suggest_period_choices_node
+[DEBUG] Next Node: suggest_period_choices_node | Is Bridge: True
+[DEBUG] Current Node: suggest_period_choices_node | Flow Type: booking
+[RUNTIME] Executing Node: suggest_period_choices_node (messageNode)
+[DEBUG MESSAGE EXECUTOR] node_id: suggest_period_choices_node | flow_type: booking | user_input: No, I’ll be busy in the morning.
+[RUNTIME] Node Result -> Outcome: None, Text: Sure. On Thursday, May 28 afte, Status: None
+[DEBUG] Searching edges for Node: suggest_period_choices_node | Outcome: None
+[DEBUG] Default edge match -> check_counter_proposal
+[DEBUG] Next Node: check_counter_proposal | Is Bridge: False
+[DB] Updating Lead State for DEBUG_TEST_CALL_12345: {'car': 'Hyundai Venue', 'car_model': 'Hyundai Venue', 'memory': {}, 'feedback_score': None, 'feedback_text': 'Advisor: None, Pickup: None, Cleanliness: None', 'last_action': 'Discussing Details'}
+[DB] Updated 1 rows in lead_states
+[ORCHESTRATION SERVICE] Status: ACTIVE | Next Step: continue
+TwiML 6:
+ <?xml version="1.0" encoding="UTF-8"?><Response><Say>Sure. On Thursday, May 28 afternoon we have slots at 01:30 PM and 04:00 PM. Which one works better for you?.</Say><Gather action="/process?step=continue&amp;customer_id=10&amp;flow_type=booking" input="speech" language="en-IN" method="POST" speechTimeout="1.0" timeout="5" /><Redirect>/process?step=continue&amp;customer_id=10&amp;flow_type=booking&amp;retry=true</Redirect></Response>
+
+FINAL SESSION STATE:
+current_node_id: check_counter_proposal
+variables:
+  callback_confirmation: I will have our Service Desk call you back to coordinate a suitable time
+  campaign_last_outcome: SERVICE_REDIRECTED
+  campaign_status: synced
+  campaign_triggered_at: 2026-05-21T07:23:07.274008
+  car: Hyundai Venue
+  car_model: Hyundai Venue
+  dnd_status: False
+  flow_type: booking
+  gender: male
+  id: 10
+  language: en-IN
+  last_action: Discussing Details
+  last_service_date: 2025-11-20
+  last_svc_formatted: 2025-11-20
+  matching_period_slots_text: 01:30 PM and 04:00 PM
+  name: Aarav Mehta
+  phone: +919881012761
+  reg: MH12-AM-1010
+  registration_date: 2022-04-12
+  registration_number: MH12-AM-1010
+  requested_day_rel: Thursday, May 28 afternoon
+  salutation: Sir
+  service_due_date: 2026-05-23
+  service_due_months: 6
+  service_status: idle
+  slot_negotiation_depth: 2
+  target_date_raw: 2026-05-28
+  target_period: afternoon

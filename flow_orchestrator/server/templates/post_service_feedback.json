@@ -1,0 +1,478 @@
+{
+  "flow_id": "post_service_feedback",
+  "version": 3,
+  "status": "draft",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "startNode",
+      "data": {
+        "label": "Start"
+      },
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "crm_lookup",
+      "type": "apiNode",
+      "data": {
+        "label": "http://mock/crm/{{from}}"
+      },
+      "position": {
+        "x": 200.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "intro",
+      "type": "messageNode",
+      "data": {
+        "label": "Hello {{salutation}}, I'm Supriya from Alcon. Am I speaking with {{name}}?"
+      },
+      "position": {
+        "x": 400.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "check_id",
+      "type": "conditionNode",
+      "data": {
+        "label": "identity_verified == true"
+      },
+      "position": {
+        "x": 600.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "ask_satisfaction",
+      "type": "messageNode",
+      "data": {
+        "label": "Thank you {{salutation}}. Were all requested jobs done to your complete satisfaction?"
+      },
+      "position": {
+        "x": 798.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "check_satisfaction",
+      "type": "conditionNode",
+      "data": {
+        "label": "satisfaction_check == true"
+      },
+      "position": {
+        "x": 1000.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "escalation",
+      "type": "messageNode",
+      "data": {
+        "label": "I'm sorry to hear that {{salutation}}. I am escalating this to our senior service team immediately. They will contact you to resolve this. May I still ask for your ratings for other areas?"
+      },
+      "position": {
+        "x": 1000.0,
+        "y": 200.0
+      }
+    },
+    {
+      "id": "check_esc_continue",
+      "type": "conditionNode",
+      "data": {
+        "label": "continue == true"
+      },
+      "position": {
+        "x": 1200.0,
+        "y": 200.0
+      }
+    },
+    {
+      "id": "ask_advisor",
+      "type": "messageNode",
+      "data": {
+        "label": "That's great to hear. Now, on a scale of one to ten, how would you rate the service advisor\u2019s explanation of work and charges?"
+      },
+      "position": {
+        "x": 1200.0,
+        "y": -0.8408964152537095
+      }
+    },
+    {
+      "id": "check_advisor",
+      "type": "conditionNode",
+      "data": {
+        "label": "advisor_rating >= 9"
+      },
+      "position": {
+        "x": 1400.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "advisor_reason",
+      "type": "messageNode",
+      "data": {
+        "label": "I've noted the rating of {{advisor_rating}}. May I know the reason for this rating, so we can improve our service?"
+      },
+      "position": {
+        "x": 1400.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "ask_pickup",
+      "type": "messageNode",
+      "data": {
+        "label": "Thank you for sharing that. Next, how would you rate the pickup process after servicing?"
+      },
+      "position": {
+        "x": 1600.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "ask_pickup_direct",
+      "type": "messageNode",
+      "data": {
+        "label": "Thank you. Next, how would you rate the pickup process after servicing?"
+      },
+      "position": {
+        "x": 1600.0,
+        "y": -100.0
+      }
+    },
+    {
+      "id": "check_pickup",
+      "type": "conditionNode",
+      "data": {
+        "label": "pickup_rating >= 9"
+      },
+      "position": {
+        "x": 1800.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "pickup_reason",
+      "type": "messageNode",
+      "data": {
+        "label": "Understood. Could you share the reason for the {{pickup_rating}} rating for the pickup process?"
+      },
+      "position": {
+        "x": 1800.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "ask_cleanliness",
+      "type": "messageNode",
+      "data": {
+        "label": "Noted. And how would you rate the cleanliness and condition of the car?"
+      },
+      "position": {
+        "x": 2000.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "ask_cleanliness_after_reason",
+      "type": "messageNode",
+      "data": {
+        "label": "Got it. And how would you rate the cleanliness and condition of the car?"
+      },
+      "position": {
+        "x": 2000.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "check_cleanliness",
+      "type": "conditionNode",
+      "data": {
+        "label": "cleanliness_rating >= 9"
+      },
+      "position": {
+        "x": 2200.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "cleanliness_reason",
+      "type": "messageNode",
+      "data": {
+        "label": "Thank you. Could you please tell me why you gave a {{cleanliness_rating}} for cleanliness?"
+      },
+      "position": {
+        "x": 2200.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "ask_overall",
+      "type": "messageNode",
+      "data": {
+        "label": "Finally, how would you rate your overall workshop experience?"
+      },
+      "position": {
+        "x": 2400.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "check_overall",
+      "type": "conditionNode",
+      "data": {
+        "label": "overall_rating >= 9"
+      },
+      "position": {
+        "x": 2600.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "overall_reason",
+      "type": "messageNode",
+      "data": {
+        "label": "I've noted your rating of {{overall_rating}}. Any suggestions on how we can make your overall experience better?"
+      },
+      "position": {
+        "x": 2600.0,
+        "y": 100.0
+      }
+    },
+    {
+      "id": "closing",
+      "type": "messageNode",
+      "data": {
+        "label": "Thank you for your valuable feedback! We've noted your suggestions and will work on them. Have a great day!"
+      },
+      "position": {
+        "x": 2800.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": "end",
+      "type": "endNode",
+      "data": {
+        "label": "End"
+      },
+      "position": {
+        "x": 3000.0,
+        "y": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "start",
+      "target": "crm_lookup",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e2",
+      "source": "crm_lookup",
+      "target": "intro",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e3",
+      "source": "intro",
+      "target": "check_id",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e4",
+      "source": "check_id",
+      "target": "ask_satisfaction",
+      "sourceHandle": "true",
+      "data": null
+    },
+    {
+      "id": "e5",
+      "source": "ask_satisfaction",
+      "target": "check_satisfaction",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e6",
+      "source": "check_satisfaction",
+      "target": "ask_advisor",
+      "sourceHandle": "true",
+      "data": null
+    },
+    {
+      "id": "e7",
+      "source": "check_satisfaction",
+      "target": "escalation",
+      "sourceHandle": "false",
+      "data": null
+    },
+    {
+      "id": "e8",
+      "source": "escalation",
+      "target": "check_esc_continue",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e9",
+      "source": "check_esc_continue",
+      "target": "ask_advisor",
+      "sourceHandle": "true",
+      "data": null
+    },
+    {
+      "id": "e10",
+      "source": "check_esc_continue",
+      "target": "end",
+      "sourceHandle": "false",
+      "data": null
+    },
+    {
+      "id": "e11",
+      "source": "ask_advisor",
+      "target": "check_advisor",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e12",
+      "source": "check_advisor",
+      "target": "ask_pickup_direct",
+      "sourceHandle": "true",
+      "data": null
+    },
+    {
+      "id": "e13",
+      "source": "check_advisor",
+      "target": "advisor_reason",
+      "sourceHandle": "false",
+      "data": null
+    },
+    {
+      "id": "e14",
+      "source": "advisor_reason",
+      "target": "ask_pickup",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e15",
+      "source": "ask_pickup",
+      "target": "check_pickup",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e16",
+      "source": "ask_pickup_direct",
+      "target": "check_pickup",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e17",
+      "source": "check_pickup",
+      "target": "ask_cleanliness",
+      "sourceHandle": "true",
+      "data": null
+    },
+    {
+      "id": "e18",
+      "source": "check_pickup",
+      "target": "pickup_reason",
+      "sourceHandle": "false",
+      "data": null
+    },
+    {
+      "id": "e19",
+      "source": "pickup_reason",
+      "target": "ask_cleanliness_after_reason",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e20",
+      "source": "ask_cleanliness",
+      "target": "check_cleanliness",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e21",
+      "source": "ask_cleanliness_after_reason",
+      "target": "check_cleanliness",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e22",
+      "source": "check_cleanliness",
+      "target": "ask_overall",
+      "sourceHandle": "true",
+      "data": null
+    },
+    {
+      "id": "e23",
+      "source": "check_cleanliness",
+      "target": "cleanliness_reason",
+      "sourceHandle": "false",
+      "data": null
+    },
+    {
+      "id": "e24",
+      "source": "cleanliness_reason",
+      "target": "ask_overall",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e25",
+      "source": "ask_overall",
+      "target": "check_overall",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e26",
+      "source": "check_overall",
+      "target": "closing",
+      "sourceHandle": "true",
+      "data": null
+    },
+    {
+      "id": "e27",
+      "source": "check_overall",
+      "target": "overall_reason",
+      "sourceHandle": "false",
+      "data": null
+    },
+    {
+      "id": "e28",
+      "source": "overall_reason",
+      "target": "closing",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e29",
+      "source": "closing",
+      "target": "end",
+      "sourceHandle": null,
+      "data": null
+    }
+  ],
+  "description": "",
+  "name": "Flow post_service_feedback"
+}

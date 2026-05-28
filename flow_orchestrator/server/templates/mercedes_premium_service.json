@@ -1,0 +1,125 @@
+{
+  "flow_id": "mercedes_premium_service",
+  "name": "Mercedes Premium Service",
+  "description": "Luxury operational flow for Mercedes-Benz clients with premium concierge handling.",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "startNode",
+      "position": { "x": 400, "y": 0 },
+      "data": { "label": "Start Call" }
+    },
+    {
+      "id": "crm_lookup",
+      "type": "apiNode",
+      "position": { "x": 400, "y": 100 },
+      "data": { "label": "/mock/crm/{{from}}" }
+    },
+    {
+      "id": "intro",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 200 },
+      "data": { "label": "Good day, I'm Supriya from the Alcon Mercedes-Benz Concierge. Am I speaking with {{name}} {{salutation}}?" }
+    },
+    {
+      "id": "check_id",
+      "type": "conditionNode",
+      "position": { "x": 400, "y": 350 },
+      "data": { "label": "Identity Verification" }
+    },
+    {
+      "id": "handle_wrong",
+      "type": "messageNode",
+      "position": { "x": 700, "y": 350 },
+      "data": { "label": "My apologies. I'll update our records immediately. Have a pleasant day!" }
+    },
+    {
+      "id": "ask_callback",
+      "type": "messageNode",
+      "position": { "x": 100, "y": 350 },
+      "data": { "label": "Of course {{salutation}}. I understand you are busy. When would be a convenient time for our concierge to call you back?" }
+    },
+    {
+      "id": "confirm_callback",
+      "type": "messageNode",
+      "position": { "x": 100, "y": 500 },
+      "data": { "label": "Perfect. I've scheduled your callback for {{callback_time}}. Have a wonderful day!" }
+    },
+    {
+      "id": "verify_due",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 500 },
+      "data": { "label": "Thank you for confirming {{salutation}}. I see your {{car_model}} is due for its periodic maintenance. Would you like to schedule your premium service today?" }
+    },
+    {
+      "id": "check_booking",
+      "type": "conditionNode",
+      "position": { "x": 400, "y": 650 },
+      "data": { "label": "User says Yes" }
+    },
+    {
+      "id": "ask_date",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 800 },
+      "data": { "label": "Excellent. Which date works best for your schedule?" }
+    },
+    {
+      "id": "collect_mileage",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 920 },
+      "data": { "label": "Noted for {{confirmed_date}}. Could you please share the current mileage on your instrument cluster?" }
+    },
+    {
+      "id": "concierge_offer",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 1040 },
+      "data": { "label": "Thank you. For our Mercedes clients, we provide a complimentary Chauffeur-driven Pick and Drop. Would you like to avail this premium service?" }
+    },
+    {
+      "id": "concierge_check",
+      "type": "conditionNode",
+      "position": { "x": 400, "y": 1160 },
+      "data": { "label": "User says Yes" }
+    },
+    {
+      "id": "confirm_mercedes",
+      "type": "messageNode",
+      "position": { "x": 400, "y": 1300 },
+      "data": { "label": "Wonderful {{salutation}}. Your service is confirmed. We will use only genuine Mercedes-Benz parts and synthetic oil. Our Service Manager, Amit Shah, will personally oversee your vehicle. Have a great day!" }
+    },
+    {
+      "id": "end",
+      "type": "endNode",
+      "position": { "x": 400, "y": 1450 },
+      "data": { "label": "Hangup" }
+    },
+    {
+      "id": "no_booking",
+      "type": "messageNode",
+      "position": { "x": 650, "y": 650 },
+      "data": { "label": "Understood {{salutation}}. {{callback_confirmation}}. Have a great day!" }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "source": "start", "target": "crm_lookup", "animated": true },
+    { "id": "e2", "source": "crm_lookup", "target": "intro", "animated": true },
+    { "id": "e3", "source": "intro", "target": "check_id", "animated": true },
+    { "id": "e4", "source": "check_id", "target": "verify_due", "sourceHandle": "true", "animated": true },
+    { "id": "e5", "source": "check_id", "target": "handle_wrong", "sourceHandle": "wrong_number", "animated": true },
+    { "id": "e6", "source": "check_id", "target": "ask_callback", "sourceHandle": "busy", "animated": true },
+    { "id": "e7", "source": "ask_callback", "target": "confirm_callback", "animated": true },
+    { "id": "e8", "source": "handle_wrong", "target": "end", "animated": true },
+    { "id": "e9", "source": "confirm_callback", "target": "end", "animated": true },
+    { "id": "e10", "source": "verify_due", "target": "check_booking", "animated": true },
+    { "id": "e11", "source": "check_booking", "target": "ask_date", "sourceHandle": "true", "animated": true },
+    { "id": "e12", "source": "check_booking", "target": "no_booking", "sourceHandle": "false", "animated": true },
+    { "id": "e12_busy", "source": "check_booking", "target": "no_booking", "sourceHandle": "busy", "animated": true },
+    { "id": "e13", "source": "no_booking", "target": "end", "animated": true },
+    { "id": "e14", "source": "ask_date", "target": "collect_mileage", "animated": true },
+    { "id": "e15", "source": "collect_mileage", "target": "concierge_offer", "animated": true },
+    { "id": "e16", "source": "concierge_offer", "target": "concierge_check", "animated": true },
+    { "id": "e17", "source": "concierge_check", "target": "confirm_mercedes", "sourceHandle": "true", "animated": true },
+    { "id": "e18", "source": "concierge_check", "target": "confirm_mercedes", "sourceHandle": "false", "animated": true },
+    { "id": "e19", "source": "confirm_mercedes", "target": "end", "animated": true }
+  ]
+}

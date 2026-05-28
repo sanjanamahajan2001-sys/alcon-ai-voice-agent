@@ -1,0 +1,7 @@
+[
+    {"id": "101", "name": "Rajesh Kumar", "phone": "+919881012767", "specialty": "Engine & Transmission", "status": "offline"},
+    {"id": "102", "name": "Amit Shah", "phone": "+919881012767", "specialty": "General Service", "status": "available"},
+    {"id": "103", "name": "Suresh Raina", "phone": "+919881012767", "specialty": "Body & Paint", "status": "available"},
+    {"id": "104", "name": "Mahendra Singh", "phone": "+919881012767", "specialty": "Insurance Desk", "status": "available"},
+    {"id": "105", "name": "Virat Kohli", "phone": "+919881012767", "specialty": "Insurance Desk", "status": "offline"}
+]

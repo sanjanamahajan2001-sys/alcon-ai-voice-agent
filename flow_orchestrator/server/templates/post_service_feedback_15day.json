@@ -1,0 +1,239 @@
+{
+  "flow_id": "post_service_feedback_15day",
+  "version": 1,
+  "status": "draft",
+  "name": "Post Service Feedback 15-Day",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "startNode",
+      "data": { "label": "Start" },
+      "position": { "x": 500, "y": 0 }
+    },
+    {
+      "id": "init_context",
+      "type": "contextLogicNode",
+      "data": { "label": "Feedback Initialization" },
+      "position": { "x": 500, "y": 100 }
+    },
+    {
+      "id": "greeting",
+      "type": "messageNode",
+      "data": {
+        "label": "Good morning {{salutation}}. I’m calling from the Alcon Hyundai Customer Relations Department. My name is Supriya. Your Hyundai {{car}}, {{reg}} was serviced at our workshop on {{last_service_date}}. This is our 15-day post-service feedback call. May I take a few minutes?"
+      },
+      "position": { "x": 500, "y": 200 }
+    },
+    {
+      "id": "check_consent",
+      "type": "conditionNode",
+      "data": { "label": "Consent/Identity Check" },
+      "position": { "x": 500, "y": 320 }
+    },
+    {
+      "id": "ask_performance",
+      "type": "messageNode",
+      "data": {
+        "label": "Thank you {{salutation}}. I just wanted to check, is your car performing well after the service?"
+      },
+      "position": { "x": 350, "y": 450 }
+    },
+    {
+      "id": "check_performance",
+      "type": "conditionNode",
+      "data": { "label": "Consent/Identity Check" },
+      "position": { "x": 350, "y": 570 }
+    },
+    {
+      "id": "positive_feedback",
+      "type": "actionNode",
+      "data": {
+        "label": "Record Positive Feedback",
+        "action_type": "record_feedback_positive"
+      },
+      "position": { "x": 200, "y": 700 }
+    },
+    {
+      "id": "positive_end_msg",
+      "type": "messageNode",
+      "data": {
+        "label": "That’s great to hear. Thank you for your valuable feedback. We appreciate your trust in Alcon Hyundai. Have a wonderful day!",
+        "is_bridge": true
+      },
+      "position": { "x": 200, "y": 820 }
+    },
+    {
+      "id": "negative_feedback",
+      "type": "actionNode",
+      "data": {
+        "label": "Record Negative Feedback",
+        "action_type": "record_feedback_negative"
+      },
+      "position": { "x": 500, "y": 700 }
+    },
+    {
+      "id": "negative_end_msg",
+      "type": "messageNode",
+      "data": {
+        "label": "I’m really sorry to hear that. Thank you for informing us. I will escalate this to our senior service team, and they will contact you shortly. For immediate support, you may also reach us on {{customer_care_number}}. Thank you for your time.",
+        "is_bridge": true
+      },
+      "position": { "x": 500, "y": 820 }
+    },
+    {
+      "id": "ask_callback_time",
+      "type": "messageNode",
+      "data": {
+        "label": "I understand {{salutation}}. Could you please let me know a suitable date or time when I should call you back for this feedback?"
+      },
+      "position": { "x": 800, "y": 450 }
+    },
+    {
+      "id": "schedule_callback_action",
+      "type": "actionNode",
+      "data": {
+        "label": "Schedule Callback",
+        "action_type": "schedule_callback"
+      },
+      "position": { "x": 800, "y": 570 }
+    },
+    {
+      "id": "callback_end_msg",
+      "type": "messageNode",
+      "data": {
+        "label": "Got it. I've scheduled a callback for {{callback_time}}. Thank you for your time, and have a nice day!",
+        "is_bridge": true
+      },
+      "position": { "x": 800, "y": 700 }
+    },
+    {
+      "id": "end",
+      "type": "endNode",
+      "data": { "label": "End Call" },
+      "position": { "x": 500, "y": 950 }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "start",
+      "target": "init_context",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e2",
+      "source": "init_context",
+      "target": "greeting",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e3",
+      "source": "greeting",
+      "target": "check_consent",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e4_yes",
+      "source": "check_consent",
+      "target": "ask_performance",
+      "sourceHandle": "true",
+      "data": null
+    },
+    {
+      "id": "e4_busy",
+      "source": "check_consent",
+      "target": "ask_callback_time",
+      "sourceHandle": "busy",
+      "data": null
+    },
+    {
+      "id": "e4_no",
+      "source": "check_consent",
+      "target": "negative_feedback",
+      "sourceHandle": "false",
+      "data": null
+    },
+    {
+      "id": "e5",
+      "source": "ask_performance",
+      "target": "check_performance",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e6_perf_yes",
+      "source": "check_performance",
+      "target": "positive_feedback",
+      "sourceHandle": "true",
+      "data": null
+    },
+    {
+      "id": "e6_perf_no",
+      "source": "check_performance",
+      "target": "negative_feedback",
+      "sourceHandle": "false",
+      "data": null
+    },
+    {
+      "id": "e6_perf_busy",
+      "source": "check_performance",
+      "target": "ask_callback_time",
+      "sourceHandle": "busy",
+      "data": null
+    },
+    {
+      "id": "e7_pos_act",
+      "source": "positive_feedback",
+      "target": "positive_end_msg",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e8_pos_end",
+      "source": "positive_end_msg",
+      "target": "end",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e9_neg_act",
+      "source": "negative_feedback",
+      "target": "negative_end_msg",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e10_neg_end",
+      "source": "negative_end_msg",
+      "target": "end",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e11_cb_input",
+      "source": "ask_callback_time",
+      "target": "schedule_callback_action",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e12_cb_act",
+      "source": "schedule_callback_action",
+      "target": "callback_end_msg",
+      "sourceHandle": null,
+      "data": null
+    },
+    {
+      "id": "e13_cb_end",
+      "source": "callback_end_msg",
+      "target": "end",
+      "sourceHandle": null,
+      "data": null
+    }
+  ],
+  "description": "Outbound 15-Day Post Service Feedback Call Flow",
+  "name": "Post Service Feedback 15-Day"
+}

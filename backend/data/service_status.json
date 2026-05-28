@@ -1,0 +1,26 @@
+[
+    {
+        "reg_no": "1234",
+        "model": "Hyundai Creta",
+        "status": "In Progress",
+        "stage": "Washing & Cleaning",
+        "est_completion": "14:30 PM",
+        "last_update": "10 mins ago"
+    },
+    {
+        "reg_no": "5678",
+        "model": "Hyundai Venue",
+        "status": "Completed",
+        "stage": "Final Inspection",
+        "est_completion": "Ready for Delivery",
+        "last_update": "2 mins ago"
+    },
+    {
+        "reg_no": "9012",
+        "model": "Hyundai Verna",
+        "status": "Waiting",
+        "stage": "Part Allocation",
+        "est_completion": "17:00 PM",
+        "last_update": "1 hour ago"
+    }
+]

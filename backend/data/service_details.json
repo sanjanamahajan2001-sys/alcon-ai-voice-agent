@@ -1,0 +1,44 @@
+{
+    "1": {
+        "reported_concerns": "Brake squealing and minor AC cooling issue",
+        "service_summary": "Front brake pads replaced, AC gas topped up, and general service completed.",
+        "estimated_cost": "₹4,500",
+        "estimated_time": "5:00 PM today"
+    },
+    "2": {
+        "reported_concerns": "Engine oil change and tire rotation",
+        "service_summary": "Full synthetic oil change, oil filter replaced, and tires rotated/balanced.",
+        "estimated_cost": "₹3,200",
+        "estimated_time": "3:30 PM tomorrow"
+    },
+    "3": {
+        "reported_concerns": "Periodic maintenance service",
+        "service_summary": "40,000 km major service completed with fluid changes and spark plug replacement.",
+        "estimated_cost": "₹8,500",
+        "estimated_time": "12:00 PM today"
+    },
+    "4": {
+        "reported_concerns": "Wheel alignment and balancing",
+        "service_summary": "Wheel alignment, high-speed balancing, and nitrogen top-up.",
+        "estimated_cost": "₹1,800",
+        "estimated_time": "2:00 PM today"
+    },
+    "5": {
+        "reported_concerns": "Battery check and terminal cleaning",
+        "service_summary": "Battery health test, terminal corrosion removal, and distilled water top-up.",
+        "estimated_cost": "₹900",
+        "estimated_time": "11:00 AM today"
+    },
+    "6": {
+        "reported_concerns": "Windshield wiper replacement and washer fluid top-up",
+        "service_summary": "Bosch wiper blades installed and concentrated washer fluid added.",
+        "estimated_cost": "₹1,200",
+        "estimated_time": "10:00 AM tomorrow"
+    },
+    "7": {
+        "reported_concerns": "Brake pad inspection and sunroof lubrication",
+        "service_summary": "Brake pads cleaned, sunroof tracks lubricated, and drain pipes cleared.",
+        "estimated_cost": "₹6,000",
+        "estimated_time": "4:00 PM today"
+    }
+}

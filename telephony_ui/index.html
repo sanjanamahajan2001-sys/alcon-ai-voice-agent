@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alcon Voice - Telephony Dashboard</title>
+    <link rel="icon" type="image/svg+xml" href="public/vite.svg" />
+    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="login-active">
+    <!-- Login Screen -->
+    <div id="login-overlay" class="login-overlay">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-logo">Alcon</div>
+                <h2>AI Voice Dashboard</h2>
+                <p>Authorized access only</p>
+            </div>
+            <div class="login-form">
+                <div class="input-group">
+                    <input type="password" id="login-pass" placeholder="Enter Password" autocomplete="current-password">
+                </div>
+                <button id="login-btn">Secure Access</button>
+                <div id="login-error" class="error-text hidden">Incorrect password. Please try again.</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-container" class="app-container blur">
+        <header>
+            <div class="logo">
+                <span class="logo-accent">Alcon</span> Digital Platform
+            </div>
+            <div class="status-bar">
+                <div class="status-indicator" id="api-status"></div>
+                <span id="status-text">Connecting...</span>
+            </div>
+        </header>
+
+        <div class="platform-layout">
+            <!-- Sidebar Navigation -->
+            <nav class="sidebar-nav">
+                <div class="nav-item active" id="nav-voice" onclick="switchView('voice')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                    <span>Voice Agent</span>
+                </div>
+                <div class="nav-item" id="nav-chat" onclick="switchView('chat')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <span>Chat Assistant</span>
+                </div>
+                <div class="nav-item" id="nav-dashboards" onclick="window.open('campaign_dashboard.html', '_blank')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                    <span>AI Dashboards</span>
+                </div>
+                <div class="nav-item" id="nav-campaigns" onclick="location.href='central_dashboard.html'">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    <span>Campaign Hub</span>
+                </div>
+                <div class="nav-item" id="nav-flow" onclick="window.open('http://localhost:3000', '_blank')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    <span>Flow Builder</span>
+                </div>
+            </nav>
+
+            <main id="main-content">
+                <!-- Voice View (Existing Dashboard) -->
+                <div id="voice-view" class="view-panel active">
+                    <div class="telephony-grid">
+                        <!-- Left Panel: Call History & Controls -->
+            <section class="side-panel">
+                <div class="panel-card">
+                    <div class="card-header-flex">
+                        <h2>Trigger Call</h2>
+                        <button id="reset-locks-btn" class="secondary-btn-sm" style="font-size: 11px; padding: 4px 8px; border-radius: 4px; border-color: rgba(255, 68, 68, 0.4); color: #ff5555; background: rgba(255, 68, 68, 0.05);" title="Clear active call concurrency locks from the database">Reset Locks</button>
+                    </div>
+                    <div class="flow-selector">
+                        <label>Select Use Case</label>
+                        <select id="flow-type">
+                            <option value="booking">Service Booking Reminder</option>
+                            <option value="reception">Inbound Receptionist IVR</option>
+                            <option value="pre_sales">Sales Campaign & Enquiry</option>
+                            <option value="insurance_start">Insurance Renewal Campaign</option>
+                            <option value="feedback_3rd_day">3rd-Day Post-Service Feedback</option>
+                            <option value="feedback_15day_v2">15-Day Post-Service Feedback</option>
+                            <option disabled>──────────</option>
+                            <option value="pd_pickup_coordination">P&D: Pickup Coordination</option>
+                            <option value="pd_workshop_update">P&D: Workshop Check-in & Estimate</option>
+                            <option value="pd_ready">P&D: Vehicle Ready Delivery</option>
+                        </select>
+                    </div>
+                    <div id="customer-list" class="customer-list">
+                        <!-- Customers will be loaded here -->
+                        <div class="loading">Loading customers...</div>
+                    </div>
+                </div>
+
+                <div class="panel-card automation-card">
+                    <div class="card-header-flex">
+                        <h2>DMS Automation</h2>
+                        <span class="badge-mini">AI SCANNER</span>
+                    </div>
+                    <p class="panel-desc">Identify customers for automated outbound AI campaigns.</p>
+                    <div class="scan-controls">
+                        <button id="scan-service-btn" class="secondary-btn-sm">Scan Service Due</button>
+                        <button id="scan-sales-btn" class="secondary-btn-sm">Scan Upgrade Potential</button>
+                        <button id="scan-insurance-btn" class="secondary-btn-sm">Scan Insurance Renewals</button>
+                    </div>
+                    
+                    <div id="dms-scan-results" class="dms-scan-results hidden">
+                        <div class="scan-summary">
+                            <span id="scan-count">0 Targets Identified</span>
+                            <button id="start-campaign-btn" class="btn-primary-sm">Start Campaign</button>
+                        </div>
+                        <div id="due-customers-list" class="mini-list"></div>
+                    </div>
+                    
+                    <div id="campaign-progress" class="campaign-progress hidden">
+                        <div class="progress-info">
+                            <span id="campaign-status">Initiating...</span>
+                            <span id="campaign-percent">0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div id="progress-bar-fill" class="progress-bar-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-card history-card">
+                    <h2>Call History</h2>
+                    <div id="call-history" class="history-list">
+                        <!-- Past calls will be loaded here -->
+                        <div class="empty-state">No past calls found.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel: Live Conversation -->
+            <section class="main-panel">
+                <div class="live-card">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <h2>Active Session</h2>
+                            <div id="active-step" class="step-badge hidden">Initializing...</div>
+                        </div>
+                        <div class="header-right">
+                            <div id="voice-pulse" class="voice-pulse hidden">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <div id="active-call-sid" class="sid-badge hidden">SID: ...</div>
+                        </div>
+                    </div>
+
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <label>Duration</label>
+                            <span id="metric-duration">0s</span>
+                        </div>
+                        <div class="metric-item">
+                            <label>Characters</label>
+                            <span id="metric-chars">0</span>
+                        </div>
+                        <div class="metric-item">
+                            <label>Est. Cost</label>
+                            <span id="metric-cost">$0.0000</span>
+                        </div>
+                        <div class="metric-item">
+                            <label>Status</label>
+                            <span id="metric-status" class="status-idle">IDLE</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Call Recording Player -->
+                    <div id="recording-container" class="recording-container hidden">
+                        <div class="player-label">Call Recording Available</div>
+                        <audio id="recording-player" controls></audio>
+                    </div>
+
+                    <div id="live-transcript" class="transcript-view">
+                        <div class="welcome-msg"> Select a customer to start an AI telephony interaction.</div>
+                    </div>
+                </div>
+                        </section>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Floating Chat Widget -->
+    <div id="chat-widget" class="chat-widget-container">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <div class="chat-avatar">S</div>
+                <div class="chat-title">
+                    <h2>Alcon Assistant</h2>
+                    <p>Powered by Supriya AI</p>
+                </div>
+            </div>
+            <div class="chat-actions">
+                <button class="close-chat" onclick="toggleChat()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="chat-messages" class="chat-messages">
+            <div class="msg msg-ai">
+                <span class="msg-label">Supriya</span>
+                <div class="msg-text">Hello! I'm Supriya, your Alcon Digital Assistant. How can I help you today?</div>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <div class="chat-options" id="chat-quick-options">
+                <button class="chip" onclick="sendChatMessage('Book a service')">Book Service</button>
+                <button class="chip" onclick="sendChatMessage('New car enquiry')">Enquiry</button>
+                <button class="chip" onclick="sendChatMessage('Track status')">Track</button>
+            </div>
+            <div class="chat-input-wrapper">
+                <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
+                <button id="chat-send-btn" class="chat-send-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <div id="chat-fab" class="chat-fab" onclick="toggleChat()">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </div>
+
+    <script src="app.js?v=4"></script>
+</body>
+</html>

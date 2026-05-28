@@ -1,0 +1,49 @@
+{
+  "session_id": "chat_e6e531",
+  "flow_id": "pd_workshop_update_draft_5d90",
+  "current_node_id": "transfer_advisor",
+  "variables": {
+    "from": " 919999999999",
+    "id": "7",
+    "name": "Arjun",
+    "phone": "+919999999999",
+    "car_model": "Mercedes S-Class",
+    "registration_number": "MH01-MS-0001",
+    "registration_date": "2023-11-01",
+    "last_service_date": "2026-04-01",
+    "service_due_months": 6,
+    "gender": "male",
+    "dnd_status": false,
+    "location": "Mumbai",
+    "insurance_expiry_date": "2026-11-01",
+    "insurance_provider": "Tata AIG",
+    "policy_number": "POL-MERC-777",
+    "current_premium": "\u20b985,000",
+    "loyalty_premium": "\u20b980,000",
+    "policy_status": "PENDING",
+    "exists": true,
+    "tier": "premium",
+    "last_svc_formatted": "April 01",
+    "callback_confirmation": "I'll check back later",
+    "concerns": "yes check the ac smell",
+    "additional_concerns_ack": "I've noted that down. "
+  },
+  "history": [
+    {
+      "role": "user",
+      "text": "yes speaking"
+    },
+    {
+      "role": "user",
+      "text": "yes check the ac smell"
+    },
+    {
+      "role": "user",
+      "text": "why such high cost?"
+    },
+    {
+      "role": "user",
+      "text": "i would like to talk with advisor"
+    }
+  ]
+}

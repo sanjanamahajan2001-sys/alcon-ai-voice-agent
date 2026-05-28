@@ -1,0 +1,32 @@
+{
+  "session_id": "chat_8a0221",
+  "flow_id": "service_booking_prod_draft_af1e",
+  "current_node_id": "end",
+  "variables": {
+    "from": " 919881012768",
+    "id": "6",
+    "name": "Kavita",
+    "phone": "+919881012768",
+    "car_model": "Hyundai Aura",
+    "registration_number": "DL04-CC-1122",
+    "registration_date": "2022-10-05",
+    "last_service_date": "2025-10-05",
+    "service_due_months": 6,
+    "gender": "female",
+    "dnd_status": false,
+    "exists": true,
+    "tier": "generic",
+    "last_svc_formatted": "October 05",
+    "callback_confirmation": "I'll check back later"
+  },
+  "history": [
+    {
+      "role": "user",
+      "text": "no wrong number"
+    },
+    {
+      "role": "user",
+      "text": ""
+    }
+  ]
+}
