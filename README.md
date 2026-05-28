@@ -4,6 +4,16 @@ An enterprise-grade, high-availability, highly scalable outbound and inbound AI 
 
 ---
 
+## 🔗 Portfolio Repositories Linkage
+
+This project is split into two sister repositories to separate business application logic from cloud infrastructure engineering:
+* **Application Codebase (This Repository)**: Contains the core conversational AI engines, telephony flow runtime, campaign managers, and real-time agent console.
+  👉 **[Go to AI Voice Bot Application Repository](https://github.com/sanjanamahajan2001-sys/Alcon-AI-voice-agent)**
+* **Infrastructure & Deployment Codebase**: Contains the Terraform IaC configurations, AWS EKS networking modules, Kubernetes/Helm deployment manifests, Docker containers, and Prometheus/Grafana/Loki monitoring dashboards.
+  👉 **[Go to AI Voice Infrastructure Platform Repository](https://github.com/sanjanamahajan2001-sys/AI-Voice-Infrastructure-Platform)**
+
+---
+
 ## 📖 Table of Contents
 1. [Project Overview & Key Business Value](#1-project-overview--key-business-value)
 2. [High-Level Architecture Diagrams](#2-high-level-architecture-diagrams)
@@ -68,35 +78,43 @@ flowchart TD
 ```
 
 ### B. AWS EKS Deployment Architecture
-A secure, multi-AZ networking setup isolating workload layers, database layers, and management gateways to guarantee maximum resilience and tight security.
+A secure, multi-AZ networking setup isolating workload layers, database layers, and management gateways to guarantee maximum resilience and tight security, fully aligned with the active Terraform and Kubernetes deployment manifests.
 
 ```mermaid
 graph TD
-    Internet[Internet / Twilio API] -->|HTTPS Route53| ALB[AWS ALB Public Subnet]
+    Internet[Internet / Twilio API] -->|HTTPS Route53| ALB[AWS Application Load Balancer]
     
     subgraph VPC [AWS Multi-AZ VPC]
-        subgraph PublicSubnet [Public Subnet - AZ-a & AZ-b]
+        subgraph PublicSubnet [Public Subnets]
             ALB
             NAT[NAT Gateways]
         end
         
-        subgraph PrivateSubnet [Private Subnet - EKS Worker Nodes]
+        subgraph PrivateSubnet [Private Subnets - EKS Worker Nodes]
             subgraph EKSCluster [Amazon EKS Cluster]
-                IngressController[ALB Ingress Controller] --> BackendPods[FastAPI Backend Pods]
-                IngressController --> FrontendPods[React Dashboard Pods]
+                Nginx[Nginx Ingress Controller] --> BackendPods[FastAPI Backend Pods]
+                Nginx --> FrontendPods[Next.js/React Dashboard Pods]
                 BackendPods --> CeleryWorkers[Celery Background Workers]
+                
+                subgraph Observability [Observability Namespace]
+                    Prom[Prometheus]
+                    Graf[Grafana]
+                    Loki[Loki Log Aggregator]
+                end
             end
         end
         
-        subgraph IsolatedSubnet [Isolated Database Subnet]
-            RDS[(Amazon RDS Multi-AZ PostgreSQL)]
-            Redis[(AWS ElastiCache Redis replication group)]
+        subgraph IsolatedSubnet [Isolated Data Subnets]
+            RDS[(Amazon RDS PostgreSQL)]
+            Redis[(Amazon ElastiCache Redis)]
+            S3[(Amazon S3 - Audio Logs Vault)]
         end
     end
     
-    ALB --> IngressController
+    ALB -->|TLS via Cert-Manager| Nginx
     BackendPods --> RDS
     BackendPods --> Redis
+    BackendPods --> S3
     CeleryWorkers --> Redis
     BackendPods --> NAT --> ExternalLLM[External LLM / Twilio APIs]
 ```
